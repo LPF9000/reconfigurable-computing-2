@@ -66,7 +66,7 @@ module eq
    
 endmodule
 
-module datapath
+module datapath_str
   #(parameter int WIDTH)
   (
   input   logic 			                  clk,
@@ -137,4 +137,62 @@ module datapath
 					    .out(out), 
 					    .*);
     
+endmodule
+
+module datapath_bhv
+  #(parameter int WIDTH)
+  (
+    input   logic 			                  clk,
+    input   logic 			                  rst,
+    input   logic [WIDTH-1:0]             in, 
+    input   logic 			                  n_sel,
+    input   logic 			                  n_en, // TODO this is always 1'b1. Not needed ?
+    input   logic 			                  count_sel,
+    input   logic 			                  count_en,
+    input   logic 			                  out_en,
+    output  logic 			                  count_done, 
+    output  logic [$clog2(WIDTH+1)-1:0]   out
+  );
+
+  logic [$bits(in)-1:0] n_r, count_r;
+  logic [$bits(in)-1:0] sub_and_n_r;
+
+  always_ff @(posedge clk or posedge rst) begin
+    if (rst) begin
+      n_r <= '0;
+      count_r <= '0;
+    end
+    else begin
+      n_r <= n_sel ? sub_and_n_r : in;
+      if (count_en) count_r <= count_sel ? count_r + 1 : '0;
+      if (out_en) out <= count_r;
+    end
+  end // always_ff
+
+  always_comb begin
+    sub_and_n_r = (n_r - 1'b1) & n_r;
+    count_done = n_r == '0;
+  end
+
+endmodule
+
+
+module datapath
+  #(parameter int WIDTH)
+  (
+  input   logic 			                  clk,
+  input   logic 			                  rst,
+  input   logic [WIDTH-1:0]             in, 
+  input   logic 			                  n_sel,
+  input   logic 			                  n_en,
+  input   logic 			                  count_sel,
+  input   logic 			                  count_en,
+  input   logic 			                  out_en,
+  output  logic 			                  count_done, 
+  output  logic [$clog2(WIDTH+1)-1:0]   out
+  );
+
+  // datapath_bhv #(WIDTH) top (.*);
+  datapath_str #(WIDTH) top (.*);
+
 endmodule
