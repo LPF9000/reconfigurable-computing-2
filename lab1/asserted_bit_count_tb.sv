@@ -14,9 +14,11 @@ module asserted_bit_count_tb;
 
    int 			       passed, failed;
 
-   //asserted_bit_count_fsmd_1p #(.WIDTH(WIDTH)) DUT (.*);
+   // Edit the architecture in the top-level asserted_bit_count module.
+   asserted_bit_count #(.WIDTH(WIDTH)) DUT (.*);
+   // asserted_bit_count_fsmd_1p #(.WIDTH(WIDTH)) DUT (.*);
    //asserted_bit_count_fsmd_2p #(.WIDTH(WIDTH)) DUT (.*);
-   asserted_bit_count_fsm_plus_d #(.WIDTH(WIDTH)) DUT (.*);
+   // asserted_bit_count_fsm_plus_d #(.WIDTH(WIDTH)) DUT (.*);
 
    // Reference model
    function int model(logic [WIDTH-1:0] n);
