@@ -3,7 +3,7 @@
 
 // Datapath to count the number of bits asserted in a number
 module register
-  #(parameter WIDTH)
+  #(parameter int WIDTH)
   (
     input   logic 	            clk,
     input   logic 	            rst,
@@ -21,7 +21,7 @@ module register
 endmodule
 
 module mux2x1
-  #(parameter WIDTH)
+  #(parameter int WIDTH)
   (
     input   logic [WIDTH-1:0]   in0,
     input   logic [WIDTH-1:0]   in1,
@@ -34,7 +34,7 @@ module mux2x1
 endmodule
 
 module add
-  #(parameter WIDTH)
+  #(parameter int WIDTH)
   (
     input   logic [WIDTH-1:0]   in0, in1,
     output  logic [WIDTH-1:0]   sum
@@ -45,7 +45,7 @@ module add
 endmodule
 
 module and_gate
-  #(parameter WIDTH)
+  #(parameter int WIDTH)
   (
     input   logic [WIDTH-1:0]   in0, in1,
     output  logic [WIDTH-1:0]   sum
@@ -56,7 +56,7 @@ module and_gate
 endmodule
 
 module eq
-  #(parameter WIDTH)
+  #(parameter int WIDTH)
   (
     input   logic [WIDTH-1:0] in0, in1,
     output  logic 	          out
@@ -67,7 +67,7 @@ module eq
 endmodule
 
 module datapath
-  #(parameter WIDTH)
+  #(parameter int WIDTH)
   (
   input   logic 			                  clk,
   input   logic 			                  rst,
