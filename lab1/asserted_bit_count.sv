@@ -176,7 +176,7 @@ module asserted_bit_count_fsmd_2p
 	    end
 	
 	    S_COND : begin	
-        next_state <= n_r == '0 ? S_RESULT : S_COMPUTE;  
+        next_state = n_r == '0 ? S_RESULT : S_COMPUTE;  
       end
 
       S_COMPUTE : begin

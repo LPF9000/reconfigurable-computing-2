@@ -88,7 +88,7 @@ module datapath_str
   logic [$clog2(WIDTH):0]   count_r, count_add, count_mux;
    
    // Mux that defines provides input to the data register.
-   mux2x1 #(.WIDTH(WIDTH)) N_MUX (.in0(in), 
+   mux2x1 #(.WIDTH(WIDTH)) MUX_N (.in0(in), 
 				      .in1(n_and_sub), 
 				      .sel(n_sel),
 				      .out(n_mux));
@@ -115,19 +115,19 @@ module datapath_str
 			        .out(count_done));   
 
    // Selects between a 1 or -1 input to the adder.
-   mux2x1 #(.WIDTH(COUNT_WIDTH)) COUNT_MUX(.in0(COUNT_WIDTH'(0)), 
+   mux2x1 #(.WIDTH(COUNT_WIDTH)) CNT_MUX(.in0(COUNT_WIDTH'(0)), 
 					    .in1(count_add), 
 					    .sel(count_sel),
 					    .out(count_mux));
 
   // The count register.
-   register #(.WIDTH(COUNT_WIDTH)) COUNT_REG (.en(count_en), 
+   register #(.WIDTH(COUNT_WIDTH)) CNT_REG (.en(count_en), 
 				      .in(count_mux), 
 				      .out(count_r), 
 				      .*);
    
    // Adds the current difference with the output of the add_in1_mux (1 or -1).
-   add #(.WIDTH(COUNT_WIDTH)) COUNT_ADD (.in0(COUNT_WIDTH'(1)),
+   add #(.WIDTH(COUNT_WIDTH)) CNT_ADD (.in0(COUNT_WIDTH'(1)),
 				      .in1(count_r),
 				      .sum(count_add));
 
