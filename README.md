@@ -1,6 +1,14 @@
 # Reconfigurable Computing 2
 Link to Dr. Stitt's SystemVerilog tutorial: https://github.com/ARC-Lab-UF/sv-tutorial
 
+## Resources
+
+1. https://github.com/intel/FPGA-Devcloud/tree/master/main/QuickStartGuides/RTL_AFU_Program_PAC_Quickstart/Arria10
+
+2. https://github.com/ARC-Lab-UF/docs/wiki/VSCode-Remote-Development
+
+3. https://github.com/intel/FPGA-Devcloud/tree/master/main/Devcloud_Access_Instructions#30-access-from-your-pc-via-mobaxterm-or-from-linux-terminal
+
 # MobaXterm + Intel DevCloud Instructions
 This tutorial goes through the process of setting up Intel DevCloud using MobaXterm, a free Xserver and SSH client for Windows. 
 
@@ -72,3 +80,21 @@ fi
 ```bash
  devcloud_login
   ```
+  
+7. Select l for Arria 10 PAC
+8. Select 1 for release 1.2.1
+9. To view the available nodes, type the following:
+```bash
+ devcloud_login -l
+  ```
+10. To report the status of your jobs running on the DevCloud using the login script provided, type the following:
+
+```
+qstatus
+```
+11. Jobs can be terminated with the following command when nodes are hanging with stalled jobs:
+```
+qdel XXXX.v-qsvr-fpga.aidevcloud
+```
+
+
