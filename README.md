@@ -57,6 +57,14 @@ After completing the steps outlined above, you should be able to login to the De
  ```bash
  ssh devcloud
   ```
+  
+  Note that the following response:
+
+tty: standard input: Inappropriate ioctl for device
+X11 forwarding request failed on channel 0
+
+is expected behavior.
+
 2. Type the following command to edit the .bashrc file:
 ```bash
  nano .bashrc
