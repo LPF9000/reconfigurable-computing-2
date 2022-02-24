@@ -9,6 +9,8 @@ Link to Dr. Stitt's SystemVerilog tutorial: https://github.com/ARC-Lab-UF/sv-tut
 
 3. https://github.com/intel/FPGA-Devcloud/tree/master/main/Devcloud_Access_Instructions#30-access-from-your-pc-via-mobaxterm-or-from-linux-terminal
 
+4. https://github.com/ARC-Lab-UF/intel-training-modules
+
 # MobaXterm + Intel DevCloud Instructions
 This tutorial goes through the process of setting up Intel DevCloud using MobaXterm, a free Xserver and SSH client for Windows. 
 
