@@ -43,7 +43,7 @@ MobaXterm provides all the important remote network tools (SSH, X11, RDP, VNC, F
 ### Automated Configuration using Intel's oneAPI OpenCL
 1. Follow Instructions for Getting Started using OpenCL. The link on the GitHub mentioned above, https://devcloud.intel.com/fpga/connect/# doesn’t seem to work. Since the FPGA Devcloud is subset of oneAPI Devcloud, you can use base DevCloud for oneAPI to submit tasks on FPGA nodes. Therefore, you will need to follow the instructions here: https://devcloud.intel.com/oneapi/get_started/opencl/
 2. The easiest method to set up an SSH connection to is by downloading and running an automated installer. The installer will add SSH configuration entries to ~/.ssh/config and create a private SSH key file inside ~/.ssh. Once logged into your DevCloud Account, navigate to https://devcloud.intel.com/oneapi/get_started/opencl/ and download the installer script. 
-3. Run the script by adjusting the command according to your download location, or copy the script into C:\Users\[Your Username]\AppData\Roaming\MobaXterm\home and run it directly using the commands shown in the instructions from a terminal window in MobaXterm. 
+3. Run the script by adjusting the command according to your download location, or copy the script into `C:\Users\[Your Username]\AppData\Roaming\MobaXterm\home` and run it directly using the commands shown in the instructions from a terminal window in MobaXterm. 
 ![image](https://user-images.githubusercontent.com/56581520/155419372-775eed88-f436-47bc-96c3-56bffe4aca98.png)
 4. You can set restrictive permissions for security purposes by running the following commands:
  ```bash
@@ -57,19 +57,15 @@ After completing the steps outlined above, you should be able to login to the De
  ```bash
  ssh devcloud
   ```
-  
-  Note that the following response:
-
-tty: standard input: Inappropriate ioctl for device
+Note that the following response is expected behavior:
+> tty: standard input: Inappropriate ioctl for device
 X11 forwarding request failed on channel 0
 
-is expected behavior.
-
-2. Type the following command to edit the .bashrc file:
+2. Type the following command to edit the `.bashrc` file:
 ```bash
  nano .bashrc
  ```
-This command will pen a window to edit the .bashrc file. Add the following code to the top of the file: 
+This command will pen a window to edit the `.bashrc` file. Add the following code to the top of the file: 
 ```
 if [ -f /data/intel_fpga/devcloudLoginToolSetup.sh ]; then
     source /data/intel_fpga/devcloudLoginToolSetup.sh
@@ -77,7 +73,7 @@ fi
 ```
 ![image](https://user-images.githubusercontent.com/56581520/155421241-db69adf1-1ccf-419b-bea6-36deb6e0ad77.png)
 
-3. After adding the code, press Ctrl-O to write the file, and press enter to confirm. Press Ctrl-X to exit the editor. 
+3. After adding the code, press `Ctrl-O` to write the file, and press `Enter` to confirm. Press `Ctrl-X` to exit the editor. 
 4. Now logout by entering the command:
 ```bash
  logout
