@@ -7,7 +7,8 @@
 `include "fib_item.svh"
 
 class scoreboard #(
-    int WIDTH
+    int INPUT_WIDTH,
+    int OUTPUT_WIDTH
 );
   mailbox scoreboard_result_mailbox;
   mailbox scoreboard_data_mailbox;
@@ -21,47 +22,63 @@ class scoreboard #(
     failed = 0;
   endfunction  // new
 
-  function int model(int data, int width);
-    automatic int diff = 0;
+  // Reference model for the correct result.
+  function automatic longint result_model(int n);
+  longint x, y, i, temp;
+  x = 0;
+  y = 1;
+  i = 3;
+  if (n < 2) return 0;
 
-    for (int i = 0; i < width; i++) begin
-      diff = data[0] ? diff + 1 : diff - 1;
-      data = data >> 1;
-    end
+  while (i <= n) begin
+    temp = x + y;
+    x = y;
+    y = temp;
+    i++;
+  end
+  return y;
+endfunction
 
-    return diff;
-  endfunction
+// Reference overflow_model for the correct overflow.
+function automatic logic overflow_model(longint result);
+  logic [OUTPUT_WIDTH-1:0] result_truncated;
+  result_truncated = result;
+
+  // If the truncated version is the same as the full version, there
+  // was no overflow.
+  return result_truncated != result;
+endfunction
 
   task run(int num_tests);
-    fib_item #(.WIDTH(WIDTH)) in_item;
-    fib_item #(.WIDTH(WIDTH)) out_item;
+    fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) in_item;
+    fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) out_item;
 
     for (int i = 0; i < num_tests; i++) begin
 
       // First wait until the driver informs us of a new test.
       scoreboard_data_mailbox.get(in_item);
-      $display("Time %0t [Scoreboard]: Received start of test for data=h%h.", $time, in_item.data);
+      $display("Time %0t [Scoreboard]: Received start of test for n=h%h.", $time, in_item.n);
 
       // Then, wait until the monitor tells us that test is complete.
       scoreboard_result_mailbox.get(out_item);
-      $display("Time %0t [Scoreboard]: Received result=%0d for data=h%h.", $time, out_item.result,
-               in_item.data);
+      $display("Time %0t [Scoreboard]: Received result=%0d for n=h%h.", $time, out_item.result,
+               in_item.n);
 
       // Get the correct result based on the input at the start of the test.
-      reference = model(in_item.data, WIDTH);
+      reference = result_model(in_item.n, INPUT_WIDTH);
       if (out_item.result == reference) begin
-        $display("Time %0t [Scoreboard] Test passed for data=h%h", $time, in_item.data);
+        $display("Time %0t [Scoreboard] Test passed for n=h%h", $time, in_item.n);
         passed++;
       end else begin
-        $display("Time %0t [Scoredboard] Test failed: result = %0d instead of %0d for data = h%h.",
-                 $time, out_item.result, reference, in_item.data);
+        $display("Time %0t [Scoredboard] Test failed: result = %0d instead of %0d for n = h%h.",
+                 $time, out_item.result, reference, in_item.n);
         failed++;
       end
     end  // for (int i=0; i < num_tests; i++)
 
     // Remove any leftover messages that might be in the mailbox upon
     // completion. This is needed for the repeat functionality to work.
-    // If data is left in the mailbox when repeating a test, that data
+    // If n is left in the mailbox when repeating a test, that n
     // will be detected as part of the current test.
     while (scoreboard_data_mailbox.try_get(in_item));
     while (scoreboard_result_mailbox.try_get(out_item));

@@ -10,18 +10,19 @@
 `include "scoreboard.svh"
 
 class environment #(
-    int WIDTH
+    int INPUT_WIDTH,
+    int OUTPUT_WIDTH
 );
 
   // The environment doesn't know what type of generator and driver it will
   // use, so it contains a handle to the base class for each. Use of virtual
   // methods then allows us to use any class derived from the base version
   // without requiring knowledge of the specific class here.
-  base_generator #(.WIDTH(WIDTH)) genarator_h;
-  base_driver #(.WIDTH(WIDTH)) driver_h;
-  done_monitor #(.WIDTH(WIDTH)) done_monitor_h;
-  start_monitor #(.WIDTH(WIDTH)) start_monitor_h;
-  scoreboard #(.WIDTH(WIDTH)) scoreboard_h;
+  base_generator #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) genarator_h;
+  base_driver #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) driver_h;
+  done_monitor #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) done_monitor_h;
+  start_monitor #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) start_monitor_h;
+  scoreboard #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) scoreboard_h;
 
   mailbox scoreboard_data_mailbox;
   mailbox scoreboard_result_mailbox;
@@ -29,8 +30,8 @@ class environment #(
 
   event driver_done_event;
 
-  function new(virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm, base_generator#(.WIDTH(WIDTH)) gen_h,
-               base_driver#(.WIDTH(WIDTH)) drv_h);
+  function new(virtual fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm, base_generator#(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) gen_h,
+               base_driver#(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) drv_h);
     scoreboard_data_mailbox = new;
     scoreboard_result_mailbox = new;
     driver_mailbox = new;

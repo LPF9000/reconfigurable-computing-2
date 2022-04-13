@@ -7,13 +7,14 @@
 `include "driver.svh"
 
 virtual class base_generator #(
-    int WIDTH
+    int INPUT_WIDTH,
+    int OUTPUT_WIDTH
 );
 
   mailbox driver_mailbox;
   event   driver_done_event;
 
-  function new(base_driver#(.WIDTH(WIDTH)) driver_h);
+  function new(base_driver#(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) driver_h);
     this.driver_mailbox = driver_h.driver_mailbox;
     this.driver_done_event = driver_h.driver_done_event;
   endfunction  // new
@@ -23,21 +24,22 @@ endclass
 
 
 class random_generator #(
-    int WIDTH
+    int INPUT_WIDTH,
+    int OUTPUT_WIDTH
 ) extends base_generator #(
-    .WIDTH(WIDTH)
+    .INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)
 );
 
-  function new(base_driver#(.WIDTH(WIDTH)) driver_h);
+  function new(base_driver#(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) driver_h);
     super.new(driver_h);
   endfunction  // new
 
   virtual task run();
-    fib_item #(.WIDTH(WIDTH)) item;
+    fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) item;
 
     // Start the consecutive sequence at 0. This could also be modified with
     // another configuration parameter.
-    bit [WIDTH-1:0] data = '0;
+    bit [WIDTH-1:0] n = '0;
 
     forever begin
       item = new;
@@ -50,23 +52,24 @@ endclass
 
 
 class consecutive_generator #(
-    int WIDTH
+    int INPUT_WIDTH,
+    int OUTPUT_WIDTH
 ) extends base_generator #(
-    .WIDTH(WIDTH)
+    .INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)
 );
 
-  function new(base_driver#(.WIDTH(WIDTH)) driver_h);
+  function new(base_driver#(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) driver_h);
     super.new(driver_h);
   endfunction  // new
 
   task run();
-    fib_item #(.WIDTH(WIDTH)) item;
-    bit [WIDTH-1:0] data = '0;
+    fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) item;
+    bit [WIDTH-1:0] n = '0;
 
     forever begin
       item = new;
-      item.data = data;
-      data++;
+      item.n = n;
+      n++;
       driver_mailbox.put(item);
       @(driver_done_event);
     end

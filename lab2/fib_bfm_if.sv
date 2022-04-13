@@ -2,13 +2,14 @@
 // University of Florida
 
 interface fib_bfm_if #(
-    parameter int WIDTH
+    parameter int INPUT_WIDTH,
+    parameter int OUTPUT_WIDTH
 ) (
     input logic clk
 );
   logic rst, go, done;
-  logic [WIDTH-1:0] data;
-  logic signed [$clog2(2*WIDTH+1)-1:0] result;
+  logic [INPUT_WIDTH-1:0] n;
+  logic [OUTPUT_WIDTH-1:0] result;
 
   task automatic wait_for_done();
     @(posedge clk iff (done == 1'b0));
@@ -24,8 +25,8 @@ interface fib_bfm_if #(
     @(posedge clk);
   endtask
 
-  task automatic start(input logic [WIDTH-1:0] data_);
-    data <= data_;
+  task automatic start(input logic [INPUT_WIDTH-1:0] n_);
+    n <= n_;
     go   <= 1'b1;
     @(posedge clk);
     go <= 1'b0;

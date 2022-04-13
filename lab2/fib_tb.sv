@@ -8,23 +8,25 @@ module fib_tb;
   localparam int NUM_RANDOM_TESTS = 1000;
   localparam int NUM_CONSECUTIVE_TESTS = 200;
   localparam int NUM_REPEATS = 4;
-  localparam int WIDTH = 16;
+  localparam int INPUT_WIDTH = 6;
+  localparam int OUTPUT_WIDTH = 32;
   logic clk;
 
-  fib_bfm_if #(.WIDTH(WIDTH)) bfm (.clk(clk));
+  fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm (.clk(clk));
   fib #(
-      .WIDTH(WIDTH)
+      .INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)
   ) DUT (
       .clk(clk),
       .rst(bfm.rst),
       .go(bfm.go),
       .done(bfm.done),
-      .data(bfm.data),
-      .result(bfm.result)
+      .n(bfm.n),
+      .result(bfm.result),
+      .overflow(bfm.overflow)
   );
 
-  random_test #(.WIDTH(WIDTH)) test_random = new(bfm, "Random Test");
-  consecutive_test #(.WIDTH(WIDTH)) test_consecutive = new(bfm, "Consecutive Test");
+  random_test #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) test_random = new(bfm, "Random Test");
+  consecutive_test #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) test_consecutive = new(bfm, "Consecutive Test");
 
   initial begin : generate_clock
     clk = 1'b0;

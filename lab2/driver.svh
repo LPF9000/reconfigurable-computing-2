@@ -7,13 +7,14 @@
 `include "fib_item.svh"
 
 virtual class base_driver #(
-    int WIDTH
+    int INPUT_WIDTH,
+    int OUTPUT_WIDTH
 );
-  virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm;
+  virtual fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm;
   mailbox driver_mailbox;
   event driver_done_event;
 
-  function new(virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm);
+  function new(virtual fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm);
     this.bfm = bfm;
     driver_mailbox = new;
   endfunction  // new
@@ -23,23 +24,24 @@ endclass  // base_driver
 
 
 class nonblocking_driver #(
-    int WIDTH
+  int INPUT_WIDTH,
+  int OUTPUT_WIDTH
 ) extends base_driver #(
-    .WIDTH(WIDTH)
+    .INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)
 );
 
-  function new(virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm);
+  function new(virtual fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm);
     super.new(bfm);
   endfunction  // new
 
   virtual task run();
-    fib_item #(.WIDTH(WIDTH)) item;
+    fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) item;
     $display("Time %0t [Driver]: Driver starting.", $time);
 
     forever begin
       driver_mailbox.get(item);
-      //$display("Time %0t [Driver]: Driving data=h%h, go=%0b.", $time, item.data, item.go);
-      bfm.data = item.data;
+      //$display("Time %0t [Driver]: Driving n=h%h, go=%0b.", $time, item.n, item.go);
+      bfm.n = item.n;
       bfm.go   = item.go;
       @(posedge bfm.clk);
       ->driver_done_event;
@@ -49,22 +51,23 @@ endclass
 
 
 class blocking_driver #(
-    int WIDTH
+    int INPUT_WIDTH,
+    int OUTPUT_WIDTH
 ) extends base_driver #(
-    .WIDTH(WIDTH)
+    .INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)
 );
 
-  function new(virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm);
+  function new(virtual fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm);
     super.new(bfm);
   endfunction  // new
 
   task run();
-    fib_item #(.WIDTH(WIDTH)) item;
+    fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) item;
     $display("Time %0t [Driver]: Driver starting.", $time);
 
     forever begin
       driver_mailbox.get(item);
-      bfm.start(item.data);
+      bfm.start(item.n);
       bfm.wait_for_done();
       $display("Time %0t [Driver]: Detected done.", $time);
       ->driver_done_event;
