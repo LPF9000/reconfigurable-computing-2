@@ -56,7 +56,7 @@ module asserted_bit_count_tb;
     for (int i = 0; i < NUM_TESTS; i++) begin
 
       // Start the test with a random input
-      in = $random;
+      in = $urandom;
       go = 1'b1;
       @(posedge clk);
       go = 1'b0;
