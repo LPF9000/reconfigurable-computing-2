@@ -39,7 +39,7 @@ class random_generator #(
 
     // Start the consecutive sequence at 0. This could also be modified with
     // another configuration parameter.
-    bit [WIDTH-1:0] n = '0;
+    bit [INPUT_WIDTH-1:0] n = '0;
 
     forever begin
       item = new;
@@ -64,7 +64,7 @@ class consecutive_generator #(
 
   task run();
     fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) item;
-    bit [WIDTH-1:0] n = '0;
+    bit [INPUT_WIDTH-1:0] n = '0;
 
     forever begin
       item = new;

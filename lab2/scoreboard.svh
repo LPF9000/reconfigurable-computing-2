@@ -65,7 +65,7 @@ endfunction
                in_item.n);
 
       // Get the correct result based on the input at the start of the test.
-      reference = result_model(in_item.n, INPUT_WIDTH);
+      reference = result_model(in_item.n);
       if (out_item.result == reference) begin
         $display("Time %0t [Scoreboard] Test passed for n=h%h", $time, in_item.n);
         passed++;
