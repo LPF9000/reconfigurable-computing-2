@@ -29,7 +29,7 @@ class environment #(
 
   event driver_done_event;
 
-  function new(virtual fib_bfm #(.WIDTH(WIDTH)) bfm, base_generator#(.WIDTH(WIDTH)) gen_h,
+  function new(virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm, base_generator#(.WIDTH(WIDTH)) gen_h,
                base_driver#(.WIDTH(WIDTH)) drv_h);
     scoreboard_data_mailbox = new;
     scoreboard_result_mailbox = new;

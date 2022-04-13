@@ -9,9 +9,9 @@
 virtual class base_monitor #(
     int WIDTH
 );
-  virtual fib_bfm #(.WIDTH(WIDTH)) bfm;
+  virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm;
 
-  function new(virtual fib_bfm #(.WIDTH(WIDTH)) bfm);
+  function new(virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm);
     this.bfm = bfm;
   endfunction  // new
 
@@ -26,7 +26,7 @@ class done_monitor #(
 );
   mailbox scoreboard_result_mailbox;
 
-  function new(virtual fib_bfm #(.WIDTH(WIDTH)) bfm, mailbox _scoreboard_result_mailbox);
+  function new(virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm, mailbox _scoreboard_result_mailbox);
     super.new(bfm);
     scoreboard_result_mailbox = _scoreboard_result_mailbox;
   endfunction  // new
@@ -52,7 +52,7 @@ class start_monitor #(
 );
   mailbox scoreboard_data_mailbox;
 
-  function new(virtual fib_bfm #(.WIDTH(WIDTH)) bfm, mailbox _scoreboard_data_mailbox);
+  function new(virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm, mailbox _scoreboard_data_mailbox);
     super.new(bfm);
     scoreboard_data_mailbox = _scoreboard_data_mailbox;
   endfunction  // new

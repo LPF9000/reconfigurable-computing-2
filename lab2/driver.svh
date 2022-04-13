@@ -9,11 +9,11 @@
 virtual class base_driver #(
     int WIDTH
 );
-  virtual fib_bfm #(.WIDTH(WIDTH)) bfm;
+  virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm;
   mailbox driver_mailbox;
   event driver_done_event;
 
-  function new(virtual fib_bfm #(.WIDTH(WIDTH)) bfm);
+  function new(virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm);
     this.bfm = bfm;
     driver_mailbox = new;
   endfunction  // new
@@ -28,7 +28,7 @@ class nonblocking_driver #(
     .WIDTH(WIDTH)
 );
 
-  function new(virtual fib_bfm #(.WIDTH(WIDTH)) bfm);
+  function new(virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm);
     super.new(bfm);
   endfunction  // new
 
@@ -54,7 +54,7 @@ class blocking_driver #(
     .WIDTH(WIDTH)
 );
 
-  function new(virtual fib_bfm #(.WIDTH(WIDTH)) bfm);
+  function new(virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm);
     super.new(bfm);
   endfunction  // new
 

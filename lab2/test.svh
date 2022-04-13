@@ -10,11 +10,11 @@ virtual class base_test #(
     int WIDTH
 );
 
-  virtual fib_bfm #(.WIDTH(WIDTH)) bfm;
+  virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm;
   string name;
   environment #(.WIDTH(WIDTH)) env_h;
 
-  function new(virtual fib_bfm #(.WIDTH(WIDTH)) bfm, string name = "default_test_name");
+  function new(virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm, string name = "default_test_name");
 
     // Ideally we would also create the environment here, but we don't
     // have all the parameters we need for the constructor yet.
@@ -51,7 +51,7 @@ class random_test #(
   nonblocking_driver #(.WIDTH(WIDTH)) drv_h;
   random_generator #(.WIDTH(WIDTH))   gen_h;
 
-  function new(virtual fib_bfm #(.WIDTH(WIDTH)) bfm, string name);
+  function new(virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm, string name);
     super.new(bfm, name);
 
     // These should really be passed to the base constructor, but super.new
@@ -74,7 +74,7 @@ class consecutive_test #(
   blocking_driver #(.WIDTH(WIDTH)) drv_h;
   consecutive_generator #(.WIDTH(WIDTH)) gen_h;
 
-  function new(virtual fib_bfm #(.WIDTH(WIDTH)) bfm, string name);
+  function new(virtual fib_bfm_if #(.WIDTH(WIDTH)) bfm, string name);
     super.new(bfm, name);
 
     // These should really be passed to the base constructor, but super.new

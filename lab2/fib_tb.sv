@@ -11,7 +11,7 @@ module fib_tb;
   localparam int WIDTH = 16;
   logic clk;
 
-  fib_bfm #(.WIDTH(WIDTH)) bfm (.clk(clk));
+  fib_bfm_if #(.WIDTH(WIDTH)) bfm (.clk(clk));
   fib #(
       .WIDTH(WIDTH)
   ) DUT (

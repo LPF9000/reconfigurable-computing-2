@@ -115,7 +115,7 @@ module fib_bad #(
           if (go == 1'b1) state_r <= COND;
         end
 
-        default : ;
+        default: ;
       endcase
 
       if (go == 1'b1) state_r <= COND;
