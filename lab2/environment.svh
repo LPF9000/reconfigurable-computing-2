@@ -26,6 +26,7 @@ class environment #(
 
   mailbox scoreboard_n_mailbox;
   mailbox scoreboard_result_mailbox;
+  mailbox scoreboard_overflow_mailbox;
   mailbox driver_mailbox;
 
   event driver_done_event;
