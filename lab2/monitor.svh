@@ -53,11 +53,11 @@ class start_monitor #(
 ) extends base_monitor #(
     .INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)
 );
-  mailbox scoreboard_data_mailbox;
+  mailbox scoreboard_n_mailbox;
 
-  function new(virtual fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm, mailbox _scoreboard_data_mailbox);
+  function new(virtual fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm, mailbox _scoreboard_n_mailbox);
     super.new(bfm);
-    scoreboard_data_mailbox = _scoreboard_data_mailbox;
+    scoreboard_n_mailbox = _scoreboard_n_mailbox;
   endfunction  // new
 
   virtual task run();
@@ -76,7 +76,7 @@ class start_monitor #(
       @(bfm.active_event);
       item.n = bfm.n;
       $display("Time %0t [start_monitor]: Sending start of test for n=h%h.", $time, item.n);
-      scoreboard_data_mailbox.put(item);
+      scoreboard_n_mailbox.put(item);
     end
   endtask
 endclass

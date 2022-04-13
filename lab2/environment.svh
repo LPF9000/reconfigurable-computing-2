@@ -24,7 +24,7 @@ class environment #(
   start_monitor #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) start_monitor_h;
   scoreboard #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) scoreboard_h;
 
-  mailbox scoreboard_data_mailbox;
+  mailbox scoreboard_n_mailbox;
   mailbox scoreboard_result_mailbox;
   mailbox driver_mailbox;
 
@@ -32,8 +32,9 @@ class environment #(
 
   function new(virtual fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm, base_generator#(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) gen_h,
                base_driver#(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) drv_h);
-    scoreboard_data_mailbox = new;
+    scoreboard_n_mailbox = new;
     scoreboard_result_mailbox = new;
+    scoreboard_overflow_mailbox = new;
     driver_mailbox = new;
 
     // We no longer instantiate these here because they are created in the
@@ -41,8 +42,8 @@ class environment #(
     genarator_h = gen_h;
     driver_h = drv_h;
     done_monitor_h = new(bfm, scoreboard_result_mailbox);
-    start_monitor_h = new(bfm, scoreboard_data_mailbox);
-    scoreboard_h = new(scoreboard_data_mailbox, scoreboard_result_mailbox);
+    start_monitor_h = new(bfm, scoreboard_n_mailbox);
+    scoreboard_h = new(scoreboard_n_mailbox, scoreboard_result_mailbox, scoreboard_overflow_mailbox);
   endfunction  // new
 
   function void report_status();

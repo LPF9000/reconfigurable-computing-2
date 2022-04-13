@@ -7,7 +7,7 @@ interface fib_bfm_if #(
 ) (
     input logic clk
 );
-  logic rst, go, done;
+  logic rst, go, done, overflow;
   logic [INPUT_WIDTH-1:0] n;
   logic [OUTPUT_WIDTH-1:0] result;
 
@@ -43,10 +43,13 @@ interface fib_bfm_if #(
 
     forever begin
       @(posedge clk);
-      if (rst) is_active = 1'b0;
+      if (rst) begin
+        is_active = 1'b0;
+      end
       else begin
         if (done) is_active = 1'b0;
         if (!is_active && go) begin
+
           is_active = 1'b1;
           // The event is needed because there will be times in the
           // simulation where go and done are asserted at the same time.
