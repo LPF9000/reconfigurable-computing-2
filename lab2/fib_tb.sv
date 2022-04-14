@@ -92,6 +92,13 @@ module fib_tb;
   assert property (@(posedge bfm.clk) disable iff (bfm.rst) $rose(bfm.done) |-> $past(!bfm.go, 1))
   else $error("Time %0t [Assert Property]: Go did not return to 0", $time);
 
+  // upon completion, (ie done = 1), result and overflow retain their values until circuit is restarted
+  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done |-> $stable(bfm.result))
+  else $error("Time %0t [Assert Property]: Done=1, result not stable.", $time);
+  // upon completion, (ie done = 1), result and overflow retain their values until circuit is restarted
+  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done |-> $stable(bfm.overflow))
+  else $error("Time %0t [Assert Property]: Done=1, overflow not stable.", $time);
+
 endmodule
 
 /*
