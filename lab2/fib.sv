@@ -83,7 +83,7 @@ module fib_bad #(
 
         COND: begin
           // removed done_r = 0
-          done_r <= 1'b0;
+          //done_r <= 1'b0;
 
           if (i_r <= n) state_r <= COMPUTE;
           else state_r <= DONE;
@@ -113,13 +113,13 @@ module fib_bad #(
           // added done_r = 0 here to be cleared cycle after go is asserted
           if (go == 1'b1) begin
             state_r <= COND;
-            //done_r  <= 1'b0;
+            done_r  <= 1'b0;
           end
         end
       endcase
 
       // removed this line
-      if (go == 1'b1) state_r <= COND;
+      //if (go == 1'b1) state_r <= COND;
     end
   end
 endmodule
