@@ -13,7 +13,7 @@ class scoreboard #(
   mailbox scoreboard_result_mailbox;
   mailbox scoreboard_n_mailbox;
   mailbox scoreboard_overflow_mailbox;
-  int     result_passed, result_failed, overflow_passed, overflow_failed, reference1, reference2;
+  int result_passed, result_failed, overflow_passed, overflow_failed, reference1, reference2;
 
   function new(mailbox scoreboard_n_mailbox, mailbox scoreboard_result_mailbox);
     this.scoreboard_n_mailbox = scoreboard_n_mailbox;
@@ -75,8 +75,9 @@ class scoreboard #(
         $display("Time %0t [Scoreboard] Result test passed for n=h%h", $time, in_item.n);
         result_passed++;
       end else begin
-        $display("Time %0t [Scoredboard] Result test failed: result = %0d instead of %0d for n = h%h.",
-                 $time, out_item.result, reference1, in_item.n);
+        $display(
+            "Time %0t [Scoredboard] Result test failed: result = %0d instead of %0d for n = h%h.",
+            $time, out_item.result, reference1, in_item.n);
         result_failed++;
       end
 
@@ -86,8 +87,9 @@ class scoreboard #(
         $display("Time %0t [Scoreboard] Overflow test passed for n=h%h", $time, in_item.n);
         overflow_passed++;
       end else begin
-        $display("Time %0t [Scoredboard] Overflow test failed: overflow = %0d instead of %0d for n = h%h.",
-                 $time, out_item.overflow, reference2, in_item.n);
+        $display(
+            "Time %0t [Scoredboard] Overflow test failed: overflow = %0d instead of %0d for n = h%h.",
+            $time, out_item.overflow, reference2, in_item.n);
         overflow_failed++;
       end
     end  // for (int i=0; i < num_tests; i++)
@@ -103,7 +105,8 @@ class scoreboard #(
 
   function void report_status();
     $display("Test status: %0d result_passed, %0d result_failed", result_passed, result_failed);
-    $display("Test status: %0d overflow_passed, %0d overflow_failed", overflow_passed, overflow_failed);
+    $display("Test status: %0d overflow_passed, %0d overflow_failed", overflow_passed,
+             overflow_failed);
   endfunction
 
 endclass
