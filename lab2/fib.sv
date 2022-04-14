@@ -105,8 +105,11 @@ module fib_bad #(
           if (n < 2) result_r <= x_r;
           else result_r <= y_r;
 
-          done_r  <= 1'b1;
-          state_r <= RESTART;
+          // Defining that go must return to 0 to start another execution
+          if (go == 1'b0) begin
+            done_r  <= 1'b1;
+            state_r <= RESTART;
+          end
         end
 
         RESTART: begin
