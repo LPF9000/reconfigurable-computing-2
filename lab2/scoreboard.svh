@@ -69,10 +69,6 @@ class scoreboard #(
       $display("Time %0t [Scoreboard]: Received result=%0d and overflow = %0d for n=h%h.", $time,
                out_item.result, out_item.overflow, in_item.n);
 
-      //scoreboard_overflow_mailbox.get(out_item2);
-      //$display("Time %0t [Scoreboard]: Received overflow=%0d for n=h%h.", $time,
-      //         out_item2.overflow, in_item.n);
-
       // Get the correct result based on the input at the start of the test.
       reference1 = result_model(in_item.n);
       if (out_item.result == reference1) begin

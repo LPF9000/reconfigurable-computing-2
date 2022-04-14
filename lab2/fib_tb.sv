@@ -88,7 +88,4 @@ module fib_tb;
   assert property (@(posedge bfm.clk) disable iff (bfm.rst) $rose(bfm.done) |-> $past(!bfm.go, 1))
   else $error("Time %0t [Assert Property]: Go did not return to 0", $time);
 
-  // go must be cleared for done to be asserted
-  assert property (@(posedge bfm.clk) disable iff (bfm.rst) $rose(bfm.done) |-> $past(!bfm.go, 1))
-  else $error("Time %0t [Assert Property]: Go did not return to 0", $time);
 endmodule
