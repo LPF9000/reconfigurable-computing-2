@@ -10,6 +10,7 @@ interface fib_bfm_if #(
   logic rst, go, done, overflow;
   logic [ INPUT_WIDTH-1:0] n;
   logic [OUTPUT_WIDTH-1:0] result;
+  logic [$bits(n)-1:0] i_r;
 
   task automatic wait_for_done();
     //@(posedge clk iff (done == 1'b0));
