@@ -38,7 +38,8 @@ module fib_bad #(
     output logic                    done
 );
 
-  typedef enum {
+// changed to enum logic [2:0] (to get recognized as a state machine)
+  typedef enum logic [2:0] {
     START,
     COND,
     COMPUTE,
@@ -108,7 +109,10 @@ module fib_bad #(
         end
 
         RESTART: begin
-          if (go == 1'b1) state_r <= COND;
+           // added done_r = 0 here to be cleared cycle after go is asserted
+          if (go == 1'b1) begin
+            state_r <= COND;
+            done_r <= 1'b0;
         end
       endcase
 
