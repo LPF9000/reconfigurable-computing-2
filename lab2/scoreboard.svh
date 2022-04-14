@@ -15,8 +15,7 @@ class scoreboard #(
   mailbox scoreboard_overflow_mailbox;
   int     passed,                      failed, reference1, reference2;
 
-  function new(mailbox scoreboard_n_mailbox, mailbox scoreboard_result_mailbox,
-               mailbox scoreboard_overflow_mailbox);
+  function new(mailbox scoreboard_n_mailbox, mailbox scoreboard_result_mailbox, mailbox scoreboard_overflow_mailbox);
     this.scoreboard_n_mailbox = scoreboard_n_mailbox;
     this.scoreboard_result_mailbox = scoreboard_result_mailbox;
     this.scoreboard_overflow_mailbox = scoreboard_overflow_mailbox;
@@ -26,7 +25,7 @@ class scoreboard #(
   endfunction  // new
 
   // Reference model for the correct result.
-  function automatic longint result_model(int n);
+  function longint result_model(int n);
     longint x, y, i, temp;
     x = 0;
     y = 1;
@@ -43,7 +42,7 @@ class scoreboard #(
   endfunction
 
   // Reference overflow_model for the correct overflow.
-  function automatic logic overflow_model(longint result);
+  function logic overflow_model(longint result);
     logic [OUTPUT_WIDTH-1:0] result_truncated;
     result_truncated = result;
 

@@ -7,9 +7,9 @@ module fib_tb;
 
   localparam int NUM_RANDOM_TESTS = 10;
   localparam int NUM_CONSECUTIVE_TESTS = 10;
-  localparam int NUM_REPEATS = 4;
-  localparam int INPUT_WIDTH = 6;
-  localparam int OUTPUT_WIDTH = 32;
+  localparam int NUM_REPEATS = 2;
+  localparam int INPUT_WIDTH = 3;
+  localparam int OUTPUT_WIDTH = 6;
   logic clk;
 
   fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm (.clk(clk));
@@ -19,10 +19,10 @@ module fib_tb;
       .clk(clk),
       .rst(bfm.rst),
       .go(bfm.go),
-      .done(bfm.done),
       .n(bfm.n),
       .result(bfm.result),
-      .overflow(bfm.overflow)
+      .overflow(bfm.overflow),
+      .done(bfm.done)
   );
 
   random_test #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) test_random = new(bfm, "Random Test");
