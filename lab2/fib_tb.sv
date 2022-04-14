@@ -71,7 +71,7 @@ module fib_tb;
   $error("Time %0t [Assert Property]: done not cleared after go asserted.", $time);
 
   // go must be cleared for done to be asserted
-  assert property (@(posedge bfm.clk) disable iff (bfm.rst) $rose(bfm.done) |-> $past(bfm.go, 0))
+  assert property (@(posedge bfm.clk) disable iff (bfm.rst) $rose(bfm.done) |=> $past(bfm.go, 0))
   else
   $error("Time %0t [Assert Property]: Go did not return to 0", $time);
 endmodule
