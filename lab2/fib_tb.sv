@@ -8,8 +8,8 @@ module fib_tb;
   localparam int NUM_RANDOM_TESTS = 10;
   localparam int NUM_CONSECUTIVE_TESTS = 10;
   localparam int NUM_REPEATS = 2;
-  localparam int INPUT_WIDTH = 3;
-  localparam int OUTPUT_WIDTH = 7;
+  localparam int INPUT_WIDTH = 6;
+  localparam int OUTPUT_WIDTH = 32;
   logic clk;
 
   fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm (.clk(clk));
