@@ -18,6 +18,9 @@ module fib_tb;
   ) bfm (
       .clk(clk)
   );
+
+  bind fib fib_bfm_if bfm(.*);
+  /*
   fib #(
       .INPUT_WIDTH (INPUT_WIDTH),
       .OUTPUT_WIDTH(OUTPUT_WIDTH)
@@ -29,9 +32,8 @@ module fib_tb;
       .result(bfm.result),
       .overflow(bfm.overflow),
       .done(bfm.done),
-      .i_r(bfm.i_r)
   );
-
+*/
   random_test #(
       .INPUT_WIDTH (INPUT_WIDTH),
       .OUTPUT_WIDTH(OUTPUT_WIDTH)
