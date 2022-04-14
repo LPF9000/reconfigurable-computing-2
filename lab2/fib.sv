@@ -118,7 +118,8 @@ module fib_bad #(
         end
       endcase
 
-      if (go == 1'b1) state_r <= COND;
+      // removed this line
+      //if (go == 1'b1) state_r <= COND;
     end
   end
 endmodule
