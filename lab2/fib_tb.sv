@@ -61,10 +61,12 @@ module fib_tb;
   is evaluated on the next clock tick.*/
 
   // if go and done are both asserted, done should be cleared on the next cycle
-  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.go && bfm.done |=> !bfm.done) 
-  $display("Time %0t [Assert Property]: Done=1, go=1, done not cleared next cycle.", $time);
+  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.go && bfm.done |=> !bfm.done);
+  else
+  $error("Time %0t [Assert Property]: Done=1, go=1, done not cleared next cycle.", $time);
 
   // if done is cleared, then go should have been asserted on the previous clock cycle
-  assert property (@(posedge bfm.clk) disable iff (bfm.rst) $fell(bfm.done) |-> $past(bfm.go, 1))
-  $display("Time %0t [Assert Property]: done not cleared after go asserted.", $time);
+  assert property (@(posedge bfm.clk) disable iff (bfm.rst) $fell(bfm.done) |-> $past(bfm.go, 1));
+  else
+  $error("Time %0t [Assert Property]: done not cleared after go asserted.", $time);
 endmodule
