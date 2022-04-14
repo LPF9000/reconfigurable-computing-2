@@ -37,6 +37,7 @@ interface fib_bfm_if #(
   // becomes active. With this strategy, the implementation specific details
   // are limited to the BFM and are hidden from the testbench.
   event active_event;
+  event inactive_event;
   task automatic monitor();
     logic is_active;
     is_active = 1'b0;

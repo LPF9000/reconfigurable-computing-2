@@ -5,9 +5,9 @@
 
 module fib_tb;
 
-  localparam int NUM_RANDOM_TESTS = 10;
-  localparam int NUM_CONSECUTIVE_TESTS = 10;
-  localparam int NUM_REPEATS = 2;
+  localparam int NUM_RANDOM_TESTS = 1;
+  localparam int NUM_CONSECUTIVE_TESTS = 1;
+  localparam int NUM_REPEATS = 1;
   localparam int INPUT_WIDTH = 6;
   localparam int OUTPUT_WIDTH = 32;
   logic clk;
