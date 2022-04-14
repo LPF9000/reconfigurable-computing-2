@@ -93,3 +93,16 @@ module fib_tb;
   else $error("Time %0t [Assert Property]: Go did not return to 0", $time);
 
 endmodule
+
+/*
+Design specifican bullet points:
+
+Done: 1 2 3 4 8 
+Not done: 5 6 9
+Skipping: 7 
+
+To do:
+
+7. Fixing the design
+
+*/
