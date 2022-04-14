@@ -81,8 +81,8 @@ module fib_tb;
   else $error("Time %0t [Assert Property]: Done=1, go=1, done not cleared next cycle.", $time);
 
   // if done is asserted, but go is not asserted, done should remain true.
-  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done && $stable(!bfm.go) |-> $stable(bfm.done))
-  else $error("Time %0t [Assert Property]: Done=1, go=1, done not stable.", $time);
+  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done && $stable(bfm.done) && !bfm.go |=> $stable(bfm.done))
+  else $error("Time %0t [Assert Property]: Done=1, go=0, done not stable.", $time);
 
   // if done is cleared, then go should have been asserted on the previous clock cycle
   assert property (@(posedge bfm.clk) disable iff (bfm.rst) $fell(bfm.done) |-> $past(bfm.go, 1))
