@@ -8,7 +8,7 @@ interface fib_bfm_if #(
     input logic clk
 );
   logic rst, go, done, overflow;
-  logic [INPUT_WIDTH-1:0] n;
+  logic [ INPUT_WIDTH-1:0] n;
   logic [OUTPUT_WIDTH-1:0] result;
 
   task automatic wait_for_done();
@@ -26,8 +26,8 @@ interface fib_bfm_if #(
   endtask
 
   task automatic start(input logic [INPUT_WIDTH-1:0] n_);
-    n <= n_;
-    go   <= 1'b1;
+    n  <= n_;
+    go <= 1'b1;
     @(posedge clk);
     go <= 1'b0;
   endtask  // start
@@ -46,8 +46,7 @@ interface fib_bfm_if #(
       @(posedge clk);
       if (rst) begin
         is_active = 1'b0;
-      end
-      else begin
+      end else begin
         if (done) is_active = 1'b0;
         if (!is_active && go) begin
 

@@ -39,6 +39,7 @@ module fib_bad #(
 );
 
   // changed to enum logic [2:0] (to get recognized as a state machine)
+ // todo check for state machine? 
   typedef enum logic [2:0] {
     START,
     COND,
