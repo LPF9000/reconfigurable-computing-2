@@ -29,7 +29,7 @@ module fib_tb;
       .result(bfm.result),
       .overflow(bfm.overflow),
       .done(bfm.done),
-      .i_r(bfm.i_r);
+      .i_r(bfm.i_r)
   );
 
   random_test #(
