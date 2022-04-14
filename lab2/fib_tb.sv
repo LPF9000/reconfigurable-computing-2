@@ -106,7 +106,7 @@ module fib_tb;
   // upon completion, (ie done = 1), result and overflow retain their values until circuit is restarted
   assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done && $stable(
       bfm.done
-  ) |-> $stable(
+  ) |=> $stable(
       bfm.overflow
   ))
   else $error("Time %0t [Assert Property]: Done=1, overflow not stable.", $time);
