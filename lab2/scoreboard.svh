@@ -64,8 +64,8 @@ class scoreboard #(
 
       // Then, wait until the monitor tells us that test is complete.
       scoreboard_result_mailbox.get(out_item);
-      $display("Time %0t [Scoreboard]: Received result=%0d for n=h%h.", $time, out_item.result,
-               in_item.n);
+      $display("Time %0t [Scoreboard]: Received result=%0d and overflow = %0d for n=h%h.", $time,
+               out_item.result, out_item.overflow, in_item.n);
 
       //scoreboard_overflow_mailbox.get(out_item2);
       //$display("Time %0t [Scoreboard]: Received overflow=%0d for n=h%h.", $time,
