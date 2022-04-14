@@ -12,9 +12,15 @@ module fib_tb;
   localparam int OUTPUT_WIDTH = 32;
   logic clk;
 
-  fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm (.clk(clk));
+  fib_bfm_if #(
+      .INPUT_WIDTH (INPUT_WIDTH),
+      .OUTPUT_WIDTH(OUTPUT_WIDTH)
+  ) bfm (
+      .clk(clk)
+  );
   fib #(
-      .INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)
+      .INPUT_WIDTH (INPUT_WIDTH),
+      .OUTPUT_WIDTH(OUTPUT_WIDTH)
   ) DUT (
       .clk(clk),
       .rst(bfm.rst),
@@ -25,8 +31,18 @@ module fib_tb;
       .done(bfm.done)
   );
 
-  random_test #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) test_random = new(bfm, "Random Test");
-  consecutive_test #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) test_consecutive = new(bfm, "Consecutive Test");
+  random_test #(
+      .INPUT_WIDTH (INPUT_WIDTH),
+      .OUTPUT_WIDTH(OUTPUT_WIDTH)
+  ) test_random = new(
+      bfm, "Random Test"
+  );
+  consecutive_test #(
+      .INPUT_WIDTH (INPUT_WIDTH),
+      .OUTPUT_WIDTH(OUTPUT_WIDTH)
+  ) test_consecutive = new(
+      bfm, "Consecutive Test"
+  );
 
   initial begin : generate_clock
     clk = 1'b0;
@@ -42,36 +58,37 @@ module fib_tb;
     disable generate_clock;
   end
 
-  /*The implication construct (|->) allows a user to monitor sequences based on satisfying some 
-  criteria, e.g. attach a precondition to a sequence and evaluate the sequence only if the condition 
-  is successful. The left-hand side operand of the implication is called the antecedent sequence expression, 
+  /*The implication construct (|->) allows a user to monitor sequences based on satisfying some
+  criteria, e.g. attach a precondition to a sequence and evaluate the sequence only if the condition
+  is successful. The left-hand side operand of the implication is called the antecedent sequence expression,
   while the right-hand side is called the consequent sequence expression.
 
-  If there is no match of the antecedent sequence expression, implication succeeds 
-  vacuously by returning true. If there is a match, for each successful match of the antecedent 
-  sequence expression, the consequent sequence expression is separately evaluated, beginning at 
+  If there is no match of the antecedent sequence expression, implication succeeds
+  vacuously by returning true. If there is a match, for each successful match of the antecedent
+  sequence expression, the consequent sequence expression is separately evaluated, beginning at
   the end point of the match.
 
   There are two forms of implication: overlapped using operator |->, and non-overlapped using operator |=>.
 
-  For overlapped implication, if there is a match for the antecedent sequence expression, then the 
+  For overlapped implication, if there is a match for the antecedent sequence expression, then the
   first element of the consequent sequence expression is evaluated on the same clock tick.
-      
-  For non-overlapped implication, the first element of the consequent sequence expression 
+
+  For non-overlapped implication, the first element of the consequent sequence expression
   is evaluated on the next clock tick.*/
 
   // if go and done are both asserted, done should be cleared on the next cycle
   assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.go && bfm.done |=> !bfm.done)
-  else
-  $error("Time %0t [Assert Property]: Done=1, go=1, done not cleared next cycle.", $time);
+  else $error("Time %0t [Assert Property]: Done=1, go=1, done not cleared next cycle.", $time);
 
   // if done is cleared, then go should have been asserted on the previous clock cycle
   assert property (@(posedge bfm.clk) disable iff (bfm.rst) $fell(bfm.done) |-> $past(bfm.go, 1))
-  else
-  $error("Time %0t [Assert Property]: done not cleared after go asserted.", $time);
+  else $error("Time %0t [Assert Property]: done not cleared after go asserted.", $time);
 
   // go must be cleared for done to be asserted
   assert property (@(posedge bfm.clk) disable iff (bfm.rst) $rose(bfm.done) |-> $past(!bfm.go, 1))
-  else
-  $error("Time %0t [Assert Property]: Go did not return to 0", $time);
+  else $error("Time %0t [Assert Property]: Go did not return to 0", $time);
+
+  // go must be cleared for done to be asserted
+  assert property (@(posedge bfm.clk) disable iff (bfm.rst) $rose(bfm.done) |-> $past(!bfm.go, 1))
+  else $error("Time %0t [Assert Property]: Go did not return to 0", $time);
 endmodule

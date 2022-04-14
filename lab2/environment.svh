@@ -26,7 +26,7 @@ class environment #(
 
   mailbox scoreboard_n_mailbox;
   mailbox scoreboard_result_mailbox;
-  mailbox scoreboard_overflow_mailbox;
+  //mailbox scoreboard_overflow_mailbox;
   mailbox driver_mailbox;
 
   event driver_done_event;
@@ -35,7 +35,7 @@ class environment #(
                base_driver#(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) drv_h);
     scoreboard_n_mailbox = new;
     scoreboard_result_mailbox = new;
-    scoreboard_overflow_mailbox = new;
+    //scoreboard_overflow_mailbox = new;
     driver_mailbox = new;
 
     // We no longer instantiate these here because they are created in the
@@ -44,7 +44,7 @@ class environment #(
     driver_h = drv_h;
     done_monitor_h = new(bfm, scoreboard_result_mailbox);
     start_monitor_h = new(bfm, scoreboard_n_mailbox);
-    scoreboard_h = new(scoreboard_n_mailbox, scoreboard_result_mailbox, scoreboard_overflow_mailbox);
+    scoreboard_h = new(scoreboard_n_mailbox, scoreboard_result_mailbox);
   endfunction  // new
 
   function void report_status();

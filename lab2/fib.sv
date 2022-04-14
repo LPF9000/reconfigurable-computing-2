@@ -6,8 +6,8 @@
 
 /*=============================================================================
  Parameter Descriptions
- INPUT_WIDTH : A positive integer representing the bit width of the n input 
- OUTPUT_WIDTH : A positive integer representing the bit width of the result 
+ INPUT_WIDTH : A positive integer representing the bit width of the n input
+ OUTPUT_WIDTH : A positive integer representing the bit width of the result
  ===============================================================================
  ===============================================================================
  Interface Description (all control inputs are active high)
@@ -18,7 +18,7 @@
          impact when the module is currently active (!done except after reset).
  n     : The nth Fibonacci number to calculate, starting at 1. A value of n=0
          produces a result = 0.
- 
+
  --- OUTPUTS ---
  result : The calculated result. Is valid when done is asserted.
  done : Asserted when the result output is valid. Remains asserted indefinitely

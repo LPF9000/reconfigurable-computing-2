@@ -11,11 +11,22 @@ virtual class base_test #(
     int OUTPUT_WIDTH
 );
 
-  virtual fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm;
+  virtual fib_bfm_if #(
+      .INPUT_WIDTH (INPUT_WIDTH),
+      .OUTPUT_WIDTH(OUTPUT_WIDTH)
+  ) bfm;
   string name;
-  environment #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) env_h;
+  environment #(
+      .INPUT_WIDTH (INPUT_WIDTH),
+      .OUTPUT_WIDTH(OUTPUT_WIDTH)
+  ) env_h;
 
-  function new(virtual fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm, string name = "default_test_name");
+  function new(
+  virtual fib_bfm_if #(
+      .INPUT_WIDTH (INPUT_WIDTH),
+      .OUTPUT_WIDTH(OUTPUT_WIDTH)
+  ) bfm,
+               string name = "default_test_name");
 
     // Ideally we would also create the environment here, but we don't
     // have all the parameters we need for the constructor yet.
@@ -47,13 +58,19 @@ class random_test #(
     int INPUT_WIDTH,
     int OUTPUT_WIDTH
 ) extends base_test #(
-    .INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)
+    .INPUT_WIDTH (INPUT_WIDTH),
+    .OUTPUT_WIDTH(OUTPUT_WIDTH)
 );
 
   nonblocking_driver #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) drv_h;
   random_generator #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH))   gen_h;
 
-  function new(virtual fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm, string name);
+  function new(
+  virtual fib_bfm_if #(
+      .INPUT_WIDTH (INPUT_WIDTH),
+      .OUTPUT_WIDTH(OUTPUT_WIDTH)
+  ) bfm,
+               string name);
     super.new(bfm, name);
 
     // These should really be passed to the base constructor, but super.new
@@ -71,13 +88,25 @@ class consecutive_test #(
     int INPUT_WIDTH,
     int OUTPUT_WIDTH
 ) extends base_test #(
-    .INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)
+    .INPUT_WIDTH (INPUT_WIDTH),
+    .OUTPUT_WIDTH(OUTPUT_WIDTH)
 );
 
-  blocking_driver #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) drv_h;
-  consecutive_generator #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) gen_h;
+  blocking_driver #(
+      .INPUT_WIDTH (INPUT_WIDTH),
+      .OUTPUT_WIDTH(OUTPUT_WIDTH)
+  ) drv_h;
+  consecutive_generator #(
+      .INPUT_WIDTH (INPUT_WIDTH),
+      .OUTPUT_WIDTH(OUTPUT_WIDTH)
+  ) gen_h;
 
-  function new(virtual fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm, string name);
+  function new(
+  virtual fib_bfm_if #(
+      .INPUT_WIDTH (INPUT_WIDTH),
+      .OUTPUT_WIDTH(OUTPUT_WIDTH)
+  ) bfm,
+               string name);
     super.new(bfm, name);
 
     // These should really be passed to the base constructor, but super.new
