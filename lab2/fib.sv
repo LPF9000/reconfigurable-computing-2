@@ -82,6 +82,7 @@ module fib_bad #(
         end
 
         COND: begin
+          // removed done_r = 0
           done_r <= 1'b0;
 
           if (i_r <= n) state_r <= COMPUTE;
