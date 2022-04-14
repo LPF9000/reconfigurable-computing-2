@@ -5,9 +5,9 @@
 
 module fib_tb;
 
-  localparam int NUM_RANDOM_TESTS = 10;
-  localparam int NUM_CONSECUTIVE_TESTS = 10;
-  localparam int NUM_REPEATS = 2;
+  localparam int NUM_RANDOM_TESTS = 1;
+  localparam int NUM_CONSECUTIVE_TESTS = 1;
+  localparam int NUM_REPEATS = 0;
   localparam int INPUT_WIDTH = 6;
   localparam int OUTPUT_WIDTH = 32;
   logic clk;
@@ -42,7 +42,7 @@ module fib_tb;
     disable generate_clock;
   end
 
-  //assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.go && bfm.done |=> !bfm.done);
-  //assert property (@(posedge bfm.clk) disable iff (bfm.rst) $fell(bfm.done) |-> $past(bfm.go, 1));
+  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.go && bfm.done |=> !bfm.done);
+  assert property (@(posedge bfm.clk) disable iff (bfm.rst) $fell(bfm.done) |-> $past(bfm.go, 1));
 
 endmodule

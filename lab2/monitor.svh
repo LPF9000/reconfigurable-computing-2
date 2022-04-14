@@ -40,7 +40,7 @@ class done_monitor #(
       fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) item = new;
       bfm.wait_for_done();
       item.result = bfm.result;
-      $display("Time %0t [Monitor]: Monitor detected result=%0d.", $time, bfm.result);
+      //$display("Time %0t [Monitor]: Monitor detected result=%0d.", $time, bfm.result);
       scoreboard_result_mailbox.put(item);
     end
   endtask
@@ -75,7 +75,7 @@ class start_monitor #(
       // Wait until the DUT becomes active.
       @(bfm.active_event);
       item.n = bfm.n;
-      $display("Time %0t [start_monitor]: Sending start of test for n=h%h.", $time, item.n);
+      //$display("Time %0t [start_monitor]: Sending start of test for n=h%h.", $time, item.n);
       scoreboard_n_mailbox.put(item);
     end
   endtask

@@ -96,7 +96,7 @@ module fib_bad
 	      if (full_add_r[OUTPUT_WIDTH]) overflow_r <= 1'b1;
 	      y_r <= full_add_r;	      
 	      state_r <= COND;						
-	   end
+	   end-
 
 	   DONE : begin
 	      if (n < 2)
