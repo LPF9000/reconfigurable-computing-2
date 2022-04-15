@@ -29,7 +29,7 @@ module fib_tb;
       .n(bfm.n),
       .result(bfm.result),
       .overflow(bfm.overflow),
-      .done(bfm.done),
+      .done(bfm.done)
   );
 
   bind fib fib_bfm_if bfm(.*);
