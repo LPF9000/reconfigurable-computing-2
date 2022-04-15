@@ -80,8 +80,8 @@ class scoreboard #(
       scoreboard_result_mailbox.get(out_item);
       $display("Time %0t [Scoreboard]: Received result=%0d and overflow = %0d for n=h%h.", $time,
                out_item.result, out_item.overflow, in_item.n);
-      $display("Time %0t [Scoreboard]: Received i_r=h%h and x_r = h%h and y_r=h%h.", $time,
-               out_item.i_r, out_item.x_r, out_item.y_r);
+      $display("Time %0t [Scoreboard]: Received i_r=h%h.", $time,
+               out_item.i_r);
 
       // Get the correct result based on the input at the start of the test.
       reference1 = result_model(in_item.n, x_r, y_r, i_r);
