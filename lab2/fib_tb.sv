@@ -11,12 +11,14 @@ module fib_tb;
   localparam int INPUT_WIDTH = 6;
   localparam int OUTPUT_WIDTH = 32;
   logic clk;
+  logic [INPUT_WIDTH-1:0] i_r;
 
   fib_bfm_if #(
       .INPUT_WIDTH (INPUT_WIDTH),
       .OUTPUT_WIDTH(OUTPUT_WIDTH)
   ) bfm (
-      .clk(clk)
+      .clk(clk),
+      .i_r(DUT.i_r)
   );
 
   fib #(
@@ -111,9 +113,6 @@ module fib_tb;
       bfm.overflow
   ))
   else $error("Time %0t [Assert Property]: Done=1, overflow not stable.", $time);
-
-
-    $display("i_r = h%h", DUT.i_r);
 
 endmodule
 
