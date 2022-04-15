@@ -57,7 +57,8 @@ class done_monitor #(
       bfm.wait_for_done();
       item.result   = bfm.result;
       item.overflow = bfm.overflow;
-      $display("Time %0t [Monitor]: Monitor detected result=%0d and overflow=%0d.", $time,
+      item.i_r      = bfm.i_r;
+      $display("Time %0t [Monitor]: Monitor detected result=%0d and overflow=%0d", $time,
                bfm.result, bfm.overflow);
       scoreboard_result_mailbox.put(item);
     end
