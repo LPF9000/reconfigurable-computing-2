@@ -114,7 +114,7 @@ class start_monitor #(
 
       @(posedge bfm.clk);
       item.i_r_init   = bfm.i_r;
-      scoreboard_n_mailbox.put(item);
+      scoreboard_n_mailbox.put(item.i_r_init);
 
 
     end
