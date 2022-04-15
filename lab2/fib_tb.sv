@@ -37,6 +37,11 @@ module fib_tb;
       .full_add_r(DUT.top.full_add_r)
   );
 
+  // Coverage 
+  //covergroup cg @(posedge bfm.clk);
+    //n_eq_0: coverpoint bfm.n {bins one = {0}; option.at_least = 1;}
+    //overf: coverpoint bfm.overflow {bins one = {1}; option.at_least =1;}
+  //endgroup
 
 
 
@@ -60,12 +65,16 @@ module fib_tb;
     while (1) #5 clk = ~clk;
   end
 
+  //cg cg_inst;
+
   initial begin
     $timeformat(-9, 0, " ns");
+    //cg_inst = new;
     test_random.run(NUM_RANDOM_TESTS, NUM_REPEATS);
     test_consecutive.run(NUM_CONSECUTIVE_TESTS, NUM_REPEATS);
     test_random.report_status();
     test_consecutive.report_status();
+    //$display("Coverage = %0.2f %%", cg_inst.get_inst_coverage());
     disable generate_clock;
   end
 
@@ -108,32 +117,31 @@ module fib_tb;
   else $error("Time %0t [Assert Property]: Go did not return to 0", $time);
 
   // upon completion, (ie done = 1), result and overflow retain their values until circuit is restarted
-  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done && $stable(
-      bfm.done
-  ) |-> $stable(
-      bfm.result
-  ))
+  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done && $stable(bfm.done) |-> $stable(bfm.result))
   else $error("Time %0t [Assert Property]: Done=1, result not stable.", $time);
   // upon completion, (ie done = 1), result and overflow retain their values until circuit is restarted
-  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done && $stable(
-      bfm.done
-  ) |-> $stable(
-      bfm.overflow
-  ))
+  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done && $stable(bfm.done) |-> $stable(bfm.overflow))
   else $error("Time %0t [Assert Property]: Done=1, overflow not stable.", $time);
+
+  // Check overflow asserted 
+  // assert property (@(posedge clk) disable iff (bfm.rst) ) 
+  // else $error("Time %0t [Assert Property]: ", $time);
+
+  // cp_n_eq_0: cover property (@(posedge clk) bfm.n == 0);
+  
+  // Check that overflow is asserted at some point (is this the right way to do this?)
+  // cp_overf: cover property (@(posedge bfm.done) bfm.overflow == 1'b1);
 
 endmodule
 
 /*
 Design specifican bullet points:
 
-Done: 1 2 3 4 8
-Not done: 5 6 9
+Done: 1 2 3 4 8 9
+Not done: 5 6 
 Skipping: 7
 
-To do:
-
-7. Fixing the design
+DONE: 7. Fixing the design
 
 Todo Notes:
 -Create custom distribution contraint for input n
