@@ -21,8 +21,15 @@ class scoreboard #(
       reference1,
       reference2,
       i_r_passed,
-      i_r_failed;
-  longint x_r, i_r, y_r;
+      i_r_failed,
+      x_r_passed,
+      x_r_failed,
+      y_r_passed,
+      y_r_failed,
+      full_add_r_passed,
+      full_add_r_failed;
+
+  longint x_r, i_r, y_r, full_add_r;
 
   function new(mailbox scoreboard_n_mailbox, mailbox scoreboard_result_mailbox);
     this.scoreboard_n_mailbox = scoreboard_n_mailbox;
@@ -35,10 +42,17 @@ class scoreboard #(
     overflow_failed = 0;
     i_r_passed = 0;
     i_r_failed = 0;
+    x_r_passed = 0;
+    x_r_failed = 0;
+    y_r_passed = 0;
+    y_r_failed = 0;
+    full_add_r_passed = 0;
+    full_add_r_failed = 0;
   endfunction  // new
 
   // Reference model for the correct result.
-  function automatic longint result_model(int n, ref longint x, ref longint y, ref longint i);
+  function automatic longint result_model(int n, ref longint x, ref longint y, ref longint i,
+                                          ref longint temp);
     //longint x, y, i, temp;
     longint temp;
     x = 0;
@@ -80,11 +94,10 @@ class scoreboard #(
       scoreboard_result_mailbox.get(out_item);
       $display("Time %0t [Scoreboard]: Received result=%0d and overflow = %0d for n=h%h.", $time,
                out_item.result, out_item.overflow, in_item.n);
-      $display("Time %0t [Scoreboard]: Received i_r=h%h.", $time,
-               out_item.i_r);
+      $display("Time %0t [Scoreboard]: Received i_r=h%h.", $time, out_item.i_r);
 
       // Get the correct result based on the input at the start of the test.
-      reference1 = result_model(in_item.n, x_r, y_r, i_r);
+      reference1 = result_model(in_item.n, x_r, y_r, i_r, full_add_r);
       if (out_item.result == reference1) begin
         $display("Time %0t [Scoreboard] Result test passed for n=h%h", $time, in_item.n);
         result_passed++;
@@ -102,6 +115,32 @@ class scoreboard #(
         $display("Time %0t [Scoredboard] Result test failed: i_r = h%h instead of h%h for n = h%h.",
                  $time, out_item.i_r, i_r, in_item.n);
         i_r_failed++;
+      end
+      if (out_item.x_r == x_r) begin
+        $display("Time %0t [Scoreboard] Result test passed for i_r=h%h", $time, out_item.x_r);
+        i_r_passed++;
+      end else begin
+        $display("Time %0t [Scoredboard] Result test failed: x_r = h%h instead of h%h for n = h%h.",
+                 $time, out_item.x_r, x_r, in_item.n);
+        x_r_failed++;
+      end
+      if (out_item.y_r == y_r) begin
+        $display("Time %0t [Scoreboard] Result test passed for y_r=h%h", $time, out_item.y_r);
+        y_r_passed++;
+      end else begin
+        $display("Time %0t [Scoredboard] Result test failed: y_r = h%h instead of h%h for n = h%h.",
+                 $time, out_item.y_r, y_r, in_item.n);
+        y_r_failed++;
+      end
+      if (out_item.full_add_r == full_add_r) begin
+        $display("Time %0t [Scoreboard] Result test passed for full_add_r=h%h", $time,
+                 out_item.full_add_r);
+        full_add_r_passed++;
+      end else begin
+        $display(
+            "Time %0t [Scoredboard] Result test failed: full_add_r = h%h instead of h%h for n = h%h.",
+            $time, out_item.full_add_r, full_add_r, in_item.n);
+        full_add_r_failed++;
       end
 
       // Get the correct overflow based on the input at the start of the test.
@@ -131,6 +170,10 @@ class scoreboard #(
     $display("Test status: %0d overflow_passed, %0d overflow_failed", overflow_passed,
              overflow_failed);
     $display("Test status: %0d i_r_passed, %0d i_r_failed", i_r_passed, i_r_failed);
+    $display("Test status: %0d x_r_passed, %0d x_r_failed", x_r_passed, x_r_failed);
+    $display("Test status: %0d y_r_passed, %0d y_r_failed", y_r_passed, y_r_failed);
+    $display("Test status: %0d full_add_r_passed, %0d full_add_r_failed", full_add_r_passed,
+             full_add_r_failed);
   endfunction
 
 endclass
