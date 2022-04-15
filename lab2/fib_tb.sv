@@ -123,12 +123,12 @@ module fib_tb;
   assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done && $stable(bfm.done) |-> $stable(bfm.overflow))
   else $error("Time %0t [Assert Property]: Done=1, overflow not stable.", $time);
 
-  // Check overflow asserted 
-  // assert property (@(posedge clk) disable iff (bfm.rst) ) 
+  // Check overflow asserted
+  // assert property (@(posedge clk) disable iff (bfm.rst) )
   // else $error("Time %0t [Assert Property]: ", $time);
 
   // cp_n_eq_0: cover property (@(posedge clk) bfm.n == 0);
-  
+
   // Check that overflow is asserted at some point (is this the right way to do this?)
   // cp_overf: cover property (@(posedge bfm.done) bfm.overflow == 1'b1);
 
@@ -138,7 +138,7 @@ endmodule
 Design specifican bullet points:
 
 Done: 1 2 3 4 8 9
-Not done: 5 6 
+Not done: 5 6
 Skipping: 7
 
 DONE: 7. Fixing the design
