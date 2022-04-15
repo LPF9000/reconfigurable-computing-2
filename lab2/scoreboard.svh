@@ -12,7 +12,7 @@ class scoreboard #(
 );
   mailbox scoreboard_result_mailbox;
   mailbox scoreboard_n_mailbox;
-  mailbox scoreboard_overflow_mailbox;
+  mailbox scoreboard_clear_mailbox;
   int
       result_passed,
       result_failed,
@@ -41,10 +41,10 @@ class scoreboard #(
 
 
 
-  function new(mailbox scoreboard_n_mailbox, mailbox scoreboard_result_mailbox);
+  function new(mailbox scoreboard_n_mailbox, mailbox scoreboard_result_mailbox, mailbox scoreboard_clear_mailbox);
     this.scoreboard_n_mailbox = scoreboard_n_mailbox;
     this.scoreboard_result_mailbox = scoreboard_result_mailbox;
-    //this.scoreboard_overflow_mailbox = scoreboard_overflow_mailbox;
+    this.mailbox scoreboard_clear_mailbox; = mailbox scoreboard_clear_mailbox;;
 
     result_passed = 0;
     result_failed = 0;
@@ -109,6 +109,7 @@ class scoreboard #(
 
       // First wait until the driver informs us of a new test.
       scoreboard_n_mailbox.get(in_item);
+      scoreboard_clear_mailbox.get(in_item);
       $display("Time %0t [Scoreboard]: Received start of test for n=h%h", $time, in_item.n);
 
       if (in_item.i_r_init == i_r) begin

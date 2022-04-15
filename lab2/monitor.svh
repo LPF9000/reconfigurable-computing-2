@@ -102,6 +102,7 @@ class start_monitor #(
           .INPUT_WIDTH (INPUT_WIDTH),
           .OUTPUT_WIDTH(OUTPUT_WIDTH)
       ) item = new;
+        item_clear = new;
 
       // Wait until the DUT becomes active.
       @(bfm.active_event);
@@ -113,8 +114,9 @@ class start_monitor #(
       scoreboard_n_mailbox.put(item);
 
       @(posedge bfm.clk);
-      item.i_r_init   = bfm.i_r;
-      scoreboard_n_mailbox.put(item.i_r_init);
+      item_clear.i_r  = bfm.i_r;
+
+      scoreboard_clear_mailbox.put(item_clear);
 
 
     end
