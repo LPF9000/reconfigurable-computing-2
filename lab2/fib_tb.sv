@@ -112,6 +112,9 @@ module fib_tb;
   ))
   else $error("Time %0t [Assert Property]: Done=1, overflow not stable.", $time);
 
+
+    $display("i_r = h%h", DUT.i_r);
+
 endmodule
 
 /*
