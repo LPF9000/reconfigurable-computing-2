@@ -112,14 +112,6 @@ class start_monitor #(
       $display("Time %0t [start_monitor]: Sending start of test for n=h%h.", $time, item.n);
       scoreboard_n_mailbox.put(item);
 
-      @(posedge bfm.clk);
-      item.i_r_init   = bfm.i_r;
-      item.x_r_init   = bfm.x_r;
-      item.y_r_init   = bfm.y_r;
-
-      scoreboard_n_mailbox.put(item.i_r_init);
-
-
 
     end
   endtask

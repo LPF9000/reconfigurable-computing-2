@@ -146,7 +146,6 @@ module fib_good #(
   // todo check for state machine?
   typedef enum logic [2:0] {
     START,
-    INIT,
     COND,
     COMPUTE,
     OVERFLOW,
@@ -188,14 +187,6 @@ module fib_good #(
           if (go == 1'b1) state_r <= COND;
         end
 
-        // added an init state to account for the signals never getting reset
-        INIT: begin
-          i_r <= INPUT_WIDTH'(3);
-          x_r <= '0;
-          y_r <= OUTPUT_WIDTH'(1);
-
-          state_r <= COND;
-        end
       // TO DO: Needs an init state to initialize variables when repeating back to COND
         COND: begin
           // removed done_r = 0
@@ -231,8 +222,12 @@ module fib_good #(
         RESTART: begin
           // added done_r = 0 here to be cleared cycle after go is asserted
           if (go == 1'b1) begin
-            state_r <= INIT;
+            state_r <= COND;
             done_r  <= 1'b0;
+            // added init to signals to account for the signals never getting reset
+            i_r <= INPUT_WIDTH'(3);
+            x_r <= '0;
+            y_r <= OUTPUT_WIDTH'(1);
           end
         end
 
