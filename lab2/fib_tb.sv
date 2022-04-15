@@ -31,7 +31,10 @@ module fib_tb;
       .OUTPUT_WIDTH(OUTPUT_WIDTH)
   ) bfm (
       .clk(clk),
-      .i_r(DUT.top.i_r)
+      .i_r(DUT.top.i_r),
+      .x_r(DUT.top.x_r),
+      .y_r(DUT.top.y_r),
+      .full_add_r(DUT.top.full_add_r)
   );
 
 
@@ -131,5 +134,12 @@ Skipping: 7
 To do:
 
 7. Fixing the design
+
+Todo Notes:
+-Create custom distribution contraint for input n
+
+Things I changed:
+1. Wait_for_done function (made more sense to check rising edge of done if I am already asserting done on posedge clk)
+2. Added i_r, x_r, y_r, and full_add_r signals to the scoreboard/monitor. 
 
 */
