@@ -39,7 +39,111 @@ module fib_bad #(
 );
 
   // changed to enum logic [2:0] (to get recognized as a state machine)
- // todo check for state machine?
+  // todo check for state machine?
+
+  typedef enum {
+    START,
+    COND,
+    COMPUTE,
+    OVERFLOW,
+    DONE,
+    RESTART
+  } state_t;
+  state_t state_r;
+
+  logic [$bits(n)-1:0] i_r;
+  logic [$bits(result)-1:0] x_r;
+  logic [$bits(result)-1:0] y_r;
+  logic [$bits(result):0] full_add_r;
+
+  logic [$bits(result)-1:0] result_r;
+  logic done_r, overflow_r;
+
+  assign done = done_r;
+  assign result = result_r;
+  assign overflow = overflow_r;
+
+  always_ff @(posedge clk or posedge rst) begin
+    if (rst) begin
+      state_r <= START;
+      result_r <= '0;
+      done_r <= 1'b0;
+      i_r <= '0;
+      x_r <= '0;
+      y_r <= '0;
+      overflow_r <= 1'b0;
+      full_add_r <= '0;
+    end else begin
+
+      case (state_r)
+        START: begin
+          i_r <= 3;
+          x_r <= '0;
+          y_r <= 1;
+          if (go == 1'b1) state_r <= COND;
+        end
+
+        COND: begin
+          done_r <= 1'b0;
+
+          if (i_r <= n) state_r <= COMPUTE;
+          else state_r <= DONE;
+        end
+
+        COMPUTE: begin
+          x_r <= y_r;
+          full_add_r <= x_r + y_r;
+          i_r <= i_r + 1'b1;
+          state_r <= OVERFLOW;
+        end
+
+        OVERFLOW: begin
+          if (full_add_r[OUTPUT_WIDTH]) overflow_r <= 1'b1;
+          y_r <= full_add_r;
+          state_r <= COND;
+        end
+
+        DONE: begin
+          if (n < 2) result_r <= x_r;
+          else result_r <= y_r;
+
+          done_r  <= 1'b1;
+          state_r <= RESTART;
+        end
+
+        RESTART: begin
+          if (go == 1'b1) state_r <= COND;
+        end
+      endcase
+
+      if (go == 1'b1) state_r <= COND;
+    end
+  end
+endmodule
+
+
+
+// TODO: Create a fully functional fib entity. It is up to you to create a
+// testbench that gives you confidence in its correctness. I will be using a
+// very thorough testbench, so if your testbench is lacking, I will likely
+// will find errors you did not see in your tests.
+
+module fib_good #(
+    parameter int INPUT_WIDTH,
+    parameter int OUTPUT_WIDTH
+) (
+    input  logic                    clk,
+    input  logic                    rst,
+    input  logic                    go,
+    input  logic [ INPUT_WIDTH-1:0] n,
+    output logic [OUTPUT_WIDTH-1:0] result,
+    output logic                    overflow,
+    output logic                    done
+);
+
+
+  // changed to enum logic [2:0] (to get recognized as a state machine)
+  // todo check for state machine?
   typedef enum logic [2:0] {
     START,
     COND,
@@ -126,29 +230,6 @@ module fib_bad #(
       //if (go == 1'b1) state_r <= COND;
     end
   end
-endmodule
-
-
-
-// TODO: Create a fully functional fib entity. It is up to you to create a
-// testbench that gives you confidence in its correctness. I will be using a
-// very thorough testbench, so if your testbench is lacking, I will likely
-// will find errors you did not see in your tests.
-
-module fib_good #(
-    parameter int INPUT_WIDTH,
-    parameter int OUTPUT_WIDTH
-) (
-    input  logic                    clk,
-    input  logic                    rst,
-    input  logic                    go,
-    input  logic [ INPUT_WIDTH-1:0] n,
-    output logic [OUTPUT_WIDTH-1:0] result,
-    output logic                    overflow,
-    output logic                    done
-);
-
-
 endmodule
 
 
