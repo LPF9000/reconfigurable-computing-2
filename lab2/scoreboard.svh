@@ -63,7 +63,7 @@ class scoreboard #(
       // First wait until the driver informs us of a new test.
       scoreboard_n_mailbox.get(in_item);
       $display("Time %0t [Scoreboard]: Received start of test for n=h%h and i_r = h%h.", $time,
-               in_item.n, in_item.i_r);
+               in_item.n);
 
       // Then, wait until the monitor tells us that test is complete.
       scoreboard_result_mailbox.get(out_item);
