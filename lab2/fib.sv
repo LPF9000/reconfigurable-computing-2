@@ -175,7 +175,7 @@ module fib_good #(
       i_r <= '0;
       x_r <= '0;
       y_r <= '0;
-      n_r <= '0
+      n_r <= '0;
       overflow_r <= 1'b0;
       full_add_r <= '0;
     end else begin

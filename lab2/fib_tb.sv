@@ -145,6 +145,8 @@ DONE: 7. Fixing the design
 
 Todo Notes:
 -Create custom distribution contraint for input n
+- get 100% coverage
+- increase tests without breaking
 
 Things I changed:
 1. Wait_for_done function (made more sense to check rising edge of done if I am already asserting done on posedge clk)
