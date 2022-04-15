@@ -26,6 +26,7 @@ class environment #(
 
   mailbox scoreboard_n_mailbox;
   mailbox scoreboard_result_mailbox;
+  mailbox scoreboard_clear_mailbox;
   mailbox driver_mailbox;
 
   event driver_done_event; // TODO unused?
@@ -42,7 +43,7 @@ class environment #(
     genarator_h = gen_h;
     driver_h = drv_h;
     done_monitor_h = new(bfm, scoreboard_result_mailbox);
-    start_monitor_h = new(bfm, scoreboard_n_mailbox);
+    start_monitor_h = new(bfm, scoreboard_n_mailbox, scoreboard_clear_mailbox;);
     scoreboard_h = new(scoreboard_n_mailbox, scoreboard_result_mailbox, scoreboard_clear_mailbox);
   endfunction  // new
 
