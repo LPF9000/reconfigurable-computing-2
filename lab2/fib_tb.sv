@@ -32,8 +32,6 @@ module fib_tb;
       .done(bfm.done)
   );
 
-  bind fib fib_bfm_if bfm(.*);
-
   random_test #(
       .INPUT_WIDTH (INPUT_WIDTH),
       .OUTPUT_WIDTH(OUTPUT_WIDTH)
