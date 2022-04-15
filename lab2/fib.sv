@@ -155,6 +155,7 @@ module fib_good #(
   state_t state_r;
 
   logic [$bits(n)-1:0] i_r;
+  logic [$bits(n)-1:0] n_r;
   logic [$bits(result)-1:0] x_r;
   logic [$bits(result)-1:0] y_r;
   logic [$bits(result):0] full_add_r;
@@ -174,6 +175,7 @@ module fib_good #(
       i_r <= '0;
       x_r <= '0;
       y_r <= '0;
+      n_r <= '0
       overflow_r <= 1'b0;
       full_add_r <= '0;
     end else begin
@@ -184,7 +186,13 @@ module fib_good #(
           i_r <= INPUT_WIDTH'(3);
           x_r <= '0;
           y_r <= OUTPUT_WIDTH'(1);
-          if (go == 1'b1) state_r <= COND;
+          
+          // added registered n signal to prevent changes during computation
+          if (go == 1'b1) begin 
+            n_r <= n; // Save n
+            state_r <= COND;
+          end
+
         end
 
       // TO DO: Needs an init state to initialize variables when repeating back to COND
@@ -192,7 +200,7 @@ module fib_good #(
           // removed done_r = 0
           //done_r <= 1'b0;
 
-          if (i_r <= n) state_r <= COMPUTE;
+          if (i_r <= n_r) state_r <= COMPUTE;
           else state_r <= DONE;
         end
 
@@ -209,12 +217,15 @@ module fib_good #(
           state_r <= COND;
         end
         DONE: begin
-          if (n < 2) result_r <= x_r;
+          if (n_r < 2) result_r <= x_r;
           else result_r <= y_r;
 
           // Defining that go must return to 0 to start another execution
           if (go == 1'b0) begin
             done_r  <= 1'b1;
+            i_r <= INPUT_WIDTH'(3);
+            x_r <= '0;
+            y_r <= OUTPUT_WIDTH'(1);
             state_r <= RESTART;
           end
         end
@@ -222,12 +233,11 @@ module fib_good #(
         RESTART: begin
           // added done_r = 0 here to be cleared cycle after go is asserted
           if (go == 1'b1) begin
+            n_r <= n;
             state_r <= COND;
             done_r  <= 1'b0;
             // added init to signals to account for the signals never getting reset
-            i_r <= INPUT_WIDTH'(3);
-            x_r <= '0;
-            y_r <= OUTPUT_WIDTH'(1);
+
           end
         end
 

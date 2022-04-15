@@ -28,7 +28,7 @@ class environment #(
   mailbox scoreboard_result_mailbox;
   mailbox driver_mailbox;
 
-  event driver_done_event;
+  event driver_done_event; // TODO unused?
 
   function new(virtual fib_bfm_if #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) bfm, base_generator#(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) gen_h,
                base_driver#(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) drv_h);
