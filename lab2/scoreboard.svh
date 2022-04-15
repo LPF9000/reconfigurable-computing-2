@@ -210,7 +210,6 @@ class scoreboard #(
     // will be detected as part of the current test.
     while (scoreboard_n_mailbox.try_get(in_item));
     while (scoreboard_result_mailbox.try_get(out_item));
-    //while (scoreboard_overflow_mailbox.try_get(out_item2));
   endtask
 
   function void report_status();
@@ -221,7 +220,11 @@ class scoreboard #(
     $display("Test status: %0d x_r_passed, %0d x_r_failed", x_r_passed, x_r_failed);
     $display("Test status: %0d y_r_passed, %0d y_r_failed", y_r_passed, y_r_failed);
     $display("Test status: %0d full_add_r_passed, %0d full_add_r_failed", full_add_r_passed,
-             full_add_r_failed);
+    full_add_r_failed);
+    $display("Test status: %0d i_r_clear_passed, %0d i_r_clear_failed", i_r_clear_passed, i_r_clear_failed);
+    $display("Test status: %0d x_r_clear_passed, %0d x_r_clear_failed", x_r_clear_passed, x_r_clear_failed);
+    $display("Test status: %0d y_r_clear_passed, %0d y_r_clear_failed", y_r_clear_passed, y_r_clear_failed);
+
   endfunction
 
 endclass

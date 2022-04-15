@@ -26,7 +26,6 @@ class environment #(
 
   mailbox scoreboard_n_mailbox;
   mailbox scoreboard_result_mailbox;
-  //mailbox scoreboard_overflow_mailbox;
   mailbox driver_mailbox;
 
   event driver_done_event;
@@ -35,7 +34,6 @@ class environment #(
                base_driver#(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) drv_h);
     scoreboard_n_mailbox = new;
     scoreboard_result_mailbox = new;
-    //scoreboard_overflow_mailbox = new;
     driver_mailbox = new;
 
     // We no longer instantiate these here because they are created in the
