@@ -13,25 +13,28 @@ module fib_tb;
   logic clk;
   logic [INPUT_WIDTH-1:0] i_r;
 
+  fib #(
+    .INPUT_WIDTH (INPUT_WIDTH),
+    .OUTPUT_WIDTH(OUTPUT_WIDTH)
+) DUT (
+    .clk(clk),
+    .rst(bfm.rst),
+    .go(bfm.go),
+    .n(bfm.n),
+    .result(bfm.result),
+    .overflow(bfm.overflow),
+    .done(bfm.done)
+);
+
   fib_bfm_if #(
       .INPUT_WIDTH (INPUT_WIDTH),
       .OUTPUT_WIDTH(OUTPUT_WIDTH)
   ) bfm (
-      .clk(clk)
+      .clk(clk),
+      .i_r(DUT.top.i_r)
   );
 
-  fib #(
-      .INPUT_WIDTH (INPUT_WIDTH),
-      .OUTPUT_WIDTH(OUTPUT_WIDTH)
-  ) DUT (
-      .clk(clk),
-      .rst(bfm.rst),
-      .go(bfm.go),
-      .n(bfm.n),
-      .result(bfm.result),
-      .overflow(bfm.overflow),
-      .done(bfm.done)
-  );
+
 
 
 
