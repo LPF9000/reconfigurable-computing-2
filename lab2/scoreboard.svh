@@ -54,7 +54,7 @@ class scoreboard #(
   function automatic longint result_model(int n, ref longint x, ref longint y, ref longint i,
                                           ref longint temp);
     //longint x, y, i, temp;
-    longint temp;
+    temp = 0;
     x = 0;
     y = 1;
     i = 3;
