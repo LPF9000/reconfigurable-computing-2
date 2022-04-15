@@ -26,10 +26,20 @@ class scoreboard #(
       x_r_failed,
       y_r_passed,
       y_r_failed,
+      i_r_clear_passed,
+      i_r_clear_failed,
+      x_r_clear_passed,
+      x_r_clear_failed,
+      y_r_clear_passed,
+      y_r_clear_failed,
       full_add_r_passed,
       full_add_r_failed;
 
   longint x_r, i_r, y_r, full_add_r;
+
+
+
+
 
   function new(mailbox scoreboard_n_mailbox, mailbox scoreboard_result_mailbox);
     this.scoreboard_n_mailbox = scoreboard_n_mailbox;
@@ -46,8 +56,18 @@ class scoreboard #(
     x_r_failed = 0;
     y_r_passed = 0;
     y_r_failed = 0;
+    i_r_clear_passed = 0;
+    i_r_clear_failed = 0;
+    x_r_clear_passed = 0;
+    x_r_clear_failed = 0;
+    y_r_clear_passed = 0;
+    y_r_clear_failed = 0;
     full_add_r_passed = 0;
     full_add_r_failed = 0;
+
+    i_r = 3;
+    x_r = 0;
+    y_r = 1;
   endfunction  // new
 
   // Reference model for the correct result.
@@ -82,7 +102,6 @@ class scoreboard #(
   task run(int num_tests);
     fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) in_item;
     fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) out_item;
-    //fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) out_item2;
 
     for (int i = 0; i < num_tests; i++) begin
 
@@ -90,11 +109,38 @@ class scoreboard #(
       scoreboard_n_mailbox.get(in_item);
       $display("Time %0t [Scoreboard]: Received start of test for n=h%h", $time, in_item.n);
 
+      if (in_item.i_r == i_r) begin
+        $display("Time %0t [Scoreboard] i_r cleared passed for i_r=h%h", $time, in_item.i_r);
+        i_r_clear_passed++;
+      end else begin
+        $display("Time %0t [Scoredboard] i_r cleared failed: i_r = h%h instead of h%h for n = h%h.",
+                 $time, in_item.i_r, i_r, in_item.n);
+        i_r_clear_failed++;
+      end
+
+      if (in_item.x_r == x_r) begin
+        $display("Time %0t [Scoreboard] x_r cleared passed for x_r=h%h", $time, in_item.x_r);
+        x_r_clear_passed++;
+      end else begin
+        $display("Time %0t [Scoredboard] x_r cleared failed: x_r = h%h instead of h%h for n = h%h.",
+                 $time, in_item.x_r, x_r, in_item.n);
+        x_r_clear_failed++;
+      end
+
+      if (in_item.y_r == y_r) begin
+        $display("Time %0t [Scoreboard] y_r cleared passed for y_r=h%h", $time, in_item.y_r);
+        y_r_clear_passed++;
+      end else begin
+        $display("Time %0t [Scoredboard] y_r cleared failed: y_r = h%h instead of h%h for n = h%h.",
+                 $time, in_item.y_r, y_r, in_item.n);
+        y_r_clear_failed++;
+      end
+
       // Then, wait until the monitor tells us that test is complete.
       scoreboard_result_mailbox.get(out_item);
       $display("Time %0t [Scoreboard]: Received result=%0d and overflow = %0d for n=h%h.", $time,
                out_item.result, out_item.overflow, in_item.n);
-      $display("Time %0t [Scoreboard]: Received i_r=h%h.", $time, out_item.i_r);
+      $display("Time %0t [Scoreboard]: Received y_r=h%h.", $time, out_item.y_r);
 
       // Get the correct result based on the input at the start of the test.
       reference1 = result_model(in_item.n, x_r, y_r, i_r, full_add_r);

@@ -22,7 +22,6 @@ class fib_item #(
       1 :/ 10
     };
   }
-  
 endclass
 
 `endif

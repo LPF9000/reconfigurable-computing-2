@@ -224,10 +224,13 @@ module fib_good #(
             done_r  <= 1'b0;
           end
         end
+
+        default : ;
       endcase
 
       // removed this line
       //if (go == 1'b1) state_r <= COND;
+
     end
   end
 endmodule

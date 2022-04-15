@@ -140,6 +140,6 @@ Todo Notes:
 
 Things I changed:
 1. Wait_for_done function (made more sense to check rising edge of done if I am already asserting done on posedge clk)
-2. Added i_r, x_r, y_r, and full_add_r signals to the scoreboard/monitor. 
+2. Added i_r, x_r, y_r, and full_add_r signals to the scoreboard/monitor.
 
 */
