@@ -12,7 +12,7 @@ class fib_item #(
   rand bit go;
   bit [OUTPUT_WIDTH-1:0] result, x_r, y_r, full_add_r;
   bit overflow;
-  bit [INPUT_WIDTH-1:0] i_r;
+  bit [INPUT_WIDTH-1:0] i_r, i_r_init;
 
   // A uniform distribution of go values probably isn't what we want, so
   // we'll make sure go is 1'b0 90% of the time.

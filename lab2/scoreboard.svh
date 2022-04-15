@@ -111,8 +111,8 @@ class scoreboard #(
       scoreboard_n_mailbox.get(in_item);
       $display("Time %0t [Scoreboard]: Received start of test for n=h%h", $time, in_item.n);
 
-      if (in_item.i_r == i_r) begin
-        $display("Time %0t [Scoreboard] i_r cleared passed for i_r=h%h", $time, in_item.i_r);
+      if (in_item.i_r_init == i_r) begin
+        $display("Time %0t [Scoreboard] i_r cleared passed for i_r=h%h", $time, in_item.i_r_init);
         i_r_clear_passed++;
       end else begin
         $display("Time %0t [Scoredboard] i_r cleared failed: i_r = h%h instead of h%h for n = h%h.",
