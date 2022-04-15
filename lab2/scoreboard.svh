@@ -44,7 +44,7 @@ class scoreboard #(
   function new(mailbox scoreboard_n_mailbox, mailbox scoreboard_result_mailbox, mailbox scoreboard_clear_mailbox);
     this.scoreboard_n_mailbox = scoreboard_n_mailbox;
     this.scoreboard_result_mailbox = scoreboard_result_mailbox;
-    this.mailbox scoreboard_clear_mailbox; = mailbox scoreboard_clear_mailbox;;
+    this.scoreboard_clear_mailbox = scoreboard_clear_mailbox;
 
     result_passed = 0;
     result_failed = 0;

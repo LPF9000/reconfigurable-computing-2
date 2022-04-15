@@ -101,7 +101,7 @@ class start_monitor #(
       fib_item #(
           .INPUT_WIDTH (INPUT_WIDTH),
           .OUTPUT_WIDTH(OUTPUT_WIDTH)
-      ) item = new;
+      ) item = new,
         item_clear = new;
 
       // Wait until the DUT becomes active.
