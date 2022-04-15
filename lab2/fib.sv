@@ -223,9 +223,7 @@ module fib_good #(
           // Defining that go must return to 0 to start another execution
           if (go == 1'b0) begin
             done_r  <= 1'b1;
-            i_r <= INPUT_WIDTH'(3);
-            x_r <= '0;
-            y_r <= OUTPUT_WIDTH'(1);
+
             state_r <= RESTART;
           end
         end
@@ -233,6 +231,9 @@ module fib_good #(
         RESTART: begin
           // added done_r = 0 here to be cleared cycle after go is asserted
           if (go == 1'b1) begin
+            i_r <= INPUT_WIDTH'(3);
+            x_r <= '0;
+            y_r <= OUTPUT_WIDTH'(1);
             n_r <= n;
             state_r <= COND;
             done_r  <= 1'b0;

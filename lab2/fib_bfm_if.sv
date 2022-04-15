@@ -15,9 +15,9 @@ interface fib_bfm_if #(
   logic [OUTPUT_WIDTH-1:0] result;
 
   task automatic wait_for_done();
-    //@(posedge clk iff (done == 1'b0));
-    //@(posedge clk iff (done == 1'b1));
-    @(posedge done);
+    @(posedge clk iff (done == 1'b0));
+    @(posedge clk iff (done == 1'b1));
+    //@(posedge done);
   endtask
 
   task automatic reset(int cycles);
