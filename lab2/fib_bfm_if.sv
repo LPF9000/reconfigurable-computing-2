@@ -5,12 +5,12 @@ interface fib_bfm_if #(
     parameter int INPUT_WIDTH,
     parameter int OUTPUT_WIDTH
 ) (
-    input logic clk
+    input logic clk,
+    input [INPUT_WIDTH-1:0] i_r
 );
   logic rst, go, done, overflow;
   logic [ INPUT_WIDTH-1:0] n;
   logic [OUTPUT_WIDTH-1:0] result;
-  logic [$bits(n)-1:0] i_r;
 
   task automatic wait_for_done();
     //@(posedge clk iff (done == 1'b0));
