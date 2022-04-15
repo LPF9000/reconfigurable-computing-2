@@ -229,7 +229,7 @@ module fib_good #(
         RESTART: begin
           // added done_r = 0 here to be cleared cycle after go is asserted
           if (go == 1'b1) begin
-            state_r <= COND;
+            state_r <= INIT;
             done_r  <= 1'b0;
           end
         end

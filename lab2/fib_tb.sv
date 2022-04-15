@@ -5,8 +5,8 @@
 
 module fib_tb;
 
-  localparam int NUM_RANDOM_TESTS = 10;
-  localparam int NUM_CONSECUTIVE_TESTS = 10;
+  localparam int NUM_RANDOM_TESTS = 1000;
+  localparam int NUM_CONSECUTIVE_TESTS = 1000;
   localparam int NUM_REPEATS = 1;
   localparam int INPUT_WIDTH = 6;
   localparam int OUTPUT_WIDTH = 32;
@@ -38,10 +38,10 @@ module fib_tb;
   );
 
   // Coverage 
-  //covergroup cg @(posedge bfm.clk);
-    //n_eq_0: coverpoint bfm.n {bins one = {0}; option.at_least = 1;}
-    //overf: coverpoint bfm.overflow {bins one = {1}; option.at_least =1;}
-  //endgroup
+  covergroup cg @(posedge bfm.clk);
+    n_eq_0: coverpoint bfm.n {bins one = {0}; option.at_least = 1;}
+    overf: coverpoint bfm.overflow {bins one = {1}; option.at_least =1;}
+  endgroup
 
 
 
@@ -65,16 +65,16 @@ module fib_tb;
     while (1) #5 clk = ~clk;
   end
 
-  //cg cg_inst;
+  cg cg_inst;
 
   initial begin
     $timeformat(-9, 0, " ns");
-    //cg_inst = new;
+    cg_inst = new;
     test_random.run(NUM_RANDOM_TESTS, NUM_REPEATS);
     test_consecutive.run(NUM_CONSECUTIVE_TESTS, NUM_REPEATS);
     test_random.report_status();
     test_consecutive.report_status();
-    //$display("Coverage = %0.2f %%", cg_inst.get_inst_coverage());
+    $display("Coverage = %0.2f %%", cg_inst.get_inst_coverage());
     disable generate_clock;
   end
 
