@@ -193,6 +193,8 @@ module fib_good #(
           i_r <= INPUT_WIDTH'(3);
           x_r <= '0;
           y_r <= OUTPUT_WIDTH'(1);
+
+          state_r <= COND;
         end
       // TO DO: Needs an init state to initialize variables when repeating back to COND
         COND: begin
