@@ -65,9 +65,7 @@ class scoreboard #(
     full_add_r_passed = 0;
     full_add_r_failed = 0;
 
-    i_r = 3;
-    x_r = 0;
-    y_r = 1;
+
   endfunction  // new
 
   // Reference model for the correct result.
@@ -104,6 +102,10 @@ class scoreboard #(
     fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) out_item;
 
     for (int i = 0; i < num_tests; i++) begin
+
+      i_r = 3;
+      x_r = 0;
+      y_r = 1;
 
       // First wait until the driver informs us of a new test.
       scoreboard_n_mailbox.get(in_item);

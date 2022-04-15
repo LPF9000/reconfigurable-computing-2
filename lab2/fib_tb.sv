@@ -141,5 +141,7 @@ Todo Notes:
 Things I changed:
 1. Wait_for_done function (made more sense to check rising edge of done if I am already asserting done on posedge clk)
 2. Added i_r, x_r, y_r, and full_add_r signals to the scoreboard/monitor.test
+3. need to fix i_r, x_r, y_r signals in scoreboard. start time needs to be 1 cycle after the first state (except reset)
+  basically need to assert that they are reset, but since they are registers, a reset will update on the next cycle. 
 
 */

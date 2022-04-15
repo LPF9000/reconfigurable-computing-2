@@ -178,6 +178,7 @@ module fib_good #(
       full_add_r <= '0;
     end else begin
 
+      // TO DO: get screenshots showing bit widths (too long)
       case (state_r)
         START: begin
           i_r <= 3;
@@ -185,7 +186,8 @@ module fib_good #(
           y_r <= 1;
           if (go == 1'b1) state_r <= COND;
         end
-
+      
+      // TO DO: Needs an init state to initialize variables when repeating back to COND
         COND: begin
           // removed done_r = 0
           //done_r <= 1'b0;
