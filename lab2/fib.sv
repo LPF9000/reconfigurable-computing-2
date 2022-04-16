@@ -156,9 +156,9 @@ module fib_good #(
 
   logic [$bits(n)-1:0] i_r;
   logic [$bits(n)-1:0] n_r;
-  logic [$bits(result+2)-1:0] x_r;
-  logic [$bits(result+2)-1:0] y_r;
-  logic [$bits(result+1):0] full_add_r;
+  logic [$bits(result)-1:0] x_r;
+  logic [$bits(result)-1:0] y_r;
+  logic [$bits(result):0] full_add_r;
 
   logic [$bits(result)-1:0] result_r;
   logic done_r, overflow_r;
@@ -168,7 +168,7 @@ module fib_good #(
   assign overflow = overflow_r;
 
   always_ff @(posedge clk or posedge rst) begin
-    if (rst) begin
+    if (rst == 1'b1) begin
       state_r <= START;
       result_r <= '0;
       done_r <= 1'b0;
@@ -186,6 +186,7 @@ module fib_good #(
           i_r <= INPUT_WIDTH'(3);
           x_r <= '0;
           y_r <= OUTPUT_WIDTH'(1);
+          overflow_r <= 1'b0;
 
           // added registered n signal to prevent changes during computation
           if (go == 1'b1) begin
