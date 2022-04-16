@@ -6,7 +6,7 @@ interface fib_bfm_if #(
     parameter int OUTPUT_WIDTH
 ) (
     input logic clk,
-    input [INPUT_WIDTH-1:0] i_r,
+    input [INPUT_WIDTH-1:0] i_r, n_r,
     input [OUTPUT_WIDTH-1:0] x_r, y_r,
     input [OUTPUT_WIDTH:0] full_add_r
 );
