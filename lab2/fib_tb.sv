@@ -11,7 +11,6 @@ module fib_tb;
   localparam int INPUT_WIDTH = 6;
   localparam int OUTPUT_WIDTH = 32;
   logic clk;
-  logic [INPUT_WIDTH-1:0] i_r;
 
   fib #(
     .INPUT_WIDTH (INPUT_WIDTH),

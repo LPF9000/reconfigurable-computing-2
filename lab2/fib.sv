@@ -157,7 +157,7 @@ module fib_good #(
   logic [$bits(n)-1:0] n_r;
   logic [$bits(result)-1:0] x_r;
   logic [$bits(result)-1:0] y_r;
-  logic [$bits(result):0] full_add_r;
+  logic [$bits(result)-1:0] full_add_r;
 
   logic [$bits(result)-1:0] result_r;
   logic done_r, overflow_r;
