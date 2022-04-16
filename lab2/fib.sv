@@ -54,7 +54,7 @@ module fib_bad #(
   logic [$bits(n)-1:0] i_r;
   logic [$bits(result)-1:0] x_r;
   logic [$bits(result)-1:0] y_r;
-  logic [$bits(result):0] full_add_r;
+  logic [$bits(result)-1:0] full_add_r;
 
   logic [$bits(result)-1:0] result_r;
   logic done_r, overflow_r;
@@ -148,7 +148,6 @@ module fib_good #(
     START,
     COND,
     COMPUTE,
-    OVERFLOW,
     DONE,
     RESTART
   } state_t;
@@ -207,16 +206,18 @@ module fib_good #(
 
         COMPUTE: begin
           x_r <= y_r;
-          full_add_r <= x_r + y_r;
+          // added lengths of bits
+          {overflow,y_r} <= {1'b0,x_r} + {1'b0,y_r};
           i_r <= i_r + 1'b1;
-          state_r <= OVERFLOW;
-        end
-
-        OVERFLOW: begin
-          if (full_add_r[OUTPUT_WIDTH]) overflow_r <= 1'b1;
-          y_r <= full_add_r;
           state_r <= COND;
         end
+/*
+        OVERFLOW: begin
+          //if (full_add_r[OUTPUT_WIDTH]) overflow_r <= 1'b1;
+          y_r <= full_add_r[OUTPUT_WIDTH-1:0];
+          state_r <= COND;
+        end
+        */
         DONE: begin
           if (n_r < 2) result_r <= x_r;
           else result_r <= y_r;
