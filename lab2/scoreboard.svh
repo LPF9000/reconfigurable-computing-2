@@ -122,21 +122,21 @@ class scoreboard #(
         i_r_clear_failed++;
       end
 
-      if (in_item.x_r == x_r) begin
-        $display("Time %0t [Scoreboard] x_r cleared passed for x_r=h%h", $time, in_item.x_r);
+      if (clear_item.x_r == x_r) begin
+        $display("Time %0t [Scoreboard] x_r cleared passed for x_r=h%h", $time, clear_item.x_r);
         x_r_clear_passed++;
       end else begin
         $display("Time %0t [Scoredboard] x_r cleared failed: x_r = h%h instead of h%h for n = h%h.",
-                 $time, in_item.x_r, x_r, in_item.n);
+                 $time, clear_item.x_r, x_r, in_item.n);
         x_r_clear_failed++;
       end
 
-      if (in_item.y_r == y_r) begin
-        $display("Time %0t [Scoreboard] y_r cleared passed for y_r=h%h", $time, in_item.y_r);
+      if (clear_item.y_r == y_r) begin
+        $display("Time %0t [Scoreboard] y_r cleared passed for y_r=h%h", $time, clear_item.y_r);
         y_r_clear_passed++;
       end else begin
         $display("Time %0t [Scoredboard] y_r cleared failed: y_r = h%h instead of h%h for n = h%h.",
-                 $time, in_item.y_r, y_r, in_item.n);
+                 $time, clear_item.y_r, y_r, in_item.n);
         y_r_clear_failed++;
       end
 
