@@ -193,8 +193,8 @@ class scoreboard #(
         full_add_r_failed++;
       end
 
-      // Get the correct overflow based on the input at the start of the test.
-      reference2 = overflow_model(in_item.n);
+      // Get the correct overflow based on the output at the start of the test.
+      reference2 = overflow_model(reference1);
       if (out_item.overflow == reference2) begin
         $display("Time %0t [Scoreboard] Overflow test passed for n=h%h", $time, in_item.n);
         overflow_passed++;
