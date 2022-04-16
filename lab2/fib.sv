@@ -207,7 +207,7 @@ module fib_good #(
         COMPUTE: begin
           x_r <= y_r;
           // added lengths of bits
-          {overflow,y_r} <= {1'b0,x_r} + {1'b0,y_r};
+          {overflow_r,y_r} <= {1'b0,x_r} + {1'b0,y_r};
           i_r <= i_r + 1'b1;
           state_r <= COND;
         end
