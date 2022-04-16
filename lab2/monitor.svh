@@ -118,8 +118,8 @@ class start_monitor #(
 
       @(posedge bfm.clk);
       item_clear.i_r  = bfm.i_r;
-      item_clear.x_r  = bfm.y_r;
-      item_clear.y_r  = bfm.x_r;
+      item_clear.x_r  = bfm.x_r;
+      item_clear.y_r  = bfm.y_r;
 
       scoreboard_clear_mailbox.put(item_clear);
 
