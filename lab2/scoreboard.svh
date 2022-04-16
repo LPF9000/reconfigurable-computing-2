@@ -100,6 +100,7 @@ class scoreboard #(
   task run(int num_tests);
     fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) in_item;
     fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) out_item;
+    fib_item #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) clear_item;
 
     for (int i = 0; i < num_tests; i++) begin
 
@@ -109,15 +110,15 @@ class scoreboard #(
 
       // First wait until the driver informs us of a new test.
       scoreboard_n_mailbox.get(in_item);
-      scoreboard_clear_mailbox.get(in_item);
+      scoreboard_clear_mailbox.get(clear_item);
       $display("Time %0t [Scoreboard]: Received start of test for n=h%h", $time, in_item.n);
 
-      if (in_item.i_r_init == i_r) begin
-        $display("Time %0t [Scoreboard] i_r cleared passed for i_r=h%h", $time, in_item.i_r_init);
+      if (clear_item.i_r_init == i_r) begin
+        $display("Time %0t [Scoreboard] i_r cleared passed for i_r=h%h", $time, clear_item.i_r_init);
         i_r_clear_passed++;
       end else begin
         $display("Time %0t [Scoredboard] i_r cleared failed: i_r = h%h instead of h%h for n = h%h.",
-                 $time, in_item.i_r, i_r, in_item.n);
+                 $time, clear_item.i_r, i_r, in_item.n);
         i_r_clear_failed++;
       end
 
@@ -211,6 +212,7 @@ class scoreboard #(
     // will be detected as part of the current test.
     while (scoreboard_n_mailbox.try_get(in_item));
     while (scoreboard_result_mailbox.try_get(out_item));
+    while (scoreboard_clear_mailbox.try_get(clear_item));
   endtask
 
   function void report_status();

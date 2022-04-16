@@ -77,15 +77,18 @@ class start_monitor #(
     .OUTPUT_WIDTH(OUTPUT_WIDTH)
 );
   mailbox scoreboard_n_mailbox;
+  mailbox scoreboard_clear_mailbox;
 
   function new(
   virtual fib_bfm_if #(
       .INPUT_WIDTH (INPUT_WIDTH),
       .OUTPUT_WIDTH(OUTPUT_WIDTH)
   ) bfm,
-               mailbox _scoreboard_n_mailbox);
+               mailbox _scoreboard_n_mailbox,
+               mailbox _scoreboard_clear_mailbox);
     super.new(bfm);
     scoreboard_n_mailbox = _scoreboard_n_mailbox;
+    scoreboard_clear_mailbox = _scoreboard_clear_mailbox;
   endfunction  // new
 
   virtual task run();
