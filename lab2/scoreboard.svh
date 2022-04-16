@@ -168,7 +168,7 @@ class scoreboard #(
       end
       if (out_item.x_r == x_r) begin
         $display("Time %0t [Scoreboard] Result test passed for i_r=h%h", $time, out_item.x_r);
-        i_r_passed++;
+        x_r_passed++;
       end else begin
         $display("Time %0t [Scoredboard] Result test failed: x_r = h%h instead of h%h for n = h%h.",
                  $time, out_item.x_r, x_r, in_item.n);
