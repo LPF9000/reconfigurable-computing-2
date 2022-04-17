@@ -5,8 +5,8 @@
 
 module fib_tb;
 
-  localparam int NUM_RANDOM_TESTS = 1000;
-  localparam int NUM_CONSECUTIVE_TESTS = 200;
+  localparam int NUM_RANDOM_TESTS = 5000;
+  localparam int NUM_CONSECUTIVE_TESTS = 1000;
   localparam int NUM_REPEATS = 4;
   localparam int INPUT_WIDTH = 6;
   localparam int OUTPUT_WIDTH = 32;
