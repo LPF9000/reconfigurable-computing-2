@@ -148,6 +148,7 @@ module fib_good #(
     START,
     COND,
     COMPUTE,
+    OVERFLOW,
     DONE,
     RESTART
   } state_t;
@@ -217,7 +218,7 @@ module fib_good #(
           {overflow_r,y_r} <= {1'b0,x_r} + {1'b0,y_r};
           state_r <= COND;
         end
-        
+
         DONE: begin
           if (n_r < 2) result_r <= x_r;
           else result_r <= y_r;
