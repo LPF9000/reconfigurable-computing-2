@@ -235,6 +235,7 @@ module fib_good #(
             x_r <= '0;
             y_r <= OUTPUT_WIDTH'(1);
             n_r <= n;
+            full_add_r <= '0;
             state_r <= COND;
             done_r  <= 1'b0;
             overflow_r <= 1'b0;
