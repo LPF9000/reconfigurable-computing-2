@@ -107,6 +107,7 @@ class scoreboard #(
       i_r = 3;
       x_r = 0;
       y_r = 1;
+      full_add_r = 0;
 
       // First wait until the driver informs us of a new test.
       scoreboard_n_mailbox.get(in_item);
@@ -142,7 +143,7 @@ class scoreboard #(
 
       // Then, wait until the monitor tells us that test is complete.
       scoreboard_result_mailbox.get(out_item);
-      $display("Time %0t [Scoreboard]: Received result=%0d and overflow = %0d for n=h%h.", $time,
+      $display("Time %0t [Scoreboard]: Received result=h%h and overflow = %0d for n=h%h.", $time,
                out_item.result, out_item.overflow, in_item.n);
       $display("Time %0t [Scoreboard]: Received y_r=h%h.", $time, out_item.y_r);
 
@@ -153,7 +154,7 @@ class scoreboard #(
         result_passed++;
       end else begin
         $display(
-            "Time %0t [Scoredboard] Result test failed: result = %0d instead of %0d for n = h%h.",
+            "Time %0t [Scoredboard] Result test failed: result = h%h instead of h%h for n = h%h.",
             $time, out_item.result, reference1, in_item.n);
         result_failed++;
       end
