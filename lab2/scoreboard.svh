@@ -186,7 +186,7 @@ class scoreboard #(
       end
 
       full_add_r = full_add_r[OUTPUT_WIDTH:0];
-      if (out_item.full_add_r == int'(full_add_r[OUTPUT_WIDTH:0])) begin
+      if (out_item.full_add_r == full_add_r[OUTPUT_WIDTH:0]) begin
         $display("Time %0t [Scoreboard] Result test passed for full_add_r=h%h", $time,
                  out_item.full_add_r);
         full_add_r_passed++;
