@@ -187,7 +187,7 @@ class scoreboard #(
       end
 
       full_add_r = full_add_r[OUTPUT_WIDTH:0];
-      temp = out_item.full_add_r;
+      temp = longint'(out_item.full_add_r);
       if (out_item.full_add_r[OUTPUT_WIDTH] == 0 && out_item.overflow == 1)
         temp = {1'b1,temp[OUTPUT_WIDTH-1:0]};
       if (temp == full_add_r[OUTPUT_WIDTH:0]) begin
