@@ -197,7 +197,7 @@ class scoreboard #(
       end else begin
         $display(
             "Time %0t [Scoredboard] Result test failed: full_add_r = h%h instead of h%h for n = h%h.",
-            $time, temp, full_add_r, in_item.n);
+            $time, out_item.full_add_r, full_add_r, in_item.n);
         full_add_r_failed++;
       end
 
