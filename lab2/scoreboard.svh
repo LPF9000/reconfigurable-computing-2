@@ -33,7 +33,8 @@ class scoreboard #(
       y_r_clear_passed,
       y_r_clear_failed,
       full_add_r_passed,
-      full_add_r_failed;
+      full_add_r_failed,
+      temp;
 
   longint x_r, i_r, y_r, full_add_r, reference3;
 
@@ -186,6 +187,9 @@ class scoreboard #(
       end
 
       full_add_r = full_add_r[OUTPUT_WIDTH:0];
+      temp = out_item.full_add_r;
+      if (out_item.full_add_r[OUTPUT_WIDTH] == 0 && out_item.overflow == 1)
+        temp = {1'b1,temp[OUTPUT_WIDTH-1:0]};
       if (out_item.full_add_r == full_add_r[OUTPUT_WIDTH:0]) begin
         $display("Time %0t [Scoreboard] Result test passed for full_add_r=h%h", $time,
                  out_item.full_add_r);
