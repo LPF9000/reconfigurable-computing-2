@@ -74,13 +74,13 @@ begin
 $display(" WATCHDOG : started at %0d ",$time);
 fork : watch_dog
 begin
-wait( done == 1'b1);
+wait( bfm.done == 1'b1);
 $display(" done is asserted time:%0d",$time);
 $display(" KICKING THE WATCHDOG ");
 disable watch_dog;
 end
 begin
-repeat(100000000)@(negedge clk);
+repeat(100000000)@(negedge bfm.clk);
 $display(" done is not asserted time:%0d",$time);
 $display(" WARNING::WATCHDOG BITED ");
 disable watch_dog;
