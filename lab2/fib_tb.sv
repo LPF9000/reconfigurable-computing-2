@@ -123,7 +123,7 @@ module fib_tb;
   assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done && $stable(bfm.done) |-> $stable(bfm.overflow))
   else $error("Time %0t [Assert Property]: Done=1, overflow not stable.", $time);
 
-  assert property (@(posedge bfm.clk) disable iff (bfm.rst) !bfm.done |=> $rose(bfm.done) within ($rose(bfm.clk) ##[0:100000000000] $fell(bfm.clk)))
+  assert property (@(posedge bfm.clk) disable iff (bfm.rst) !bfm.done |=> $rose(bfm.done) within ($rose(bfm.clk) ##[0:64'd100000000000] $fell(bfm.clk)))
   else begin
     $error("Time %0t [Assert Property]: TIMEOUT, done never asserted", $time);
     $finish;
