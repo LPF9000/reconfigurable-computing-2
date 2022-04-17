@@ -33,16 +33,18 @@ class scoreboard #(
       y_r_clear_passed,
       y_r_clear_failed,
       full_add_r_passed,
-      full_add_r_failed;
+      full_add_r_failed,
+      temp;
 
 
-  longint x_r, i_r, y_r, full_add_r, reference3, temp;
+  longint x_r, i_r, y_r, full_add_r, reference3;
 
 
 
 
 
-  function new(mailbox scoreboard_n_mailbox, mailbox scoreboard_result_mailbox, mailbox scoreboard_clear_mailbox);
+  function new(mailbox scoreboard_n_mailbox, mailbox scoreboard_result_mailbox,
+               mailbox scoreboard_clear_mailbox);
     this.scoreboard_n_mailbox = scoreboard_n_mailbox;
     this.scoreboard_result_mailbox = scoreboard_result_mailbox;
     this.scoreboard_clear_mailbox = scoreboard_clear_mailbox;
@@ -186,13 +188,11 @@ class scoreboard #(
         y_r_failed++;
       end
 
-      full_add_r = full_add_r[OUTPUT_WIDTH:0];
-      temp = longint'(out_item.full_add_r);
-      if (out_item.full_add_r[OUTPUT_WIDTH] == 0 && out_item.overflow == 1)
-        temp = longint'({1'b1,temp[OUTPUT_WIDTH-1:0]});
-      if (temp == full_add_r[OUTPUT_WIDTH:0]) begin
-        $display("Time %0t [Scoreboard] Result test passed for full_add_r=h%h", $time,
-                 temp);
+      //full_add_r = full_add_r[OUTPUT_WIDTH-1:0];
+      // if (out_item.full_add_r[OUTPUT_WIDTH] == 0 && out_item.overflow == 1)
+      // temp = longint'({1'b1,temp[OUTPUT_WIDTH-1:0]});
+      if (out_item.full_add_r == full_add_r[OUTPUT_WIDTH-1:0]) begin
+        $display("Time %0t [Scoreboard] Result test passed for full_add_r=h%h", $time, temp);
         full_add_r_passed++;
       end else begin
         $display(
@@ -231,10 +231,13 @@ class scoreboard #(
     $display("Test status: %0d x_r_passed, %0d x_r_failed", x_r_passed, x_r_failed);
     $display("Test status: %0d y_r_passed, %0d y_r_failed", y_r_passed, y_r_failed);
     $display("Test status: %0d full_add_r_passed, %0d full_add_r_failed", full_add_r_passed,
-    full_add_r_failed);
-    $display("Test status: %0d i_r_clear_passed, %0d i_r_clear_failed", i_r_clear_passed, i_r_clear_failed);
-    $display("Test status: %0d x_r_clear_passed, %0d x_r_clear_failed", x_r_clear_passed, x_r_clear_failed);
-    $display("Test status: %0d y_r_clear_passed, %0d y_r_clear_failed", y_r_clear_passed, y_r_clear_failed);
+             full_add_r_failed);
+    $display("Test status: %0d i_r_clear_passed, %0d i_r_clear_failed", i_r_clear_passed,
+             i_r_clear_failed);
+    $display("Test status: %0d x_r_clear_passed, %0d x_r_clear_failed", x_r_clear_passed,
+             x_r_clear_failed);
+    $display("Test status: %0d y_r_clear_passed, %0d y_r_clear_failed", y_r_clear_passed,
+             y_r_clear_failed);
 
   endfunction
 
