@@ -11,7 +11,7 @@ class fib_item #(
   rand bit [INPUT_WIDTH-1:0] n;
   rand bit go;
   bit [OUTPUT_WIDTH-1:0] result, x_r, y_r;
-  bit [OUTPUT_WIDTH-1:0] full_add_r;
+  bit [OUTPUT_WIDTH:0] full_add_r;
   bit overflow;
   bit [INPUT_WIDTH-1:0] i_r;
 

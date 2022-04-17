@@ -158,7 +158,7 @@ module fib_good #(
   logic [$bits(n)-1:0] n_r;
   logic [$bits(result)-1:0] x_r;
   logic [$bits(result)-1:0] y_r;
-  logic [$bits(result)-1:0] full_add_r;
+  logic [$bits(result):0] full_add_r;
 
   logic [$bits(result)-1:0] result_r;
   logic done_r, overflow_r;
@@ -186,7 +186,6 @@ module fib_good #(
           i_r <= INPUT_WIDTH'(3);
           x_r <= '0;
           y_r <= OUTPUT_WIDTH'(1);
-          overflow_r <= 1'b0;
 
           // added registered n signal to prevent changes during computation
           if (go == 1'b1) begin
@@ -200,21 +199,19 @@ module fib_good #(
         COND: begin
           // removed done_r = 0
           //done_r <= 1'b0;
-          //overflow_r <= 1'b0;
           if (i_r <= n_r) state_r <= COMPUTE;
           else state_r <= DONE;
         end
 
         COMPUTE: begin
-          {overflow_r,full_add_r} <= {1'b0,x_r} + {1'b0,y_r};
+          full_add_r <= x_r + y_r;
           x_r <= y_r;
           state_r <= OVERFLOW;
         end
 
         OVERFLOW: begin
-          //if (full_add_r[OUTPUT_WIDTH]) overflow_r <= 1'b1;
-          //y_r <= full_add_r[OUTPUT_WIDTH-1:0];
-          y_r <= full_add_r;
+          if (full_add_r[OUTPUT_WIDTH]) overflow_r <= 1'b1;
+          y_r <= full_add_r[OUTPUT_WIDTH-1:0];
           i_r <= i_r + 1'b1;
           state_r <= COND;
         end
