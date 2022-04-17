@@ -201,8 +201,8 @@ class scoreboard #(
         overflow_passed++;
       end else begin
         $display(
-            "Time %0t [Scoredboard] Overflow test failed: overflow = %0d instead of %0d for n = h%h.",
-            $time, out_item.overflow, reference2, in_item.n);
+            "Time %0t [Scoredboard] Overflow test failed: overflow = %0d instead of %0d for n = h%h and ref1 = h%h and result = h%h.",
+            $time, out_item.overflow, reference2, in_item.n, reference1, out_item.result);
         overflow_failed++;
       end
     end  // for (int i=0; i < num_tests; i++)
