@@ -54,9 +54,7 @@ class done_monitor #(
           .INPUT_WIDTH (INPUT_WIDTH),
           .OUTPUT_WIDTH(OUTPUT_WIDTH)
       ) item = new;
-      
       bfm.wait_for_done();
-
       item.result     = bfm.result;
       item.overflow   = bfm.overflow;
       item.i_r        = bfm.i_r;
@@ -68,8 +66,7 @@ class done_monitor #(
       scoreboard_result_mailbox.put(item);
     end
   endtask
-
-
+endclass
 
 
 class start_monitor #(
@@ -112,7 +109,7 @@ class start_monitor #(
 
       // Wait until the DUT becomes active.
       @(bfm.active_event);
-      watchdog();
+      watch_dog():
       item.n = bfm.n;
       item.i_r        = bfm.i_r;
       item.x_r        = bfm.x_r;
@@ -130,6 +127,7 @@ class start_monitor #(
 
     end
   endtask
+
   task automatic watchdog();
   begin
   $display(" WATCHDOG : started at %0d ",$time);
@@ -149,7 +147,6 @@ class start_monitor #(
   join
   end
   endtask
-  endclass
 endclass
 
 `endif

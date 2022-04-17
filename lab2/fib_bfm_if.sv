@@ -16,7 +16,6 @@ interface fib_bfm_if #(
 
   task automatic wait_for_done();
     @(posedge clk iff (done == 1'b0));
-    
     @(posedge clk iff (done == 1'b1));
 
   endtask
