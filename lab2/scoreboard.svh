@@ -35,7 +35,7 @@ class scoreboard #(
       full_add_r_passed,
       full_add_r_failed;
 
-  longint x_r, i_r, y_r, full_add_r;
+  longint x_r, i_r, y_r, full_add_r, reference3;
 
 
 
@@ -148,7 +148,8 @@ class scoreboard #(
       $display("Time %0t [Scoreboard]: Received y_r=h%h.", $time, out_item.y_r);
 
       // Get the correct result based on the input at the start of the test.
-      reference1 = result_model(in_item.n, x_r, y_r, i_r, full_add_r);
+      reference3 = result_model(in_item.n, x_r, y_r, i_r, full_add_r);
+      reference1 = reference3;
       if (out_item.result == reference1) begin
         $display("Time %0t [Scoreboard] Result test passed for n=h%h", $time, in_item.n);
         result_passed++;
@@ -195,14 +196,14 @@ class scoreboard #(
       end
 
       // Get the correct overflow based on the output at the start of the test.
-      reference2 = overflow_model(reference1);
+      reference2 = overflow_model(reference3);
       if (out_item.overflow == reference2) begin
         $display("Time %0t [Scoreboard] Overflow test passed for n=h%h", $time, in_item.n);
         overflow_passed++;
       end else begin
         $display(
-            "Time %0t [Scoredboard] Overflow test failed: overflow = %0d instead of %0d for n = h%h and ref1 = h%h and result = h%h.",
-            $time, out_item.overflow, reference2, in_item.n, reference1, out_item.result);
+            "Time %0t [Scoredboard] Overflow test failed: overflow = %0d instead of %0d for n = h%h and ref3 = h%h and result = h%h.",
+            $time, out_item.overflow, reference3, in_item.n, reference1, out_item.result);
         overflow_failed++;
       end
     end  // for (int i=0; i < num_tests; i++)
