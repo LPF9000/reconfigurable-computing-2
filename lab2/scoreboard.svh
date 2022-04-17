@@ -192,13 +192,13 @@ class scoreboard #(
       // if (out_item.full_add_r[OUTPUT_WIDTH] == 0 && out_item.overflow == 1)
       // temp = longint'({1'b1,temp[OUTPUT_WIDTH-1:0]});
       temp = int'(full_add_r[OUTPUT_WIDTH-1:0]);
-      if (out_item.full_add_r == temp) begin
+      if (out_item.full_add_r[OUTPUT_WIDTH-1] == temp) begin
         $display("Time %0t [Scoreboard] Result test passed for full_add_r=h%h", $time, temp);
         full_add_r_passed++;
       end else begin
         $display(
             "Time %0t [Scoredboard] Result test failed: full_add_r = h%h instead of h%h for n = h%h.",
-            $time, out_item.full_add_r, temp, in_item.n);
+            $time, out_item.full_add_r[OUTPUT_WIDTH-1], temp, in_item.n);
         full_add_r_failed++;
       end
 
