@@ -16,30 +16,12 @@ interface fib_bfm_if #(
 
   task automatic wait_for_done();
     @(posedge clk iff (done == 1'b0));
-    watchdog();
+    
     @(posedge clk iff (done == 1'b1));
-    watchdog();
+
   endtask
 
-task automatic watchdog();
-begin
-$display(" WATCHDOG : started at %0d ",$time);
-fork : watch_dog
-begin
-wait( done == 1'b1);
-$display(" done is asserted time:%0d",$time);
-$display(" KICKING THE WATCHDOG ");
-disable watch_dog;
-end
-begin
-repeat(100000000)@(negedge clk);
-$display(" done is not asserted time:%0d",$time);
-$display(" WARNING::WATCHDOG BITED ");
-disable watch_dog;
-end
-join
-end
-endtask
+
 
   task automatic reset(int cycles);
     rst <= 1'b1;

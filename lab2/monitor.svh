@@ -54,7 +54,9 @@ class done_monitor #(
           .INPUT_WIDTH (INPUT_WIDTH),
           .OUTPUT_WIDTH(OUTPUT_WIDTH)
       ) item = new;
+      watchdog();
       bfm.wait_for_done();
+      watchdog();
       item.result     = bfm.result;
       item.overflow   = bfm.overflow;
       item.i_r        = bfm.i_r;
@@ -66,6 +68,26 @@ class done_monitor #(
       scoreboard_result_mailbox.put(item);
     end
   endtask
+
+  task automatic watchdog();
+begin
+$display(" WATCHDOG : started at %0d ",$time);
+fork : watch_dog
+begin
+wait( done == 1'b1);
+$display(" done is asserted time:%0d",$time);
+$display(" KICKING THE WATCHDOG ");
+disable watch_dog;
+end
+begin
+repeat(100000000)@(negedge clk);
+$display(" done is not asserted time:%0d",$time);
+$display(" WARNING::WATCHDOG BITED ");
+disable watch_dog;
+end
+join
+end
+endtask
 endclass
 
 
