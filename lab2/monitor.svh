@@ -54,9 +54,9 @@ class done_monitor #(
           .INPUT_WIDTH (INPUT_WIDTH),
           .OUTPUT_WIDTH(OUTPUT_WIDTH)
       ) item = new;
-      watchdog();
+      
       bfm.wait_for_done();
-      watchdog();
+
       item.result     = bfm.result;
       item.overflow   = bfm.overflow;
       item.i_r        = bfm.i_r;
@@ -69,26 +69,7 @@ class done_monitor #(
     end
   endtask
 
-  task automatic watchdog();
-begin
-$display(" WATCHDOG : started at %0d ",$time);
-fork : watch_dog
-begin
-wait( bfm.done == 1'b1);
-$display(" done is asserted time:%0d",$time);
-$display(" KICKING THE WATCHDOG ");
-disable watch_dog;
-end
-begin
-repeat(100000000)@(negedge bfm.clk);
-$display(" done is not asserted time:%0d",$time);
-$display(" WARNING::WATCHDOG BITED ");
-disable watch_dog;
-end
-join
-end
-endtask
-endclass
+
 
 
 class start_monitor #(
@@ -131,6 +112,7 @@ class start_monitor #(
 
       // Wait until the DUT becomes active.
       @(bfm.active_event);
+      watchdog();
       item.n = bfm.n;
       item.i_r        = bfm.i_r;
       item.x_r        = bfm.x_r;
@@ -148,6 +130,26 @@ class start_monitor #(
 
     end
   endtask
+  task automatic watchdog();
+  begin
+  $display(" WATCHDOG : started at %0d ",$time);
+  fork : watch_dog
+  begin
+  wait( bfm.done == 1'b1);
+  $display(" done is asserted time:%0d",$time);
+  $display(" KICKING THE WATCHDOG ");
+  disable watch_dog;
+  end
+  begin
+  repeat(100000000)@(negedge bfm.clk);
+  $display(" done is not asserted time:%0d",$time);
+  $display(" WARNING::WATCHDOG BITED ");
+  disable watch_dog;
+  end
+  join
+  end
+  endtask
+  endclass
 endclass
 
 `endif
