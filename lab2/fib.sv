@@ -200,7 +200,7 @@ module fib_good #(
         COND: begin
           // removed done_r = 0
           //done_r <= 1'b0;
-
+          overflow_r <= 1'b0;
           if (i_r <= n_r) state_r <= COMPUTE;
           else state_r <= DONE;
         end
