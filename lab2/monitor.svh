@@ -133,6 +133,7 @@ class start_monitor #(
   $display(" WATCHDOG : started at %0d ",$time);
   fork : watch_dog
   begin
+  wait( bfm.done == 1'b0);
   wait( bfm.done == 1'b1);
   $display(" done is asserted time:%0d",$time);
   $display(" KICKING THE WATCHDOG ");
