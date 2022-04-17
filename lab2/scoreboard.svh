@@ -168,7 +168,7 @@ class scoreboard #(
                  $time, out_item.i_r, i_r, in_item.n);
         i_r_failed++;
       end
-      if (out_item.x_r == x_r) begin
+      if (out_item.x_r == int'(x_r)) begin
         $display("Time %0t [Scoreboard] Result test passed for i_r=h%h", $time, out_item.x_r);
         x_r_passed++;
       end else begin
@@ -176,7 +176,7 @@ class scoreboard #(
                  $time, out_item.x_r, x_r, in_item.n);
         x_r_failed++;
       end
-      if (out_item.y_r == y_r) begin
+      if (out_item.y_r == int'(y_r)) begin
         $display("Time %0t [Scoreboard] Result test passed for y_r=h%h", $time, out_item.y_r);
         y_r_passed++;
       end else begin
@@ -184,7 +184,7 @@ class scoreboard #(
                  $time, out_item.y_r, y_r, in_item.n);
         y_r_failed++;
       end
-      if (out_item.full_add_r == full_add_r) begin
+      if (out_item.full_add_r == int'(full_add_r)) begin
         $display("Time %0t [Scoreboard] Result test passed for full_add_r=h%h", $time,
                  out_item.full_add_r);
         full_add_r_passed++;
