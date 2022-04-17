@@ -211,7 +211,6 @@ module fib_good #(
 
         OVERFLOW: begin
           if (full_add_r[OUTPUT_WIDTH]) overflow_r <= 1'b1;
-          else overflow_r <= 1'b0;
           y_r <= full_add_r[OUTPUT_WIDTH-1:0];
           i_r <= i_r + 1'b1;
           state_r <= COND;
@@ -238,6 +237,7 @@ module fib_good #(
             n_r <= n;
             state_r <= COND;
             done_r  <= 1'b0;
+            overflow_r <= 1'b0;
             // added init to signals to account for the signals never getting reset
 
           end
