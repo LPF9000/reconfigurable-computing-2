@@ -140,7 +140,7 @@ class start_monitor #(
   disable watch_dog;
   end
   begin
-  repeat(100000000)@(negedge bfm.clk);
+  repeat(100000)@(negedge bfm.clk);
   $display(" done is not asserted time:%0d",$time);
   $display(" WARNING::WATCHDOG BITED ");
   disable watch_dog;
