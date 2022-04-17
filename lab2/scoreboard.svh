@@ -33,10 +33,10 @@ class scoreboard #(
       y_r_clear_passed,
       y_r_clear_failed,
       full_add_r_passed,
-      full_add_r_failed,
-      temp;
+      full_add_r_failed;
 
-  longint x_r, i_r, y_r, full_add_r, reference3;
+
+  longint x_r, i_r, y_r, full_add_r, reference3, temp;
 
 
 
