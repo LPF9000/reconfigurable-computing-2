@@ -200,22 +200,22 @@ module fib_good #(
         COND: begin
           // removed done_r = 0
           //done_r <= 1'b0;
-          overflow_r <= 1'b0;
+          //overflow_r <= 1'b0;
           if (i_r <= n_r) state_r <= COMPUTE;
           else state_r <= DONE;
         end
 
         COMPUTE: begin
+          {overflow_r,full_add_r} <= {1'b0,x_r} + {1'b0,y_r};
           x_r <= y_r;
-
-          i_r <= i_r + 1'b1;
           state_r <= OVERFLOW;
         end
 
         OVERFLOW: begin
           //if (full_add_r[OUTPUT_WIDTH]) overflow_r <= 1'b1;
           //y_r <= full_add_r[OUTPUT_WIDTH-1:0];
-          {overflow_r,y_r} <= {1'b0,x_r} + {1'b0,y_r};
+          y_r <= full_add_r;
+          i_r <= i_r + 1'b1;
           state_r <= COND;
         end
 
