@@ -206,18 +206,18 @@ module fib_good #(
 
         COMPUTE: begin
           x_r <= y_r;
-          // added lengths of bits
-          {overflow_r,y_r} <= {1'b0,x_r} + {1'b0,y_r};
+
           i_r <= i_r + 1'b1;
-          state_r <= COND;
+          state_r <= OVERFLOW;
         end
-/*
+
         OVERFLOW: begin
           //if (full_add_r[OUTPUT_WIDTH]) overflow_r <= 1'b1;
-          y_r <= full_add_r[OUTPUT_WIDTH-1:0];
+          //y_r <= full_add_r[OUTPUT_WIDTH-1:0];
+          {overflow_r,y_r} <= {1'b0,x_r} + {1'b0,y_r};
           state_r <= COND;
         end
-        */
+        
         DONE: begin
           if (n_r < 2) result_r <= x_r;
           else result_r <= y_r;
