@@ -109,7 +109,7 @@ class start_monitor #(
 
       // Wait until the DUT becomes active.
       @(bfm.active_event);
-      watch_dog();
+      watchdog();
       item.n = bfm.n;
       item.i_r        = bfm.i_r;
       item.x_r        = bfm.x_r;
