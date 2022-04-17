@@ -33,8 +33,8 @@ module fib_tb;
       .i_r(DUT.top.i_r),
       .x_r(DUT.top.x_r),
       .y_r(DUT.top.y_r),
-      .full_add_r(DUT.top.full_add_r),
-      .n_r(DUT.top.n_r)
+      .full_add_r(DUT.top.full_add_r)
+      //.n_r(DUT.top.n_r)
   );
 
   // Coverage 
