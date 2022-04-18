@@ -86,7 +86,7 @@ module fib_bad #(
         COND: begin
           done_r <= 1'b0;
 
-          if (i_r <= n_r && i_r >= 2'b11) state_r <= COMPUTE;
+          if (i_r <= n && i_r >= 2'b11) state_r <= COMPUTE;
           else state_r <= DONE;
         end
 
