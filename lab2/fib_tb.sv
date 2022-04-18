@@ -132,37 +132,5 @@ module fib_tb;
   else $error("Time %0t [Assert Property]: Done=1, overflow not stable.", $time);
 
 
-
-  // Check overflow asserted
-  // assert property (@(posedge clk) disable iff (bfm.rst) )
-  // else $error("Time %0t [Assert Property]: ", $time);
-
-  // cp_n_eq_0: cover property (@(posedge clk) bfm.n == 0);
-
-  // Check that overflow is asserted at some point (is this the right way to do this?)
-  // cp_overf: cover property (@(posedge bfm.done) bfm.overflow == 1'b1);
-
 endmodule
 
-/*
-Design specifican bullet points:
-
-Done: 1 2 3 4 8 9
-Not done: 5 6
-Skipping: 7
-
-DONE: 7. Fixing the design
-
-Todo Notes:
--Create custom distribution contraint for input n
-- get 100% coverage
-- increase tests without breaking
-- check overflow (any of the bits, not just the highest bit)
-
-Things I changed:
-1. Wait_for_done function (made more sense to check rising edge of done if I am already asserting done on posedge clk)
-2. Added i_r, x_r, y_r, and full_add_r signals to the scoreboard/monitor.test
-3. need to fix i_r, x_r, y_r signals in scoreboard. start time needs to be 1 cycle after the first state (except reset)
-  basically need to assert that they are reset, but since they are registers, a reset will update on the next cycle.
-
-*/
