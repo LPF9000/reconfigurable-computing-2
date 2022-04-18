@@ -1,0 +1,784 @@
+# //  ModelSim SE-64 10.5c Jul 20 2016Linux 3.10.0-1160.53.1.el7.x86_64
+# //
+# //  Copyright 1991-2016 Mentor Graphics Corporation
+# //  All Rights Reserved.
+# //
+# //  ModelSim SE-64 and its associated documentation contain trade
+# //  secrets and commercial or financial information that are the property of
+# //  Mentor Graphics Corporation and are privileged, confidential,
+# //  and exempt from disclosure under the Freedom of Information Act,
+# //  5 U.S.C. Section 552. Furthermore, this information
+# //  is prohibited from disclosure under the Trade Secrets Act,
+# //  18 U.S.C. Section 1905.
+# //
+# Loading project lab2
+# Compile of driver.svh was successful.
+# Compile of environment.svh was successful.
+# Compile of fib.sv was successful.
+# Compile of fib_bfm_if.sv was successful.
+# Compile of fib_item.svh was successful.
+# Compile of fib_tb.sv was successful.
+# Compile of generator.svh was successful.
+# Compile of monitor.svh was successful.
+# Compile of scoreboard.svh was successful.
+# Compile of test.svh was successful.
+# 10 compiles, 0 failed with no errors.
+vsim work.fib_tb -voptargs=+acc
+# vsim work.fib_tb -voptargs="+acc" 
+# Start time: 00:38:05 on Apr 18,2022
+# ** Note: (vsim-8009) Loading existing optimized design _opt3
+# Loading sv_std.std
+# Loading work.fib_tb_sv_unit(fast)
+# Loading work.fib_tb(fast)
+# Loading work.fib(fast)
+# Loading work.fib_bad(fast)
+# Loading work.fib_bfm_if(fast)
+# Loading work.fib_bfm_if(fast)
+add wave -r /*
+run -all
+# Time 0 ns [Test]: Starting test Random Test.
+# Time 55 ns [Driver]: Driver starting.
+# Time 55 ns [Monitor]: Monitor starting.
+#  WATCHDOG : started at 275 
+#  done is asserted time:435
+#  KICKING THE WATCHDOG 
+# Time 435 ns [start_monitor]: Sending start of test for n=h31.
+# Time 445 ns [Monitor]: Monitor detected result=h00000008 and overflow=0
+# Time 445 ns [Scoreboard]: Received start of test for n=h31
+# Time 445 ns [Scoredboard] i_r cleared failed: i_r = h08 instead of h0000000000000003 for n = h31.
+# Time 445 ns [Scoredboard] x_r cleared failed: x_r = h00000005 instead of h0000000000000000 for n = h31.
+# Time 445 ns [Scoredboard] y_r cleared failed: y_r = h00000008 instead of h0000000000000001 for n = h31.
+# Time 445 ns [Scoreboard]: Received result=h00000008 and overflow = 0 for n=h31.
+# Time 445 ns [Scoreboard]: Received y_r=h00000008.
+# Time 445 ns [Scoredboard] Result test failed: result = h00000008 instead of h1e8d0a40 for n = h31.
+# Time 445 ns [Scoredboard] Result test failed: i_r = h08 instead of h0000000000000032 for n = h31.
+# Time 445 ns [Scoredboard] Result test failed: x_r = h00000005 instead of h00000000b11924e1 for n = h31.
+# Time 445 ns [Scoredboard] Result test failed: y_r = h00000008 instead of h000000011e8d0a40 for n = h31.
+# Time 445 ns [Scoredboard] Result test failed: full_add_r = h00000008 instead of h1e8d0a40 for n = h31.
+# Time 445 ns [Scoredboard] Overflow test failed: overflow = 0 instead of 1 for n = h31 and theoretical result = h000000011e8d0a40 and result = h00000008.
+#  WATCHDOG : started at 455 
+# ** Error: Time 465 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 465 ns Started: 455 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+# ** Error: Time 475 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 475 ns Started: 465 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 475 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 475 ns Started: 475 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+#  done is asserted time:675
+#  KICKING THE WATCHDOG 
+# Time 675 ns [start_monitor]: Sending start of test for n=h0c.
+# Time 685 ns [Monitor]: Monitor detected result=h00000050 and overflow=0
+# Time 685 ns [Scoreboard]: Received start of test for n=h0c
+# Time 685 ns [Scoredboard] i_r cleared failed: i_r = h0e instead of h0000000000000003 for n = h0c.
+# Time 685 ns [Scoredboard] x_r cleared failed: x_r = h00000030 instead of h0000000000000000 for n = h0c.
+# Time 685 ns [Scoredboard] y_r cleared failed: y_r = h00000050 instead of h0000000000000001 for n = h0c.
+# Time 685 ns [Scoreboard]: Received result=h00000050 and overflow = 0 for n=h0c.
+# Time 685 ns [Scoreboard]: Received y_r=h00000050.
+# Time 685 ns [Scoredboard] Result test failed: result = h00000050 instead of h00000059 for n = h0c.
+# Time 685 ns [Scoredboard] Result test failed: i_r = h0e instead of h000000000000000d for n = h0c.
+# Time 685 ns [Scoredboard] Result test failed: x_r = h00000030 instead of h0000000000000037 for n = h0c.
+# Time 685 ns [Scoredboard] Result test failed: y_r = h00000050 instead of h0000000000000059 for n = h0c.
+# Time 685 ns [Scoredboard] Result test failed: full_add_r = h00000050 instead of h00000059 for n = h0c.
+# Time 685 ns [Scoreboard] Overflow test passed for n=h0c
+#  WATCHDOG : started at 845 
+# ** Error: Time 855 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 855 ns Started: 845 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+# ** Error: Time 865 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 865 ns Started: 855 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 865 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 865 ns Started: 865 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+#  done is asserted time:975
+#  KICKING THE WATCHDOG 
+# Time 975 ns [start_monitor]: Sending start of test for n=h11.
+# Time 985 ns [Monitor]: Monitor detected result=h00000190 and overflow=0
+# Time 985 ns [Scoreboard]: Received start of test for n=h11
+# Time 985 ns [Scoredboard] i_r cleared failed: i_r = h12 instead of h0000000000000003 for n = h11.
+# Time 985 ns [Scoredboard] x_r cleared failed: x_r = h000000f0 instead of h0000000000000000 for n = h11.
+# Time 985 ns [Scoredboard] y_r cleared failed: y_r = h00000190 instead of h0000000000000001 for n = h11.
+# Time 985 ns [Scoreboard]: Received result=h00000190 and overflow = 0 for n=h11.
+# Time 985 ns [Scoreboard]: Received y_r=h00000190.
+# Time 985 ns [Scoredboard] Result test failed: result = h00000190 instead of h000003db for n = h11.
+# Time 985 ns [Scoreboard] Result test passed for i_r=h12
+# Time 985 ns [Scoredboard] Result test failed: x_r = h000000f0 instead of h0000000000000262 for n = h11.
+# Time 985 ns [Scoredboard] Result test failed: y_r = h00000190 instead of h00000000000003db for n = h11.
+# Time 985 ns [Scoredboard] Result test failed: full_add_r = h00000190 instead of h000003db for n = h11.
+# Time 985 ns [Scoreboard] Overflow test passed for n=h11
+#  WATCHDOG : started at 1155 
+# ** Error: Time 1165 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 1165 ns Started: 1155 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+# ** Error: Time 1175 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 1175 ns Started: 1165 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 1175 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 1175 ns Started: 1175 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+#  done is asserted time:1505
+#  KICKING THE WATCHDOG 
+# Time 1505 ns [start_monitor]: Sending start of test for n=h3c.
+# Time 1515 ns [Monitor]: Monitor detected result=h00013470 and overflow=0
+# Time 1515 ns [Scoreboard]: Received start of test for n=h3c
+# Time 1515 ns [Scoredboard] i_r cleared failed: i_r = h1d instead of h0000000000000003 for n = h3c.
+# Time 1515 ns [Scoredboard] x_r cleared failed: x_r = h0000bea0 instead of h0000000000000000 for n = h3c.
+# Time 1515 ns [Scoredboard] y_r cleared failed: y_r = h00013470 instead of h0000000000000001 for n = h3c.
+# Time 1515 ns [Scoreboard]: Received result=h00013470 and overflow = 0 for n=h3c.
+# Time 1515 ns [Scoreboard]: Received y_r=h00013470.
+# Time 1515 ns [Scoredboard] Result test failed: result = h00013470 instead of hc1139639 for n = h3c.
+# Time 1515 ns [Scoredboard] Result test failed: i_r = h1d instead of h000000000000003d for n = h3c.
+# Time 1515 ns [Scoredboard] Result test failed: x_r = h0000bea0 instead of h00000089ab6f7c97 for n = h3c.
+# Time 1515 ns [Scoredboard] Result test failed: y_r = h00013470 instead of h000000dec1139639 for n = h3c.
+# Time 1515 ns [Scoredboard] Result test failed: full_add_r = h00013470 instead of hc1139639 for n = h3c.
+# Time 1515 ns [Scoredboard] Overflow test failed: overflow = 0 instead of 1 for n = h3c and theoretical result = h000000dec1139639 and result = h00013470.
+#  WATCHDOG : started at 1665 
+# ** Error: Time 1675 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 1675 ns Started: 1665 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+# ** Error: Time 1685 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 1685 ns Started: 1675 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 1685 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 1685 ns Started: 1685 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+#  done is asserted time:1715
+#  KICKING THE WATCHDOG 
+# Time 1715 ns [start_monitor]: Sending start of test for n=h33.
+# Time 1725 ns [Monitor]: Monitor detected result=h0001f310 and overflow=0
+# Time 1725 ns [Scoreboard]: Received start of test for n=h33
+# Time 1725 ns [Scoredboard] i_r cleared failed: i_r = h1e instead of h0000000000000003 for n = h33.
+# Time 1725 ns [Scoredboard] x_r cleared failed: x_r = h00013470 instead of h0000000000000000 for n = h33.
+# Time 1725 ns [Scoredboard] y_r cleared failed: y_r = h0001f310 instead of h0000000000000001 for n = h33.
+# Time 1725 ns [Scoreboard]: Received result=h0001f310 and overflow = 0 for n=h33.
+# Time 1725 ns [Scoreboard]: Received y_r=h0001f310.
+# Time 1725 ns [Scoredboard] Result test failed: result = h0001f310 instead of hee333961 for n = h33.
+# Time 1725 ns [Scoredboard] Result test failed: i_r = h1e instead of h0000000000000034 for n = h33.
+# Time 1725 ns [Scoredboard] Result test failed: x_r = h00013470 instead of h00000001cfa62f21 for n = h33.
+# Time 1725 ns [Scoredboard] Result test failed: y_r = h0001f310 instead of h00000002ee333961 for n = h33.
+# Time 1725 ns [Scoredboard] Result test failed: full_add_r = h0001f310 instead of hee333961 for n = h33.
+# Time 1725 ns [Scoredboard] Overflow test failed: overflow = 0 instead of 1 for n = h33 and theoretical result = h00000002ee333961 and result = h0001f310.
+#  WATCHDOG : started at 1755 
+# ** Error: Time 1765 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 1765 ns Started: 1755 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:1775
+#  KICKING THE WATCHDOG 
+# Time 1775 ns [start_monitor]: Sending start of test for n=h39.
+# ** Error: Time 1775 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 1775 ns Started: 1765 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 1775 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 1775 ns Started: 1775 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 1785 ns [Monitor]: Monitor detected result=h0001f310 and overflow=0
+# Time 1785 ns [Scoreboard]: Received start of test for n=h39
+# Time 1785 ns [Scoredboard] i_r cleared failed: i_r = h1e instead of h0000000000000003 for n = h39.
+# Time 1785 ns [Scoredboard] x_r cleared failed: x_r = h00013470 instead of h0000000000000000 for n = h39.
+# Time 1785 ns [Scoredboard] y_r cleared failed: y_r = h0001f310 instead of h0000000000000001 for n = h39.
+# Time 1785 ns [Scoreboard]: Received result=h0001f310 and overflow = 0 for n=h39.
+# Time 1785 ns [Scoreboard]: Received y_r=h0001f310.
+# Time 1785 ns [Scoredboard] Result test failed: result = h0001f310 instead of h95cb62f5 for n = h39.
+# Time 1785 ns [Scoredboard] Result test failed: i_r = h1e instead of h000000000000003a for n = h39.
+# Time 1785 ns [Scoredboard] Result test failed: x_r = h00013470 instead of h000000207fd8b6ad for n = h39.
+# Time 1785 ns [Scoredboard] Result test failed: y_r = h0001f310 instead of h0000003495cb62f5 for n = h39.
+# Time 1785 ns [Scoredboard] Result test failed: full_add_r = h0001f310 instead of h95cb62f5 for n = h39.
+# Time 1785 ns [Scoredboard] Overflow test failed: overflow = 0 instead of 1 for n = h39 and theoretical result = h0000003495cb62f5 and result = h0001f310.
+#  WATCHDOG : started at 1785 
+# ** Error: Time 1795 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 1795 ns Started: 1785 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:1805
+#  KICKING THE WATCHDOG 
+# Time 1805 ns [start_monitor]: Sending start of test for n=h35.
+# ** Error: Time 1805 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 1805 ns Started: 1795 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 1805 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 1805 ns Started: 1805 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 1815 ns [Monitor]: Monitor detected result=h0001f310 and overflow=0
+# Time 1815 ns [Scoreboard]: Received start of test for n=h35
+# Time 1815 ns [Scoredboard] i_r cleared failed: i_r = h1e instead of h0000000000000003 for n = h35.
+# Time 1815 ns [Scoredboard] x_r cleared failed: x_r = h00013470 instead of h0000000000000000 for n = h35.
+# Time 1815 ns [Scoredboard] y_r cleared failed: y_r = h0001f310 instead of h0000000000000001 for n = h35.
+# Time 1815 ns [Scoreboard]: Received result=h0001f310 and overflow = 0 for n=h35.
+# Time 1815 ns [Scoreboard]: Received y_r=h0001f310.
+# Time 1815 ns [Scoredboard] Result test failed: result = h0001f310 instead of hac0ca1e3 for n = h35.
+# Time 1815 ns [Scoredboard] Result test failed: i_r = h1e instead of h0000000000000036 for n = h35.
+# Time 1815 ns [Scoredboard] Result test failed: x_r = h00013470 instead of h00000004bdd96882 for n = h35.
+# Time 1815 ns [Scoredboard] Result test failed: y_r = h0001f310 instead of h00000007ac0ca1e3 for n = h35.
+# Time 1815 ns [Scoredboard] Result test failed: full_add_r = h0001f310 instead of hac0ca1e3 for n = h35.
+# Time 1815 ns [Scoredboard] Overflow test failed: overflow = 0 instead of 1 for n = h35 and theoretical result = h00000007ac0ca1e3 and result = h0001f310.
+#  WATCHDOG : started at 1825 
+# ** Error: Time 1835 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 1835 ns Started: 1825 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:1845
+#  KICKING THE WATCHDOG 
+# Time 1845 ns [start_monitor]: Sending start of test for n=h39.
+# ** Error: Time 1845 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 1845 ns Started: 1835 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 1845 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 1845 ns Started: 1845 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 1855 ns [Monitor]: Monitor detected result=h0001f310 and overflow=0
+# Time 1855 ns [Scoreboard]: Received start of test for n=h39
+# Time 1855 ns [Scoredboard] i_r cleared failed: i_r = h1e instead of h0000000000000003 for n = h39.
+# Time 1855 ns [Scoredboard] x_r cleared failed: x_r = h00013470 instead of h0000000000000000 for n = h39.
+# Time 1855 ns [Scoredboard] y_r cleared failed: y_r = h0001f310 instead of h0000000000000001 for n = h39.
+# Time 1855 ns [Scoreboard]: Received result=h0001f310 and overflow = 0 for n=h39.
+# Time 1855 ns [Scoreboard]: Received y_r=h0001f310.
+# Time 1855 ns [Scoredboard] Result test failed: result = h0001f310 instead of h95cb62f5 for n = h39.
+# Time 1855 ns [Scoredboard] Result test failed: i_r = h1e instead of h000000000000003a for n = h39.
+# Time 1855 ns [Scoredboard] Result test failed: x_r = h00013470 instead of h000000207fd8b6ad for n = h39.
+# Time 1855 ns [Scoredboard] Result test failed: y_r = h0001f310 instead of h0000003495cb62f5 for n = h39.
+# Time 1855 ns [Scoredboard] Result test failed: full_add_r = h0001f310 instead of h95cb62f5 for n = h39.
+# Time 1855 ns [Scoredboard] Overflow test failed: overflow = 0 instead of 1 for n = h39 and theoretical result = h0000003495cb62f5 and result = h0001f310.
+#  WATCHDOG : started at 1885 
+# ** Error: Time 1895 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 1895 ns Started: 1885 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+# ** Error: Time 1905 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 1905 ns Started: 1895 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 1905 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 1905 ns Started: 1905 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+#  done is asserted time:1925
+#  KICKING THE WATCHDOG 
+# Time 1925 ns [start_monitor]: Sending start of test for n=h36.
+# Time 1935 ns [Monitor]: Monitor detected result=h0001f310 and overflow=0
+# Time 1935 ns [Scoreboard]: Received start of test for n=h36
+# Time 1935 ns [Scoredboard] i_r cleared failed: i_r = h1f instead of h0000000000000003 for n = h36.
+# Time 1935 ns [Scoredboard] x_r cleared failed: x_r = h0001f310 instead of h0000000000000000 for n = h36.
+# Time 1935 ns [Scoredboard] y_r cleared failed: y_r = h0001f310 instead of h0000000000000001 for n = h36.
+# Time 1935 ns [Scoreboard]: Received result=h0001f310 and overflow = 0 for n=h36.
+# Time 1935 ns [Scoreboard]: Received y_r=h0001f310.
+# Time 1935 ns [Scoredboard] Result test failed: result = h0001f310 instead of h69e60a65 for n = h36.
+# Time 1935 ns [Scoredboard] Result test failed: i_r = h1f instead of h0000000000000037 for n = h36.
+# Time 1935 ns [Scoredboard] Result test failed: x_r = h0001f310 instead of h00000007ac0ca1e3 for n = h36.
+# Time 1935 ns [Scoredboard] Result test failed: y_r = h0001f310 instead of h0000000c69e60a65 for n = h36.
+# Time 1935 ns [Scoredboard] Result test failed: full_add_r = h00032780 instead of h69e60a65 for n = h36.
+# Time 1935 ns [Scoredboard] Overflow test failed: overflow = 0 instead of 1 for n = h36 and theoretical result = h0000000c69e60a65 and result = h0001f310.
+#  WATCHDOG : started at 2015 
+# ** Error: Time 2025 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 2025 ns Started: 2015 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:2035
+#  KICKING THE WATCHDOG 
+# Time 2035 ns [start_monitor]: Sending start of test for n=h19.
+# ** Error: Time 2035 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 2035 ns Started: 2025 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 2035 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 2035 ns Started: 2035 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 2045 ns [Monitor]: Monitor detected result=h0001f310 and overflow=0
+# Time 2045 ns [Scoreboard]: Received start of test for n=h19
+# Time 2045 ns [Scoredboard] i_r cleared failed: i_r = h1f instead of h0000000000000003 for n = h19.
+# Time 2045 ns [Scoredboard] x_r cleared failed: x_r = h0001f310 instead of h0000000000000000 for n = h19.
+# Time 2045 ns [Scoredboard] y_r cleared failed: y_r = h0001f310 instead of h0000000000000001 for n = h19.
+# Time 2045 ns [Scoreboard]: Received result=h0001f310 and overflow = 0 for n=h19.
+# Time 2045 ns [Scoreboard]: Received y_r=h0001f310.
+# Time 2045 ns [Scoredboard] Result test failed: result = h0001f310 instead of h0000b520 for n = h19.
+# Time 2045 ns [Scoredboard] Result test failed: i_r = h1f instead of h000000000000001a for n = h19.
+# Time 2045 ns [Scoredboard] Result test failed: x_r = h0001f310 instead of h0000000000006ff1 for n = h19.
+# Time 2045 ns [Scoredboard] Result test failed: y_r = h0001f310 instead of h000000000000b520 for n = h19.
+# Time 2045 ns [Scoredboard] Result test failed: full_add_r = h00032780 instead of h0000b520 for n = h19.
+# Time 2045 ns [Scoreboard] Overflow test passed for n=h19
+#  WATCHDOG : started at 2095 
+# ** Error: Time 2105 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 2105 ns Started: 2095 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:2115
+#  KICKING THE WATCHDOG 
+# Time 2115 ns [start_monitor]: Sending start of test for n=h1f.
+# ** Error: Time 2115 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 2115 ns Started: 2105 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 2115 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 2115 ns Started: 2115 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 2125 ns [Monitor]: Monitor detected result=h0001f310 and overflow=0
+# Time 2125 ns [Scoreboard]: Received start of test for n=h1f
+# Time 2125 ns [Scoredboard] i_r cleared failed: i_r = h1f instead of h0000000000000003 for n = h1f.
+# Time 2125 ns [Scoredboard] x_r cleared failed: x_r = h0001f310 instead of h0000000000000000 for n = h1f.
+# Time 2125 ns [Scoredboard] y_r cleared failed: y_r = h0001f310 instead of h0000000000000001 for n = h1f.
+# Time 2125 ns [Scoreboard]: Received result=h0001f310 and overflow = 0 for n=h1f.
+# Time 2125 ns [Scoreboard]: Received y_r=h0001f310.
+# Time 2125 ns [Scoredboard] Result test failed: result = h0001f310 instead of h000cb228 for n = h1f.
+# Time 2125 ns [Scoredboard] Result test failed: i_r = h1f instead of h0000000000000020 for n = h1f.
+# Time 2125 ns [Scoredboard] Result test failed: x_r = h0001f310 instead of h000000000007d8b5 for n = h1f.
+# Time 2125 ns [Scoredboard] Result test failed: y_r = h0001f310 instead of h00000000000cb228 for n = h1f.
+# Time 2125 ns [Scoredboard] Result test failed: full_add_r = h00032780 instead of h000cb228 for n = h1f.
+# Time 2125 ns [Scoreboard] Overflow test passed for n=h1f
+#  WATCHDOG : started at 2125 
+# ** Error: Time 2135 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 2135 ns Started: 2125 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+# ** Error: Time 2145 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 2145 ns Started: 2135 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 2145 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 2145 ns Started: 2145 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+#  done is asserted time:2235
+#  KICKING THE WATCHDOG 
+# Time 2235 ns [start_monitor]: Sending start of test for n=h0c.
+# Time 2245 ns [Monitor]: Monitor detected result=h0009bf50 and overflow=0
+# Time 2245 ns [Scoreboard]: Received start of test for n=h0c
+# Time 2245 ns [Scoredboard] i_r cleared failed: i_r = h22 instead of h0000000000000003 for n = h0c.
+# Time 2245 ns [Scoredboard] x_r cleared failed: x_r = h0005d930 instead of h0000000000000000 for n = h0c.
+# Time 2245 ns [Scoredboard] y_r cleared failed: y_r = h0009bf50 instead of h0000000000000001 for n = h0c.
+# Time 2245 ns [Scoreboard]: Received result=h0009bf50 and overflow = 0 for n=h0c.
+# Time 2245 ns [Scoreboard]: Received y_r=h0009bf50.
+# Time 2245 ns [Scoredboard] Result test failed: result = h0009bf50 instead of h00000059 for n = h0c.
+# Time 2245 ns [Scoredboard] Result test failed: i_r = h22 instead of h000000000000000d for n = h0c.
+# Time 2245 ns [Scoredboard] Result test failed: x_r = h0005d930 instead of h0000000000000037 for n = h0c.
+# Time 2245 ns [Scoredboard] Result test failed: y_r = h0009bf50 instead of h0000000000000059 for n = h0c.
+# Time 2245 ns [Scoredboard] Result test failed: full_add_r = h0009bf50 instead of h00000059 for n = h0c.
+# Time 2245 ns [Scoreboard] Overflow test passed for n=h0c
+#  WATCHDOG : started at 2315 
+# ** Error: Time 2325 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 2325 ns Started: 2315 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+# ** Error: Time 2335 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 2335 ns Started: 2325 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 2335 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 2335 ns Started: 2335 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+#  done is asserted time:2435
+#  KICKING THE WATCHDOG 
+# Time 2435 ns [start_monitor]: Sending start of test for n=h3e.
+# Time 2445 ns [Monitor]: Monitor detected result=h0028f050 and overflow=0
+# Time 2445 ns [Scoreboard]: Received start of test for n=h3e
+# Time 2445 ns [Scoredboard] i_r cleared failed: i_r = h25 instead of h0000000000000003 for n = h3e.
+# Time 2445 ns [Scoredboard] x_r cleared failed: x_r = h001957d0 instead of h0000000000000000 for n = h3e.
+# Time 2445 ns [Scoredboard] y_r cleared failed: y_r = h0028f050 instead of h0000000000000001 for n = h3e.
+# Time 2445 ns [Scoreboard]: Received result=h0028f050 and overflow = 0 for n=h3e.
+# Time 2445 ns [Scoreboard]: Received y_r=h0028f050.
+# Time 2445 ns [Scoredboard] Result test failed: result = h0028f050 instead of h2d96a909 for n = h3e.
+# Time 2445 ns [Scoredboard] Result test failed: i_r = h25 instead of h000000000000003f for n = h3e.
+# Time 2445 ns [Scoredboard] Result test failed: x_r = h001957d0 instead of h000001686c8312d0 for n = h3e.
+# Time 2445 ns [Scoredboard] Result test failed: y_r = h0028f050 instead of h000002472d96a909 for n = h3e.
+# Time 2445 ns [Scoredboard] Result test failed: full_add_r = h0028f050 instead of h2d96a909 for n = h3e.
+# Time 2445 ns [Scoredboard] Overflow test failed: overflow = 0 instead of 1 for n = h3e and theoretical result = h000002472d96a909 and result = h0028f050.
+#  WATCHDOG : started at 2595 
+# ** Error: Time 2605 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 2605 ns Started: 2595 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:2615
+#  KICKING THE WATCHDOG 
+# Time 2615 ns [start_monitor]: Sending start of test for n=h04.
+# ** Error: Time 2615 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 2615 ns Started: 2605 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 2615 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 2615 ns Started: 2615 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 2625 ns [Monitor]: Monitor detected result=h0028f050 and overflow=0
+# Time 2625 ns [Scoreboard]: Received start of test for n=h04
+# Time 2625 ns [Scoredboard] i_r cleared failed: i_r = h25 instead of h0000000000000003 for n = h04.
+# Time 2625 ns [Scoredboard] x_r cleared failed: x_r = h001957d0 instead of h0000000000000000 for n = h04.
+# Time 2625 ns [Scoredboard] y_r cleared failed: y_r = h0028f050 instead of h0000000000000001 for n = h04.
+# Time 2625 ns [Scoreboard]: Received result=h0028f050 and overflow = 0 for n=h04.
+# Time 2625 ns [Scoreboard]: Received y_r=h0028f050.
+# Time 2625 ns [Scoredboard] Result test failed: result = h0028f050 instead of h00000002 for n = h04.
+# Time 2625 ns [Scoredboard] Result test failed: i_r = h25 instead of h0000000000000005 for n = h04.
+# Time 2625 ns [Scoredboard] Result test failed: x_r = h001957d0 instead of h0000000000000001 for n = h04.
+# Time 2625 ns [Scoredboard] Result test failed: y_r = h0028f050 instead of h0000000000000002 for n = h04.
+# Time 2625 ns [Scoredboard] Result test failed: full_add_r = h0028f050 instead of h00000002 for n = h04.
+# Time 2625 ns [Scoreboard] Overflow test passed for n=h04
+#  WATCHDOG : started at 2625 
+# ** Error: Time 2635 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 2635 ns Started: 2625 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:2645
+#  KICKING THE WATCHDOG 
+# Time 2645 ns [start_monitor]: Sending start of test for n=h31.
+# ** Error: Time 2645 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 2645 ns Started: 2635 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 2645 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 2645 ns Started: 2645 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 2655 ns [Monitor]: Monitor detected result=h0028f050 and overflow=0
+# Time 2655 ns [Scoreboard]: Received start of test for n=h31
+# Time 2655 ns [Scoredboard] i_r cleared failed: i_r = h25 instead of h0000000000000003 for n = h31.
+# Time 2655 ns [Scoredboard] x_r cleared failed: x_r = h001957d0 instead of h0000000000000000 for n = h31.
+# Time 2655 ns [Scoredboard] y_r cleared failed: y_r = h0028f050 instead of h0000000000000001 for n = h31.
+# Time 2655 ns [Scoreboard]: Received result=h0028f050 and overflow = 0 for n=h31.
+# Time 2655 ns [Scoreboard]: Received y_r=h0028f050.
+# Time 2655 ns [Scoredboard] Result test failed: result = h0028f050 instead of h1e8d0a40 for n = h31.
+# Time 2655 ns [Scoredboard] Result test failed: i_r = h25 instead of h0000000000000032 for n = h31.
+# Time 2655 ns [Scoredboard] Result test failed: x_r = h001957d0 instead of h00000000b11924e1 for n = h31.
+# Time 2655 ns [Scoredboard] Result test failed: y_r = h0028f050 instead of h000000011e8d0a40 for n = h31.
+# Time 2655 ns [Scoredboard] Result test failed: full_add_r = h0028f050 instead of h1e8d0a40 for n = h31.
+# Time 2655 ns [Scoredboard] Overflow test failed: overflow = 0 instead of 1 for n = h31 and theoretical result = h000000011e8d0a40 and result = h0028f050.
+#  WATCHDOG : started at 2655 
+# ** Error: Time 2665 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 2665 ns Started: 2655 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+# ** Error: Time 2675 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 2675 ns Started: 2665 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 2675 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 2675 ns Started: 2675 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+#  done is asserted time:2705
+#  KICKING THE WATCHDOG 
+# Time 2705 ns [start_monitor]: Sending start of test for n=h09.
+# Time 2715 ns [Monitor]: Monitor detected result=h00424820 and overflow=0
+# Time 2715 ns [Scoreboard]: Received start of test for n=h09
+# Time 2715 ns [Scoredboard] i_r cleared failed: i_r = h26 instead of h0000000000000003 for n = h09.
+# Time 2715 ns [Scoredboard] x_r cleared failed: x_r = h0028f050 instead of h0000000000000000 for n = h09.
+# Time 2715 ns [Scoredboard] y_r cleared failed: y_r = h00424820 instead of h0000000000000001 for n = h09.
+# Time 2715 ns [Scoreboard]: Received result=h00424820 and overflow = 0 for n=h09.
+# Time 2715 ns [Scoreboard]: Received y_r=h00424820.
+# Time 2715 ns [Scoredboard] Result test failed: result = h00424820 instead of h00000015 for n = h09.
+# Time 2715 ns [Scoredboard] Result test failed: i_r = h26 instead of h000000000000000a for n = h09.
+# Time 2715 ns [Scoredboard] Result test failed: x_r = h0028f050 instead of h000000000000000d for n = h09.
+# Time 2715 ns [Scoredboard] Result test failed: y_r = h00424820 instead of h0000000000000015 for n = h09.
+# Time 2715 ns [Scoredboard] Result test failed: full_add_r = h00424820 instead of h00000015 for n = h09.
+# Time 2715 ns [Scoreboard] Overflow test passed for n=h09
+#  WATCHDOG : started at 2735 
+# ** Error: Time 2745 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 2745 ns Started: 2735 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+# ** Error: Time 2755 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 2755 ns Started: 2745 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 2755 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 2755 ns Started: 2755 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+#  done is asserted time:2785
+#  KICKING THE WATCHDOG 
+# Time 2785 ns [start_monitor]: Sending start of test for n=h38.
+# Time 2795 ns [Monitor]: Monitor detected result=h006b3870 and overflow=0
+# Time 2795 ns [Scoreboard]: Received start of test for n=h38
+# Time 2795 ns [Scoredboard] i_r cleared failed: i_r = h27 instead of h0000000000000003 for n = h38.
+# Time 2795 ns [Scoredboard] x_r cleared failed: x_r = h00424820 instead of h0000000000000000 for n = h38.
+# Time 2795 ns [Scoredboard] y_r cleared failed: y_r = h006b3870 instead of h0000000000000001 for n = h38.
+# Time 2795 ns [Scoreboard]: Received result=h006b3870 and overflow = 0 for n=h38.
+# Time 2795 ns [Scoreboard]: Received y_r=h006b3870.
+# Time 2795 ns [Scoredboard] Result test failed: result = h006b3870 instead of h7fd8b6ad for n = h38.
+# Time 2795 ns [Scoredboard] Result test failed: i_r = h27 instead of h0000000000000039 for n = h38.
+# Time 2795 ns [Scoredboard] Result test failed: x_r = h00424820 instead of h0000001415f2ac48 for n = h38.
+# Time 2795 ns [Scoredboard] Result test failed: y_r = h006b3870 instead of h000000207fd8b6ad for n = h38.
+# Time 2795 ns [Scoredboard] Result test failed: full_add_r = h006b3870 instead of h7fd8b6ad for n = h38.
+# Time 2795 ns [Scoredboard] Overflow test failed: overflow = 0 instead of 1 for n = h38 and theoretical result = h000000207fd8b6ad and result = h006b3870.
+#  WATCHDOG : started at 2895 
+# ** Error: Time 2905 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 2905 ns Started: 2895 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:2915
+#  KICKING THE WATCHDOG 
+# Time 2915 ns [start_monitor]: Sending start of test for n=h0a.
+# ** Error: Time 2915 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 2915 ns Started: 2905 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 2915 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 2915 ns Started: 2915 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 2925 ns [Monitor]: Monitor detected result=h006b3870 and overflow=0
+# Time 2925 ns [Scoreboard]: Received start of test for n=h0a
+# Time 2925 ns [Scoredboard] i_r cleared failed: i_r = h27 instead of h0000000000000003 for n = h0a.
+# Time 2925 ns [Scoredboard] x_r cleared failed: x_r = h00424820 instead of h0000000000000000 for n = h0a.
+# Time 2925 ns [Scoredboard] y_r cleared failed: y_r = h006b3870 instead of h0000000000000001 for n = h0a.
+# Time 2925 ns [Scoreboard]: Received result=h006b3870 and overflow = 0 for n=h0a.
+# Time 2925 ns [Scoreboard]: Received y_r=h006b3870.
+# Time 2925 ns [Scoredboard] Result test failed: result = h006b3870 instead of h00000022 for n = h0a.
+# Time 2925 ns [Scoredboard] Result test failed: i_r = h27 instead of h000000000000000b for n = h0a.
+# Time 2925 ns [Scoredboard] Result test failed: x_r = h00424820 instead of h0000000000000015 for n = h0a.
+# Time 2925 ns [Scoredboard] Result test failed: y_r = h006b3870 instead of h0000000000000022 for n = h0a.
+# Time 2925 ns [Scoredboard] Result test failed: full_add_r = h006b3870 instead of h00000022 for n = h0a.
+# Time 2925 ns [Scoreboard] Overflow test passed for n=h0a
+#  WATCHDOG : started at 3245 
+# ** Error: Time 3255 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 3255 ns Started: 3245 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+# ** Error: Time 3265 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 3265 ns Started: 3255 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 3265 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 3265 ns Started: 3265 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+#  done is asserted time:3295
+#  KICKING THE WATCHDOG 
+# Time 3295 ns [start_monitor]: Sending start of test for n=h1c.
+# Time 3305 ns [Monitor]: Monitor detected result=h00ad8090 and overflow=0
+# Time 3305 ns [Scoreboard]: Received start of test for n=h1c
+# Time 3305 ns [Scoredboard] i_r cleared failed: i_r = h28 instead of h0000000000000003 for n = h1c.
+# Time 3305 ns [Scoredboard] x_r cleared failed: x_r = h006b3870 instead of h0000000000000000 for n = h1c.
+# Time 3305 ns [Scoredboard] y_r cleared failed: y_r = h00ad8090 instead of h0000000000000001 for n = h1c.
+# Time 3305 ns [Scoreboard]: Received result=h00ad8090 and overflow = 0 for n=h1c.
+# Time 3305 ns [Scoreboard]: Received y_r=h00ad8090.
+# Time 3305 ns [Scoredboard] Result test failed: result = h00ad8090 instead of h0002ff42 for n = h1c.
+# Time 3305 ns [Scoredboard] Result test failed: i_r = h28 instead of h000000000000001d for n = h1c.
+# Time 3305 ns [Scoredboard] Result test failed: x_r = h006b3870 instead of h000000000001da31 for n = h1c.
+# Time 3305 ns [Scoredboard] Result test failed: y_r = h00ad8090 instead of h000000000002ff42 for n = h1c.
+# Time 3305 ns [Scoredboard] Result test failed: full_add_r = h00ad8090 instead of h0002ff42 for n = h1c.
+# Time 3305 ns [Scoreboard] Overflow test passed for n=h1c
+#  WATCHDOG : started at 3465 
+# ** Error: Time 3475 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 3475 ns Started: 3465 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:3485
+#  KICKING THE WATCHDOG 
+# Time 3485 ns [start_monitor]: Sending start of test for n=h0f.
+# ** Error: Time 3485 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 3485 ns Started: 3475 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 3485 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 3485 ns Started: 3485 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 3495 ns [Monitor]: Monitor detected result=h00ad8090 and overflow=0
+# Time 3495 ns [Scoreboard]: Received start of test for n=h0f
+# Time 3495 ns [Scoredboard] i_r cleared failed: i_r = h28 instead of h0000000000000003 for n = h0f.
+# Time 3495 ns [Scoredboard] x_r cleared failed: x_r = h006b3870 instead of h0000000000000000 for n = h0f.
+# Time 3495 ns [Scoredboard] y_r cleared failed: y_r = h00ad8090 instead of h0000000000000001 for n = h0f.
+# Time 3495 ns [Scoreboard]: Received result=h00ad8090 and overflow = 0 for n=h0f.
+# Time 3495 ns [Scoreboard]: Received y_r=h00ad8090.
+# Time 3495 ns [Scoredboard] Result test failed: result = h00ad8090 instead of h00000179 for n = h0f.
+# Time 3495 ns [Scoredboard] Result test failed: i_r = h28 instead of h0000000000000010 for n = h0f.
+# Time 3495 ns [Scoredboard] Result test failed: x_r = h006b3870 instead of h00000000000000e9 for n = h0f.
+# Time 3495 ns [Scoredboard] Result test failed: y_r = h00ad8090 instead of h0000000000000179 for n = h0f.
+# Time 3495 ns [Scoredboard] Result test failed: full_add_r = h00ad8090 instead of h00000179 for n = h0f.
+# Time 3495 ns [Scoreboard] Overflow test passed for n=h0f
+# ** Error: Time 3495 ns [Assert Property]: Go did not return to 0
+#    Time: 3495 ns Started: 3495 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 117
+# ** Error: Time 3505 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 3505 ns Started: 3505 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 3515 ns [Monitor]: Monitor detected result=h00ad8090 and overflow=0
+#  WATCHDOG : started at 3605 
+# ** Error: Time 3615 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 3615 ns Started: 3605 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:3625
+#  KICKING THE WATCHDOG 
+# Time 3625 ns [start_monitor]: Sending start of test for n=h19.
+# ** Error: Time 3625 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 3625 ns Started: 3615 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 3625 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 3625 ns Started: 3625 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 3635 ns [Monitor]: Monitor detected result=h00ad8090 and overflow=0
+# Time 3635 ns [Scoreboard]: Received start of test for n=h19
+# Time 3635 ns [Scoredboard] i_r cleared failed: i_r = h28 instead of h0000000000000003 for n = h19.
+# Time 3635 ns [Scoredboard] x_r cleared failed: x_r = h006b3870 instead of h0000000000000000 for n = h19.
+# Time 3635 ns [Scoredboard] y_r cleared failed: y_r = h00ad8090 instead of h0000000000000001 for n = h19.
+# Time 3635 ns [Scoreboard]: Received result=h00ad8090 and overflow = 0 for n=h19.
+# Time 3635 ns [Scoreboard]: Received y_r=h00ad8090.
+# Time 3635 ns [Scoredboard] Result test failed: result = h00ad8090 instead of h0000b520 for n = h19.
+# Time 3635 ns [Scoredboard] Result test failed: i_r = h28 instead of h000000000000001a for n = h19.
+# Time 3635 ns [Scoredboard] Result test failed: x_r = h006b3870 instead of h0000000000006ff1 for n = h19.
+# Time 3635 ns [Scoredboard] Result test failed: y_r = h00ad8090 instead of h000000000000b520 for n = h19.
+# Time 3635 ns [Scoredboard] Result test failed: full_add_r = h00ad8090 instead of h0000b520 for n = h19.
+# Time 3635 ns [Scoreboard] Overflow test passed for n=h19
+#  WATCHDOG : started at 3785 
+# ** Error: Time 3795 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 3795 ns Started: 3785 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+# ** Error: Time 3805 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 3805 ns Started: 3795 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 3805 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 3805 ns Started: 3805 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+#  done is asserted time:3835
+#  KICKING THE WATCHDOG 
+# Time 3835 ns [start_monitor]: Sending start of test for n=h04.
+# Time 3845 ns [Monitor]: Monitor detected result=h0118b900 and overflow=0
+# Time 3845 ns [Scoreboard]: Received start of test for n=h04
+# Time 3845 ns [Scoredboard] i_r cleared failed: i_r = h29 instead of h0000000000000003 for n = h04.
+# Time 3845 ns [Scoredboard] x_r cleared failed: x_r = h00ad8090 instead of h0000000000000000 for n = h04.
+# Time 3845 ns [Scoredboard] y_r cleared failed: y_r = h0118b900 instead of h0000000000000001 for n = h04.
+# Time 3845 ns [Scoreboard]: Received result=h00ad8090 and overflow = 0 for n=h04.
+# Time 3845 ns [Scoreboard]: Received y_r=h00ad8090.
+# Time 3845 ns [Scoredboard] Result test failed: result = h00ad8090 instead of h00000002 for n = h04.
+# Time 3845 ns [Scoredboard] Result test failed: i_r = h28 instead of h0000000000000005 for n = h04.
+# Time 3845 ns [Scoredboard] Result test failed: x_r = h006b3870 instead of h0000000000000001 for n = h04.
+# Time 3845 ns [Scoredboard] Result test failed: y_r = h00ad8090 instead of h0000000000000002 for n = h04.
+# Time 3845 ns [Scoredboard] Result test failed: full_add_r = h00ad8090 instead of h00000002 for n = h04.
+# Time 3845 ns [Scoreboard] Overflow test passed for n=h04
+#  WATCHDOG : started at 3845 
+# ** Error: Time 3855 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 3855 ns Started: 3845 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+# ** Error: Time 3865 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 3865 ns Started: 3855 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 3865 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 3865 ns Started: 3865 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+#  done is asserted time:3895
+#  KICKING THE WATCHDOG 
+# Time 3895 ns [start_monitor]: Sending start of test for n=h06.
+# Time 3905 ns [Monitor]: Monitor detected result=h01c63990 and overflow=0
+# Time 3905 ns [Scoreboard]: Received start of test for n=h06
+# Time 3905 ns [Scoredboard] i_r cleared failed: i_r = h2a instead of h0000000000000003 for n = h06.
+# Time 3905 ns [Scoredboard] x_r cleared failed: x_r = h0118b900 instead of h0000000000000000 for n = h06.
+# Time 3905 ns [Scoredboard] y_r cleared failed: y_r = h01c63990 instead of h0000000000000001 for n = h06.
+# Time 3905 ns [Scoreboard]: Received result=h0118b900 and overflow = 0 for n=h06.
+# Time 3905 ns [Scoreboard]: Received y_r=h0118b900.
+# Time 3905 ns [Scoredboard] Result test failed: result = h0118b900 instead of h00000005 for n = h06.
+# Time 3905 ns [Scoredboard] Result test failed: i_r = h29 instead of h0000000000000007 for n = h06.
+# Time 3905 ns [Scoredboard] Result test failed: x_r = h00ad8090 instead of h0000000000000003 for n = h06.
+# Time 3905 ns [Scoredboard] Result test failed: y_r = h0118b900 instead of h0000000000000005 for n = h06.
+# Time 3905 ns [Scoredboard] Result test failed: full_add_r = h0118b900 instead of h00000005 for n = h06.
+# Time 3905 ns [Scoreboard] Overflow test passed for n=h06
+#  WATCHDOG : started at 4005 
+# ** Error: Time 4015 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 4015 ns Started: 4005 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:4025
+#  KICKING THE WATCHDOG 
+# Time 4025 ns [start_monitor]: Sending start of test for n=h15.
+# ** Error: Time 4025 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 4025 ns Started: 4015 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 4025 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 4025 ns Started: 4025 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 4035 ns [Monitor]: Monitor detected result=h01c63990 and overflow=0
+# Time 4035 ns [Scoreboard]: Received start of test for n=h15
+# Time 4035 ns [Scoredboard] i_r cleared failed: i_r = h2a instead of h0000000000000003 for n = h15.
+# Time 4035 ns [Scoredboard] x_r cleared failed: x_r = h0118b900 instead of h0000000000000000 for n = h15.
+# Time 4035 ns [Scoredboard] y_r cleared failed: y_r = h01c63990 instead of h0000000000000001 for n = h15.
+# Time 4035 ns [Scoreboard]: Received result=h01c63990 and overflow = 0 for n=h15.
+# Time 4035 ns [Scoreboard]: Received y_r=h01c63990.
+# Time 4035 ns [Scoredboard] Result test failed: result = h01c63990 instead of h00001a6d for n = h15.
+# Time 4035 ns [Scoredboard] Result test failed: i_r = h2a instead of h0000000000000016 for n = h15.
+# Time 4035 ns [Scoredboard] Result test failed: x_r = h0118b900 instead of h0000000000001055 for n = h15.
+# Time 4035 ns [Scoredboard] Result test failed: y_r = h01c63990 instead of h0000000000001a6d for n = h15.
+# Time 4035 ns [Scoredboard] Result test failed: full_add_r = h01c63990 instead of h00001a6d for n = h15.
+# Time 4035 ns [Scoreboard] Overflow test passed for n=h15
+#  WATCHDOG : started at 4205 
+# ** Error: Time 4215 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 4215 ns Started: 4205 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:4225
+#  KICKING THE WATCHDOG 
+# Time 4225 ns [start_monitor]: Sending start of test for n=h05.
+# ** Error: Time 4225 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 4225 ns Started: 4215 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 4225 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 4225 ns Started: 4225 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 4235 ns [Monitor]: Monitor detected result=h01c63990 and overflow=0
+# Time 4235 ns [Scoreboard]: Received start of test for n=h05
+# Time 4235 ns [Scoredboard] i_r cleared failed: i_r = h2a instead of h0000000000000003 for n = h05.
+# Time 4235 ns [Scoredboard] x_r cleared failed: x_r = h0118b900 instead of h0000000000000000 for n = h05.
+# Time 4235 ns [Scoredboard] y_r cleared failed: y_r = h01c63990 instead of h0000000000000001 for n = h05.
+# Time 4235 ns [Scoreboard]: Received result=h01c63990 and overflow = 0 for n=h05.
+# Time 4235 ns [Scoreboard]: Received y_r=h01c63990.
+# Time 4235 ns [Scoredboard] Result test failed: result = h01c63990 instead of h00000003 for n = h05.
+# Time 4235 ns [Scoredboard] Result test failed: i_r = h2a instead of h0000000000000006 for n = h05.
+# Time 4235 ns [Scoredboard] Result test failed: x_r = h0118b900 instead of h0000000000000002 for n = h05.
+# Time 4235 ns [Scoredboard] Result test failed: y_r = h01c63990 instead of h0000000000000003 for n = h05.
+# Time 4235 ns [Scoredboard] Result test failed: full_add_r = h01c63990 instead of h00000003 for n = h05.
+# Time 4235 ns [Scoreboard] Overflow test passed for n=h05
+#  WATCHDOG : started at 4255 
+# ** Error: Time 4265 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 4265 ns Started: 4255 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:4275
+#  KICKING THE WATCHDOG 
+# Time 4275 ns [start_monitor]: Sending start of test for n=h2b.
+# ** Error: Time 4275 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 4275 ns Started: 4265 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 4275 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 4275 ns Started: 4275 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 4285 ns [Monitor]: Monitor detected result=h01c63990 and overflow=0
+# Time 4285 ns [Scoreboard]: Received start of test for n=h2b
+# Time 4285 ns [Scoredboard] i_r cleared failed: i_r = h2a instead of h0000000000000003 for n = h2b.
+# Time 4285 ns [Scoredboard] x_r cleared failed: x_r = h0118b900 instead of h0000000000000000 for n = h2b.
+# Time 4285 ns [Scoredboard] y_r cleared failed: y_r = h01c63990 instead of h0000000000000001 for n = h2b.
+# Time 4285 ns [Scoreboard]: Received result=h01c63990 and overflow = 0 for n=h2b.
+# Time 4285 ns [Scoreboard]: Received y_r=h01c63990.
+# Time 4285 ns [Scoredboard] Result test failed: result = h01c63990 instead of h0ff80c38 for n = h2b.
+# Time 4285 ns [Scoredboard] Result test failed: i_r = h2a instead of h000000000000002c for n = h2b.
+# Time 4285 ns [Scoredboard] Result test failed: x_r = h0118b900 instead of h0000000009de8d6d for n = h2b.
+# Time 4285 ns [Scoredboard] Result test failed: y_r = h01c63990 instead of h000000000ff80c38 for n = h2b.
+# Time 4285 ns [Scoredboard] Result test failed: full_add_r = h01c63990 instead of h0ff80c38 for n = h2b.
+# Time 4285 ns [Scoreboard] Overflow test passed for n=h2b
+#  WATCHDOG : started at 4415 
+# ** Error: Time 4425 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 4425 ns Started: 4415 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:4435
+#  KICKING THE WATCHDOG 
+# Time 4435 ns [start_monitor]: Sending start of test for n=h29.
+# ** Error: Time 4435 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 4435 ns Started: 4425 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 4435 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 4435 ns Started: 4435 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 4445 ns [Monitor]: Monitor detected result=h01c63990 and overflow=0
+# Time 4445 ns [Scoreboard]: Received start of test for n=h29
+# Time 4445 ns [Scoredboard] i_r cleared failed: i_r = h2a instead of h0000000000000003 for n = h29.
+# Time 4445 ns [Scoredboard] x_r cleared failed: x_r = h0118b900 instead of h0000000000000000 for n = h29.
+# Time 4445 ns [Scoredboard] y_r cleared failed: y_r = h01c63990 instead of h0000000000000001 for n = h29.
+# Time 4445 ns [Scoreboard]: Received result=h01c63990 and overflow = 0 for n=h29.
+# Time 4445 ns [Scoreboard]: Received y_r=h01c63990.
+# Time 4445 ns [Scoredboard] Result test failed: result = h01c63990 instead of h06197ecb for n = h29.
+# Time 4445 ns [Scoreboard] Result test passed for i_r=h2a
+# Time 4445 ns [Scoredboard] Result test failed: x_r = h0118b900 instead of h0000000003c50ea2 for n = h29.
+# Time 4445 ns [Scoredboard] Result test failed: y_r = h01c63990 instead of h0000000006197ecb for n = h29.
+# Time 4445 ns [Scoredboard] Result test failed: full_add_r = h01c63990 instead of h06197ecb for n = h29.
+# Time 4445 ns [Scoreboard] Overflow test passed for n=h29
+# ** Error: Time 4445 ns [Assert Property]: Go did not return to 0
+#    Time: 4445 ns Started: 4445 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 117
+# ** Error: Time 4455 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 4455 ns Started: 4455 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 4465 ns [Monitor]: Monitor detected result=h01c63990 and overflow=0
+#  WATCHDOG : started at 4495 
+# ** Error: Time 4505 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 4505 ns Started: 4495 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:4515
+#  KICKING THE WATCHDOG 
+# Time 4515 ns [start_monitor]: Sending start of test for n=h2b.
+# ** Error: Time 4515 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 4515 ns Started: 4505 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 4515 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 4515 ns Started: 4515 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 4525 ns [Monitor]: Monitor detected result=h01c63990 and overflow=0
+# Time 4525 ns [Scoreboard]: Received start of test for n=h2b
+# Time 4525 ns [Scoredboard] i_r cleared failed: i_r = h2a instead of h0000000000000003 for n = h2b.
+# Time 4525 ns [Scoredboard] x_r cleared failed: x_r = h0118b900 instead of h0000000000000000 for n = h2b.
+# Time 4525 ns [Scoredboard] y_r cleared failed: y_r = h01c63990 instead of h0000000000000001 for n = h2b.
+# Time 4525 ns [Scoreboard]: Received result=h01c63990 and overflow = 0 for n=h2b.
+# Time 4525 ns [Scoreboard]: Received y_r=h01c63990.
+# Time 4525 ns [Scoredboard] Result test failed: result = h01c63990 instead of h0ff80c38 for n = h2b.
+# Time 4525 ns [Scoredboard] Result test failed: i_r = h2a instead of h000000000000002c for n = h2b.
+# Time 4525 ns [Scoredboard] Result test failed: x_r = h0118b900 instead of h0000000009de8d6d for n = h2b.
+# Time 4525 ns [Scoredboard] Result test failed: y_r = h01c63990 instead of h000000000ff80c38 for n = h2b.
+# Time 4525 ns [Scoredboard] Result test failed: full_add_r = h01c63990 instead of h0ff80c38 for n = h2b.
+# Time 4525 ns [Scoreboard] Overflow test passed for n=h2b
+# ** Error: Time 4525 ns [Assert Property]: Go did not return to 0
+#    Time: 4525 ns Started: 4525 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 117
+# ** Error: Time 4535 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 4535 ns Started: 4535 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 4575 ns [Monitor]: Monitor detected result=h02def290 and overflow=0
+#  WATCHDOG : started at 4595 
+# ** Error: Time 4605 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 4605 ns Started: 4595 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:4635
+#  KICKING THE WATCHDOG 
+# Time 4635 ns [start_monitor]: Sending start of test for n=h0c.
+# Time 4645 ns [Monitor]: Monitor detected result=h02def290 and overflow=0
+# Time 4645 ns [Scoreboard]: Received start of test for n=h0c
+# Time 4645 ns [Scoredboard] i_r cleared failed: i_r = h2b instead of h0000000000000003 for n = h0c.
+# Time 4645 ns [Scoredboard] x_r cleared failed: x_r = h01c63990 instead of h0000000000000000 for n = h0c.
+# Time 4645 ns [Scoredboard] y_r cleared failed: y_r = h02def290 instead of h0000000000000001 for n = h0c.
+# Time 4645 ns [Scoreboard]: Received result=h01c63990 and overflow = 0 for n=h0c.
+# Time 4645 ns [Scoreboard]: Received y_r=h01c63990.
+# Time 4645 ns [Scoredboard] Result test failed: result = h01c63990 instead of h00000059 for n = h0c.
+# Time 4645 ns [Scoredboard] Result test failed: i_r = h2a instead of h000000000000000d for n = h0c.
+# Time 4645 ns [Scoredboard] Result test failed: x_r = h0118b900 instead of h0000000000000037 for n = h0c.
+# Time 4645 ns [Scoredboard] Result test failed: y_r = h01c63990 instead of h0000000000000059 for n = h0c.
+# Time 4645 ns [Scoredboard] Result test failed: full_add_r = h01c63990 instead of h00000059 for n = h0c.
+# Time 4645 ns [Scoreboard] Overflow test passed for n=h0c
+#  WATCHDOG : started at 4725 
+# ** Error: Time 4735 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 4735 ns Started: 4725 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+# ** Error: Time 4745 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 4745 ns Started: 4735 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 4745 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 4745 ns Started: 4745 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+#  done is asserted time:4775
+#  KICKING THE WATCHDOG 
+# Time 4775 ns [start_monitor]: Sending start of test for n=h3e.
+# Time 4785 ns [Monitor]: Monitor detected result=h04a52c20 and overflow=0
+# Time 4785 ns [Scoreboard]: Received start of test for n=h3e
+# Time 4785 ns [Scoredboard] i_r cleared failed: i_r = h2c instead of h0000000000000003 for n = h3e.
+# Time 4785 ns [Scoredboard] x_r cleared failed: x_r = h02def290 instead of h0000000000000000 for n = h3e.
+# Time 4785 ns [Scoredboard] y_r cleared failed: y_r = h04a52c20 instead of h0000000000000001 for n = h3e.
+# Time 4785 ns [Scoreboard]: Received result=h01c63990 and overflow = 0 for n=h3e.
+# Time 4785 ns [Scoreboard]: Received y_r=h01c63990.
+# Time 4785 ns [Scoredboard] Result test failed: result = h01c63990 instead of h2d96a909 for n = h3e.
+# Time 4785 ns [Scoredboard] Result test failed: i_r = h2a instead of h000000000000003f for n = h3e.
+# Time 4785 ns [Scoredboard] Result test failed: x_r = h0118b900 instead of h000001686c8312d0 for n = h3e.
+# Time 4785 ns [Scoredboard] Result test failed: y_r = h01c63990 instead of h000002472d96a909 for n = h3e.
+# Time 4785 ns [Scoredboard] Result test failed: full_add_r = h01c63990 instead of h2d96a909 for n = h3e.
+# Time 4785 ns [Scoredboard] Overflow test failed: overflow = 0 instead of 1 for n = h3e and theoretical result = h000002472d96a909 and result = h01c63990.
+#  WATCHDOG : started at 4815 
+# ** Error: Time 4825 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 4825 ns Started: 4815 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+#  done is asserted time:4835
+#  KICKING THE WATCHDOG 
+# Time 4835 ns [start_monitor]: Sending start of test for n=h18.
+# ** Error: Time 4835 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 4835 ns Started: 4825 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 4835 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 4835 ns Started: 4835 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+# Time 4845 ns [Monitor]: Monitor detected result=h04a52c20 and overflow=0
+# Time 4845 ns [Scoreboard]: Received start of test for n=h18
+# Time 4845 ns [Scoredboard] i_r cleared failed: i_r = h2c instead of h0000000000000003 for n = h18.
+# Time 4845 ns [Scoredboard] x_r cleared failed: x_r = h02def290 instead of h0000000000000000 for n = h18.
+# Time 4845 ns [Scoredboard] y_r cleared failed: y_r = h04a52c20 instead of h0000000000000001 for n = h18.
+# Time 4845 ns [Scoreboard]: Received result=h02def290 and overflow = 0 for n=h18.
+# Time 4845 ns [Scoreboard]: Received y_r=h02def290.
+# Time 4845 ns [Scoredboard] Result test failed: result = h02def290 instead of h00006ff1 for n = h18.
+# Time 4845 ns [Scoredboard] Result test failed: i_r = h2b instead of h0000000000000019 for n = h18.
+# Time 4845 ns [Scoredboard] Result test failed: x_r = h01c63990 instead of h000000000000452f for n = h18.
+# Time 4845 ns [Scoredboard] Result test failed: y_r = h02def290 instead of h0000000000006ff1 for n = h18.
+# Time 4845 ns [Scoredboard] Result test failed: full_add_r = h02def290 instead of h00006ff1 for n = h18.
+# Time 4845 ns [Scoreboard] Overflow test passed for n=h18
+#  WATCHDOG : started at 4975 
+# ** Error: Time 4985 ns [Assert Property]: Done=1, go=1, done not cleared next cycle.
+#    Time: 4985 ns Started: 4975 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 101
+# ** Error: Time 4995 ns [Assert Property]: Done=1, go=0, done not stable.
+#    Time: 4995 ns Started: 4985 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 109
+# ** Error: Time 4995 ns [Assert Property]: done not cleared after go asserted.
+#    Time: 4995 ns Started: 4995 ns  Scope: fib_tb File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab2/fib_tb.sv Line: 113
+#  done is asserted time:5115
+#  KICKING THE WATCHDOG 
+# Time 5115 ns [start_monitor]: Sending start of test for n=h11.
+# Time 5125 ns [Monitor]: Monitor detected result=h1fd6b450 and overflow=0
+# Time 5125 ns [Scoreboard]: Received start of test for n=h11
+# Time 5125 ns [Scoredboard] i_r cleared failed: i_r = h30 instead of h0000000000000003 for n = h11.
+# Time 5125 ns [Scoredboard] x_r cleared failed: x_r = h13ad6980 instead of h0000000000000000 for n = h11.
+# Time 5125 ns [Scoredboard] y_r cleared failed: y_r = h1fd6b450 instead of h0000000000000001 for n = h11.
+# Time 5125 ns [Scoreboard]: Received result=h02def290 and overflow = 0 for n=h11.
+# Time 5125 ns [Scoreboard]: Received y_r=h02def290.
+# Time 5125 ns [Scoredboard] Result test failed: result = h02def290 instead of h000003db for n = h11.
+# Time 5125 ns [Scoredboard] Result test failed: i_r = h2b instead of h0000000000000012 for n = h11.
+# Time 5125 ns [Scoredboard] Result test failed: x_r = h01c63990 instead of h0000000000000262 for n = h11.
+# Time 5125 ns [Scoredboard] Result test failed: y_r = h02def290 instead of h00000000000003db for n = h11.
+# Time 5125 ns [Scoredboard] Result test failed: full_add_r = h02def290 instead of h000003db for n = h11.
+# Time 5125 ns [Scoreboard] Overflow test passed for n=h11
+# ** Error: Time 5125 ns [Assert Property]: Go did not return to 0
+#    Time: 5125 ns Started: 5125 ns  Scope: fib_tb
