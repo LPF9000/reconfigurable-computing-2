@@ -180,9 +180,10 @@ module fib_good #(
       full_add_r <= '0;
     end else begin
 
-      // TO DO: get screenshots showing bit widths (too long)
+      
       case (state_r)
         START: begin
+          // casted bit widths and reset signals at start of computation
           i_r <= INPUT_WIDTH'(3);
           x_r <= '0;
           y_r <= OUTPUT_WIDTH'(1);
@@ -194,16 +195,16 @@ module fib_good #(
           end
 
         end
-
-      // TO DO: Needs an init state to initialize variables when repeating back to COND
         COND: begin
           // removed done_r = 0
           //done_r <= 1'b0;
+          // added i_r >= 3 condition to prevent infinite loops where i_r loops back to 0 for i_r > MAX_VALUE
           if (i_r <= n_r && i_r >= 2'b11) state_r <= COMPUTE;
           else state_r <= DONE;
         end
 
         COMPUTE: begin
+          // changed order, x_r + y_r needs to be first according to algorithm
           full_add_r <= x_r + y_r;
           x_r <= y_r;
           state_r <= OVERFLOW;
@@ -211,7 +212,9 @@ module fib_good #(
 
         OVERFLOW: begin
           if (full_add_r[OUTPUT_WIDTH]) overflow_r <= 1'b1;
+          // added slice so y_r only takes OUTPUT_WIDTH bits
           y_r <= full_add_r[OUTPUT_WIDTH-1:0];
+          // incrementing i after setting y_r as stated in algorithm
           i_r <= i_r + 1'b1;
           state_r <= COND;
         end
@@ -230,6 +233,9 @@ module fib_good #(
 
         RESTART: begin
           // added done_r = 0 here to be cleared cycle after go is asserted
+          // casted bit widths and reset signals at start of computation
+          // reset overflow to prevent old values getting used
+          // only set n value on start condition
           if (go == 1'b1) begin
             i_r <= INPUT_WIDTH'(3);
             x_r <= '0;
@@ -239,7 +245,7 @@ module fib_good #(
             state_r <= COND;
             done_r  <= 1'b0;
             overflow_r <= 1'b0;
-            // added init to signals to account for the signals never getting reset
+
 
           end
         end
