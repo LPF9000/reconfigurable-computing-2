@@ -86,7 +86,9 @@ module fib_bad #(
         COND: begin
           done_r <= 1'b0;
 
-          if (i_r <= n && i_r >= 2'b11) state_r <= COMPUTE;
+          // to solve infinite loop to check more cases
+          //if (i_r <= n && i_r >= 2'b11) state_r <= COMPUTE;
+          if (i_r <= n) state_r <= COMPUTE;
           else state_r <= DONE;
         end
 
@@ -278,7 +280,7 @@ module fib #(
     output logic                    done
 );
 
-  fib_bad #(.INPUT_WIDTH (INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) top (.*);
-  //fib_good #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) top (.*);
+  //fib_bad #(.INPUT_WIDTH (INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) top (.*);
+  fib_good #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) top (.*);
 
 endmodule
