@@ -278,7 +278,7 @@ module fib #(
     output logic                    done
 );
 
-  fib_bad #(.INPUT_WIDTH (INPUT_WIDTH),.OUTPUT_WIDTH(OUTPUT_WIDTH)) top ( .*);
-  //fib_good #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) top (.*);
+  //fib_bad #(.INPUT_WIDTH (INPUT_WIDTH),.OUTPUT_WIDTH(OUTPUT_WIDTH)) top ( .*);
+  fib_good #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) top (.*);
 
 endmodule
