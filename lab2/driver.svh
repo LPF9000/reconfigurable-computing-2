@@ -43,7 +43,7 @@ class nonblocking_driver #(
       //$display("Time %0t [Driver]: Driving n=h%h, go=%0b.", $time, item.n, item.go);
       bfm.n = item.n;
       bfm.go   = item.go;
-      @(posedge bfm.clk); 
+      @(posedge bfm.clk);
       ->driver_done_event;
     end
   endtask

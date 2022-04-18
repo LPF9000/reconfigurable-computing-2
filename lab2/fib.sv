@@ -180,7 +180,7 @@ module fib_good #(
       full_add_r <= '0;
     end else begin
 
-      
+
       case (state_r)
         START: begin
           // casted bit widths and reset signals at start of computation
@@ -190,7 +190,7 @@ module fib_good #(
 
           // added registered n signal to prevent changes during computation
           if (go == 1'b1) begin
-            n_r <= n; // Save n
+            n_r <= n;  // Save n
             state_r <= COND;
           end
 
@@ -243,7 +243,7 @@ module fib_good #(
             n_r <= n;
             full_add_r <= '0;
             state_r <= COND;
-            done_r  <= 1'b0;
+            done_r <= 1'b0;
             overflow_r <= 1'b0;
 
 
@@ -278,7 +278,12 @@ module fib #(
     output logic                    done
 );
 
-  //fib_bad #(.INPUT_WIDTH (INPUT_WIDTH),.OUTPUT_WIDTH(OUTPUT_WIDTH)) top ( .*);
-  fib_good #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) top (.*);
+  fib_bad #(
+      .INPUT_WIDTH (INPUT_WIDTH),
+      .OUTPUT_WIDTH(OUTPUT_WIDTH)
+  ) top (
+      .*
+  );
+  //fib_good #(.INPUT_WIDTH(INPUT_WIDTH), .OUTPUT_WIDTH(OUTPUT_WIDTH)) top (.*);
 
 endmodule

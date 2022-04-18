@@ -109,14 +109,14 @@ class start_monitor #(
 
       // Wait until the DUT becomes active.
       @(bfm.active_event);
-      
+
       item.n = bfm.n;
       item.i_r        = bfm.i_r;
       item.x_r        = bfm.x_r;
       item.y_r        = bfm.y_r;
       $display("Time %0t [start_monitor]: Sending start of test for n=h%h.", $time, item.n);
       scoreboard_n_mailbox.put(item);
-      
+
 
       @(posedge bfm.clk);
       item_clear.i_r  = bfm.i_r;

@@ -13,17 +13,17 @@ module fib_tb;
   logic clk;
 
   fib #(
-    .INPUT_WIDTH (INPUT_WIDTH),
-    .OUTPUT_WIDTH(OUTPUT_WIDTH)
-) DUT (
-    .clk(clk),
-    .rst(bfm.rst),
-    .go(bfm.go),
-    .n(bfm.n),
-    .result(bfm.result),
-    .overflow(bfm.overflow),
-    .done(bfm.done)
-);
+      .INPUT_WIDTH (INPUT_WIDTH),
+      .OUTPUT_WIDTH(OUTPUT_WIDTH)
+  ) DUT (
+      .clk(clk),
+      .rst(bfm.rst),
+      .go(bfm.go),
+      .n(bfm.n),
+      .result(bfm.result),
+      .overflow(bfm.overflow),
+      .done(bfm.done)
+  );
 
   fib_bfm_if #(
       .INPUT_WIDTH (INPUT_WIDTH),
@@ -37,10 +37,10 @@ module fib_tb;
       //.n_r(DUT.top.n_r)
   );
 
-  // Coverage 
+  // Coverage
   covergroup cg @(posedge bfm.clk);
     n_eq_0: coverpoint bfm.n {bins one = {0}; option.at_least = 1;}
-    overf: coverpoint bfm.overflow {bins one = {1}; option.at_least =1;}
+    overf: coverpoint bfm.overflow {bins one = {1}; option.at_least = 1;}
   endgroup
 
 
@@ -117,13 +117,21 @@ module fib_tb;
   else $error("Time %0t [Assert Property]: Go did not return to 0", $time);
 
   // upon completion, (ie done = 1), result and overflow retain their values until circuit is restarted
-  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done && $stable(bfm.done) |-> $stable(bfm.result))
+  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done && $stable(
+      bfm.done
+  ) |-> $stable(
+      bfm.result
+  ))
   else $error("Time %0t [Assert Property]: Done=1, result not stable.", $time);
   // upon completion, (ie done = 1), result and overflow retain their values until circuit is restarted
-  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done && $stable(bfm.done) |-> $stable(bfm.overflow))
+  assert property (@(posedge bfm.clk) disable iff (bfm.rst) bfm.done && $stable(
+      bfm.done
+  ) |-> $stable(
+      bfm.overflow
+  ))
   else $error("Time %0t [Assert Property]: Done=1, overflow not stable.", $time);
 
- 
+
 
   // Check overflow asserted
   // assert property (@(posedge clk) disable iff (bfm.rst) )
@@ -155,6 +163,6 @@ Things I changed:
 1. Wait_for_done function (made more sense to check rising edge of done if I am already asserting done on posedge clk)
 2. Added i_r, x_r, y_r, and full_add_r signals to the scoreboard/monitor.test
 3. need to fix i_r, x_r, y_r signals in scoreboard. start time needs to be 1 cycle after the first state (except reset)
-  basically need to assert that they are reset, but since they are registers, a reset will update on the next cycle. 
+  basically need to assert that they are reset, but since they are registers, a reset will update on the next cycle.
 
 */
