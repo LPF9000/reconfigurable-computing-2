@@ -1,0 +1,1726 @@
+Analysis & Synthesis report for timing_example
+Sat Apr 23 10:09:41 2022
+Quartus Prime Version 20.1.0 Build 711 06/05/2020 SJ Standard Edition
+
+
+---------------------
+; Table of Contents ;
+---------------------
+  1. Legal Notice
+  2. Analysis & Synthesis Summary
+  3. Analysis & Synthesis Settings
+  4. Parallel Compilation
+  5. Analysis & Synthesis Source Files Read
+  6. Analysis & Synthesis Resource Usage Summary
+  7. Analysis & Synthesis Resource Utilization by Entity
+  8. Analysis & Synthesis RAM Summary
+  9. Analysis & Synthesis DSP Block Usage Summary
+ 10. Registers Protected by Synthesis
+ 11. Registers Removed During Synthesis
+ 12. General Register Statistics
+ 13. Inverted Register Statistics
+ 14. Registers Added for RAM Pass-Through Logic
+ 15. Registers Packed Into Inferred Megafunctions
+ 16. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 17. Source assignments for Top-level Entity: |timing_example
+ 18. Source assignments for fifo:fifo_|altsyncram:ram_rtl_0|altsyncram_unb1:auto_generated
+ 19. Parameter Settings for User Entity Instance: Top-level Entity: |timing_example
+ 20. Parameter Settings for User Entity Instance: bit_diff:bit_diff_
+ 21. Parameter Settings for User Entity Instance: fifo:fifo_
+ 22. Parameter Settings for Inferred Entity Instance: fifo:fifo_|altsyncram:ram_rtl_0
+ 23. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult15
+ 24. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult14
+ 25. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult13
+ 26. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult12
+ 27. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult11
+ 28. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult10
+ 29. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult9
+ 30. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult8
+ 31. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult7
+ 32. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult6
+ 33. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult5
+ 34. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult4
+ 35. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult3
+ 36. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult2
+ 37. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult1
+ 38. Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0
+ 39. altsyncram Parameter Settings by Entity Instance
+ 40. lpm_mult Parameter Settings by Entity Instance
+ 41. Port Connectivity Checks: "fifo:fifo_"
+ 42. Post-Synthesis Netlist Statistics for Top Partition
+ 43. Elapsed Time Per Partition
+ 44. Analysis & Synthesis Messages
+ 45. Analysis & Synthesis Suppressed Messages
+
+
+
+----------------
+; Legal Notice ;
+----------------
+Copyright (C) 2020  Intel Corporation. All rights reserved.
+Your use of Intel Corporation's design tools, logic functions 
+and other software and tools, and any partner logic 
+functions, and any output files from any of the foregoing 
+(including device programming or simulation files), and any 
+associated documentation or information are expressly subject 
+to the terms and conditions of the Intel Program License 
+Subscription Agreement, the Intel Quartus Prime License Agreement,
+the Intel FPGA IP License Agreement, or other applicable license
+agreement, including, without limitation, that your use is for
+the sole purpose of programming logic devices manufactured by
+Intel and sold by Intel or its authorized distributors.  Please
+refer to the applicable agreement for further details, at
+https://fpgasoftware.intel.com/eula.
+
+
+
++--------------------------------------------------------------------------------------+
+; Analysis & Synthesis Summary                                                         ;
++------------------------------------+-------------------------------------------------+
+; Analysis & Synthesis Status        ; Successful - Sat Apr 23 10:09:41 2022           ;
+; Quartus Prime Version              ; 20.1.0 Build 711 06/05/2020 SJ Standard Edition ;
+; Revision Name                      ; timing_example                                  ;
+; Top-level Entity Name              ; timing_example                                  ;
+; Family                             ; MAX 10                                          ;
+; Total logic elements               ; 593                                             ;
+;     Total combinational functions  ; 307                                             ;
+;     Dedicated logic registers      ; 564                                             ;
+; Total registers                    ; 564                                             ;
+; Total pins                         ; 2                                               ;
+; Total virtual pins                 ; 235                                             ;
+; Total memory bits                  ; 3,584                                           ;
+; Embedded Multiplier 9-bit elements ; 16                                              ;
+; Total PLLs                         ; 0                                               ;
+; UFM blocks                         ; 0                                               ;
+; ADC blocks                         ; 0                                               ;
++------------------------------------+-------------------------------------------------+
+
+
++------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Settings                                                                              ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Option                                                           ; Setting            ; Default Value      ;
++------------------------------------------------------------------+--------------------+--------------------+
+; Device                                                           ; 10M08DAF484C8G     ;                    ;
+; Top-level entity name                                            ; timing_example     ; timing_example     ;
+; Family name                                                      ; MAX 10             ; Cyclone V          ;
+; Use smart compilation                                            ; Off                ; Off                ;
+; Enable parallel Assembler and Timing Analyzer during compilation ; On                 ; On                 ;
+; Enable compact report table                                      ; Off                ; Off                ;
+; Restructure Multiplexers                                         ; Auto               ; Auto               ;
+; Create Debugging Nodes for IP Cores                              ; Off                ; Off                ;
+; Preserve fewer node names                                        ; On                 ; On                 ;
+; Intel FPGA IP Evaluation Mode                                    ; Enable             ; Enable             ;
+; Verilog Version                                                  ; Verilog_2001       ; Verilog_2001       ;
+; VHDL Version                                                     ; VHDL_1993          ; VHDL_1993          ;
+; State Machine Processing                                         ; Auto               ; Auto               ;
+; Safe State Machine                                               ; Off                ; Off                ;
+; Extract Verilog State Machines                                   ; On                 ; On                 ;
+; Extract VHDL State Machines                                      ; On                 ; On                 ;
+; Ignore Verilog initial constructs                                ; Off                ; Off                ;
+; Iteration limit for constant Verilog loops                       ; 5000               ; 5000               ;
+; Iteration limit for non-constant Verilog loops                   ; 250                ; 250                ;
+; Add Pass-Through Logic to Inferred RAMs                          ; On                 ; On                 ;
+; Infer RAMs from Raw Logic                                        ; On                 ; On                 ;
+; Parallel Synthesis                                               ; On                 ; On                 ;
+; DSP Block Balancing                                              ; Auto               ; Auto               ;
+; NOT Gate Push-Back                                               ; On                 ; On                 ;
+; Power-Up Don't Care                                              ; On                 ; On                 ;
+; Remove Redundant Logic Cells                                     ; Off                ; Off                ;
+; Remove Duplicate Registers                                       ; On                 ; On                 ;
+; Ignore CARRY Buffers                                             ; Off                ; Off                ;
+; Ignore CASCADE Buffers                                           ; Off                ; Off                ;
+; Ignore GLOBAL Buffers                                            ; Off                ; Off                ;
+; Ignore ROW GLOBAL Buffers                                        ; Off                ; Off                ;
+; Ignore LCELL Buffers                                             ; Off                ; Off                ;
+; Ignore SOFT Buffers                                              ; On                 ; On                 ;
+; Limit AHDL Integers to 32 Bits                                   ; Off                ; Off                ;
+; Optimization Technique                                           ; Balanced           ; Balanced           ;
+; Carry Chain Length                                               ; 70                 ; 70                 ;
+; Auto Carry Chains                                                ; On                 ; On                 ;
+; Auto Open-Drain Pins                                             ; On                 ; On                 ;
+; Perform WYSIWYG Primitive Resynthesis                            ; Off                ; Off                ;
+; Auto ROM Replacement                                             ; On                 ; On                 ;
+; Auto RAM Replacement                                             ; On                 ; On                 ;
+; Auto DSP Block Replacement                                       ; On                 ; On                 ;
+; Auto Shift Register Replacement                                  ; Auto               ; Auto               ;
+; Allow Shift Register Merging across Hierarchies                  ; Auto               ; Auto               ;
+; Auto Clock Enable Replacement                                    ; On                 ; On                 ;
+; Strict RAM Replacement                                           ; Off                ; Off                ;
+; Allow Synchronous Control Signals                                ; On                 ; On                 ;
+; Force Use of Synchronous Clear Signals                           ; Off                ; Off                ;
+; Auto RAM Block Balancing                                         ; On                 ; On                 ;
+; Auto RAM to Logic Cell Conversion                                ; Off                ; Off                ;
+; Auto Resource Sharing                                            ; Off                ; Off                ;
+; Allow Any RAM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any ROM Size For Recognition                               ; Off                ; Off                ;
+; Allow Any Shift Register Size For Recognition                    ; Off                ; Off                ;
+; Use LogicLock Constraints during Resource Balancing              ; On                 ; On                 ;
+; Ignore translate_off and synthesis_off directives                ; Off                ; Off                ;
+; Timing-Driven Synthesis                                          ; On                 ; On                 ;
+; Report Parameter Settings                                        ; On                 ; On                 ;
+; Report Source Assignments                                        ; On                 ; On                 ;
+; Report Connectivity Checks                                       ; On                 ; On                 ;
+; Ignore Maximum Fan-Out Assignments                               ; Off                ; Off                ;
+; Synchronization Register Chain Length                            ; 2                  ; 2                  ;
+; Power Optimization During Synthesis                              ; Normal compilation ; Normal compilation ;
+; HDL message level                                                ; Level2             ; Level2             ;
+; Suppress Register Optimization Related Messages                  ; Off                ; Off                ;
+; Number of Removed Registers Reported in Synthesis Report         ; 5000               ; 5000               ;
+; Number of Swept Nodes Reported in Synthesis Report               ; 5000               ; 5000               ;
+; Number of Inverted Registers Reported in Synthesis Report        ; 100                ; 100                ;
+; Clock MUX Protection                                             ; On                 ; On                 ;
+; Auto Gated Clock Conversion                                      ; Off                ; Off                ;
+; Block Design Naming                                              ; Auto               ; Auto               ;
+; SDC constraint protection                                        ; Off                ; Off                ;
+; Synthesis Effort                                                 ; Auto               ; Auto               ;
+; Shift Register Replacement - Allow Asynchronous Clear Signal     ; On                 ; On                 ;
+; Pre-Mapping Resynthesis Optimization                             ; Off                ; Off                ;
+; Analysis & Synthesis Message Level                               ; Medium             ; Medium             ;
+; Disable Register Merging Across Hierarchies                      ; Auto               ; Auto               ;
+; Resource Aware Inference For Block RAM                           ; On                 ; On                 ;
++------------------------------------------------------------------+--------------------+--------------------+
+
+
++------------------------------------------+
+; Parallel Compilation                     ;
++----------------------------+-------------+
+; Processors                 ; Number      ;
++----------------------------+-------------+
+; Number detected on machine ; 24          ;
+; Maximum allowed            ; 12          ;
+;                            ;             ;
+; Average used               ; 1.00        ;
+; Maximum used               ; 12          ;
+;                            ;             ;
+; Usage by Processor         ; % Time Used ;
+;     Processor 1            ; 100.0%      ;
+;     Processor 2            ;   0.0%      ;
+;     Processor 3            ;   0.0%      ;
+;     Processor 4            ;   0.0%      ;
+;     Processor 5            ;   0.0%      ;
+;     Processor 6            ;   0.0%      ;
+;     Processor 7            ;   0.0%      ;
+;     Processor 8            ;   0.0%      ;
+;     Processors 9-12        ;   0.0%      ;
++----------------------------+-------------+
+
+
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Source Files Read                                                                                                                                                  ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------------+---------+
+; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                                              ; Library ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------------+---------+
+; src/timing_example.sv            ; yes             ; User SystemVerilog HDL File  ; /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv                ;         ;
+; altsyncram.tdf                   ; yes             ; Megafunction                 ; /tools/Intel/quartus_std/20.1.0.711/quartus/libraries/megafunctions/altsyncram.tdf        ;         ;
+; stratix_ram_block.inc            ; yes             ; Megafunction                 ; /tools/Intel/quartus_std/20.1.0.711/quartus/libraries/megafunctions/stratix_ram_block.inc ;         ;
+; lpm_mux.inc                      ; yes             ; Megafunction                 ; /tools/Intel/quartus_std/20.1.0.711/quartus/libraries/megafunctions/lpm_mux.inc           ;         ;
+; lpm_decode.inc                   ; yes             ; Megafunction                 ; /tools/Intel/quartus_std/20.1.0.711/quartus/libraries/megafunctions/lpm_decode.inc        ;         ;
+; aglobal201.inc                   ; yes             ; Megafunction                 ; /tools/Intel/quartus_std/20.1.0.711/quartus/libraries/megafunctions/aglobal201.inc        ;         ;
+; a_rdenreg.inc                    ; yes             ; Megafunction                 ; /tools/Intel/quartus_std/20.1.0.711/quartus/libraries/megafunctions/a_rdenreg.inc         ;         ;
+; altrom.inc                       ; yes             ; Megafunction                 ; /tools/Intel/quartus_std/20.1.0.711/quartus/libraries/megafunctions/altrom.inc            ;         ;
+; altram.inc                       ; yes             ; Megafunction                 ; /tools/Intel/quartus_std/20.1.0.711/quartus/libraries/megafunctions/altram.inc            ;         ;
+; altdpram.inc                     ; yes             ; Megafunction                 ; /tools/Intel/quartus_std/20.1.0.711/quartus/libraries/megafunctions/altdpram.inc          ;         ;
+; db/altsyncram_unb1.tdf           ; yes             ; Auto-Generated Megafunction  ; /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/db/altsyncram_unb1.tdf               ;         ;
+; lpm_mult.tdf                     ; yes             ; Megafunction                 ; /tools/Intel/quartus_std/20.1.0.711/quartus/libraries/megafunctions/lpm_mult.tdf          ;         ;
+; lpm_add_sub.inc                  ; yes             ; Megafunction                 ; /tools/Intel/quartus_std/20.1.0.711/quartus/libraries/megafunctions/lpm_add_sub.inc       ;         ;
+; multcore.inc                     ; yes             ; Megafunction                 ; /tools/Intel/quartus_std/20.1.0.711/quartus/libraries/megafunctions/multcore.inc          ;         ;
+; bypassff.inc                     ; yes             ; Megafunction                 ; /tools/Intel/quartus_std/20.1.0.711/quartus/libraries/megafunctions/bypassff.inc          ;         ;
+; altshift.inc                     ; yes             ; Megafunction                 ; /tools/Intel/quartus_std/20.1.0.711/quartus/libraries/megafunctions/altshift.inc          ;         ;
+; db/mult_vks.tdf                  ; yes             ; Auto-Generated Megafunction  ; /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/db/mult_vks.tdf                      ;         ;
++----------------------------------+-----------------+------------------------------+-------------------------------------------------------------------------------------------+---------+
+
+
++---------------------------------------------------------+
+; Analysis & Synthesis Resource Usage Summary             ;
++---------------------------------------------+-----------+
+; Resource                                    ; Usage     ;
++---------------------------------------------+-----------+
+; Estimated Total logic elements              ; 593       ;
+;                                             ;           ;
+; Total combinational functions               ; 307       ;
+; Logic element usage by number of LUT inputs ;           ;
+;     -- 4 input functions                    ; 50        ;
+;     -- 3 input functions                    ; 152       ;
+;     -- <=2 input functions                  ; 105       ;
+;                                             ;           ;
+; Logic elements by mode                      ;           ;
+;     -- normal mode                          ; 106       ;
+;     -- arithmetic mode                      ; 201       ;
+;                                             ;           ;
+; Total registers                             ; 564       ;
+;     -- Dedicated logic registers            ; 564       ;
+;     -- I/O registers                        ; 0         ;
+;                                             ;           ;
+; Virtual pins                                ; 235       ;
+; I/O pins                                    ; 2         ;
+; Total memory bits                           ; 3584      ;
+;                                             ;           ;
+; Embedded Multiplier 9-bit elements          ; 16        ;
+;                                             ;           ;
+; Maximum fan-out node                        ; clk~input ;
+; Maximum fan-out                             ; 571       ;
+; Total fan-out                               ; 3142      ;
+; Average fan-out                             ; 2.73      ;
++---------------------------------------------+-----------+
+
+
++------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis Resource Utilization by Entity                                                                                                                                                                                                                                                              ;
++-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------+-----------------+--------------+
+; Compilation Hierarchy Node                ; Combinational ALUTs ; Dedicated Logic Registers ; Memory Bits ; UFM Blocks ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; ADC blocks ; Full Hierarchy Name                                                            ; Entity Name     ; Library Name ;
++-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------+-----------------+--------------+
+; |timing_example                           ; 307 (187)           ; 564 (457)                 ; 3584        ; 0          ; 16           ; 16      ; 0         ; 2    ; 235          ; 0          ; |timing_example                                                                ; timing_example  ; work         ;
+;    |bit_diff:bit_diff_|                   ; 59 (59)             ; 53 (53)                   ; 0           ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |timing_example|bit_diff:bit_diff_                                             ; bit_diff        ; work         ;
+;    |fifo:fifo_|                           ; 61 (61)             ; 54 (54)                   ; 3584        ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |timing_example|fifo:fifo_                                                     ; fifo            ; work         ;
+;       |altsyncram:ram_rtl_0|              ; 0 (0)               ; 0 (0)                     ; 3584        ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |timing_example|fifo:fifo_|altsyncram:ram_rtl_0                                ; altsyncram      ; work         ;
+;          |altsyncram_unb1:auto_generated| ; 0 (0)               ; 0 (0)                     ; 3584        ; 0          ; 0            ; 0       ; 0         ; 0    ; 0            ; 0          ; |timing_example|fifo:fifo_|altsyncram:ram_rtl_0|altsyncram_unb1:auto_generated ; altsyncram_unb1 ; work         ;
+;    |lpm_mult:Mult0|                       ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult0                                                 ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult0|mult_vks:auto_generated                         ; mult_vks        ; work         ;
+;    |lpm_mult:Mult10|                      ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult10                                                ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult10|mult_vks:auto_generated                        ; mult_vks        ; work         ;
+;    |lpm_mult:Mult11|                      ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult11                                                ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult11|mult_vks:auto_generated                        ; mult_vks        ; work         ;
+;    |lpm_mult:Mult12|                      ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult12                                                ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult12|mult_vks:auto_generated                        ; mult_vks        ; work         ;
+;    |lpm_mult:Mult13|                      ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult13                                                ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult13|mult_vks:auto_generated                        ; mult_vks        ; work         ;
+;    |lpm_mult:Mult14|                      ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult14                                                ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult14|mult_vks:auto_generated                        ; mult_vks        ; work         ;
+;    |lpm_mult:Mult15|                      ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult15                                                ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult15|mult_vks:auto_generated                        ; mult_vks        ; work         ;
+;    |lpm_mult:Mult1|                       ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult1                                                 ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult1|mult_vks:auto_generated                         ; mult_vks        ; work         ;
+;    |lpm_mult:Mult2|                       ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult2                                                 ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult2|mult_vks:auto_generated                         ; mult_vks        ; work         ;
+;    |lpm_mult:Mult3|                       ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult3                                                 ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult3|mult_vks:auto_generated                         ; mult_vks        ; work         ;
+;    |lpm_mult:Mult4|                       ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult4                                                 ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult4|mult_vks:auto_generated                         ; mult_vks        ; work         ;
+;    |lpm_mult:Mult5|                       ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult5                                                 ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult5|mult_vks:auto_generated                         ; mult_vks        ; work         ;
+;    |lpm_mult:Mult6|                       ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult6                                                 ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult6|mult_vks:auto_generated                         ; mult_vks        ; work         ;
+;    |lpm_mult:Mult7|                       ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult7                                                 ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult7|mult_vks:auto_generated                         ; mult_vks        ; work         ;
+;    |lpm_mult:Mult8|                       ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult8                                                 ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult8|mult_vks:auto_generated                         ; mult_vks        ; work         ;
+;    |lpm_mult:Mult9|                       ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult9                                                 ; lpm_mult        ; work         ;
+;       |mult_vks:auto_generated|           ; 0 (0)               ; 0 (0)                     ; 0           ; 0          ; 1            ; 1       ; 0         ; 0    ; 0            ; 0          ; |timing_example|lpm_mult:Mult9|mult_vks:auto_generated                         ; mult_vks        ; work         ;
++-------------------------------------------+---------------------+---------------------------+-------------+------------+--------------+---------+-----------+------+--------------+------------+--------------------------------------------------------------------------------+-----------------+--------------+
+Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
+
+
++-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Analysis & Synthesis RAM Summary                                                                                                                                              ;
++---------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; Name                                                                      ; Type ; Mode             ; Port A Depth ; Port A Width ; Port B Depth ; Port B Width ; Size ; MIF  ;
++---------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+; fifo:fifo_|altsyncram:ram_rtl_0|altsyncram_unb1:auto_generated|ALTSYNCRAM ; AUTO ; Simple Dual Port ; 512          ; 7            ; 512          ; 7            ; 3584 ; None ;
++---------------------------------------------------------------------------+------+------------------+--------------+--------------+--------------+--------------+------+------+
+
+
++-----------------------------------------------------+
+; Analysis & Synthesis DSP Block Usage Summary        ;
++---------------------------------------+-------------+
+; Statistic                             ; Number Used ;
++---------------------------------------+-------------+
+; Simple Multipliers (9-bit)            ; 16          ;
+; Simple Multipliers (18-bit)           ; 0           ;
+; Embedded Multiplier Blocks            ; --          ;
+; Embedded Multiplier 9-bit elements    ; 16          ;
+; Signed Embedded Multipliers           ; 0           ;
+; Unsigned Embedded Multipliers         ; 16          ;
+; Mixed Sign Embedded Multipliers       ; 0           ;
+; Variable Sign Embedded Multipliers    ; 0           ;
+; Dedicated Input Shift Register Chains ; 0           ;
++---------------------------------------+-------------+
+Note: number of Embedded Multiplier Blocks used is only available after a successful fit.
+
+
++----------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Registers Protected by Synthesis                                                                                                                         ;
++------------------------------------------+------------------------------------------------------------------+--------------------------------------------+
+; Register Name                            ; Protected by Synthesis Attribute or Preserve Register Assignment ; Not to be Touched by Netlist Optimizations ;
++------------------------------------------+------------------------------------------------------------------+--------------------------------------------+
+; fifo_rd_data_r[0]                        ; no                                                               ; yes                                        ;
+; fifo_rd_data_r[1]                        ; no                                                               ; yes                                        ;
+; fifo_rd_data_r[2]                        ; no                                                               ; yes                                        ;
+; fifo_rd_data_r[3]                        ; no                                                               ; yes                                        ;
+; fifo_rd_data_r[4]                        ; no                                                               ; yes                                        ;
+; fifo_rd_data_r[5]                        ; no                                                               ; yes                                        ;
+; fifo_rd_data_r[6]                        ; no                                                               ; yes                                        ;
+; Total number of protected registers is 7 ;                                                                  ;                                            ;
++------------------------------------------+------------------------------------------------------------------+--------------------------------------------+
+
+
++--------------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                                   ;
++-----------------------------------------+--------------------------------------------+
+; Register name                           ; Reason for Removal                         ;
++-----------------------------------------+--------------------------------------------+
+; bit_diff:bit_diff_|state_r[1]           ; Merged with bit_diff:bit_diff_|done_r      ;
+; bit_diff:bit_diff_|state_r[2..9,11..31] ; Merged with bit_diff:bit_diff_|state_r[10] ;
+; bit_diff:bit_diff_|state_r[10]          ; Stuck at GND due to stuck port data_in     ;
+; Total Number of Removed Registers = 31  ;                                            ;
++-----------------------------------------+--------------------------------------------+
+
+
++------------------------------------------------------+
+; General Register Statistics                          ;
++----------------------------------------------+-------+
+; Statistic                                    ; Value ;
++----------------------------------------------+-------+
+; Total registers                              ; 564   ;
+; Number of registers using Synchronous Clear  ; 5     ;
+; Number of registers using Synchronous Load   ; 0     ;
+; Number of registers using Asynchronous Clear ; 426   ;
+; Number of registers using Asynchronous Load  ; 0     ;
+; Number of registers using Clock Enable       ; 242   ;
+; Number of registers using Preset             ; 0     ;
++----------------------------------------------+-------+
+
+
++--------------------------------------------------+
+; Inverted Register Statistics                     ;
++----------------------------------------+---------+
+; Inverted Register                      ; Fan out ;
++----------------------------------------+---------+
+; first_execution_r                      ; 2       ;
+; Total number of inverted registers = 1 ;         ;
++----------------------------------------+---------+
+
+
++--------------------------------------------------------+
+; Registers Added for RAM Pass-Through Logic             ;
++---------------------------------+----------------------+
+; Register Name                   ; RAM Name             ;
++---------------------------------+----------------------+
+; fifo:fifo_|ram_rtl_0_bypass[0]  ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[1]  ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[2]  ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[3]  ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[4]  ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[5]  ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[6]  ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[7]  ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[8]  ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[9]  ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[10] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[11] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[12] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[13] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[14] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[15] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[16] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[17] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[18] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[19] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[20] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[21] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[22] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[23] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[24] ; fifo:fifo_|ram_rtl_0 ;
+; fifo:fifo_|ram_rtl_0_bypass[25] ; fifo:fifo_|ram_rtl_0 ;
++---------------------------------+----------------------+
+
+
++------------------------------------------------------------+
+; Registers Packed Into Inferred Megafunctions               ;
++------------------------------+----------------------+------+
+; Register Name                ; Megafunction         ; Type ;
++------------------------------+----------------------+------+
+; fifo:fifo_|rd_data_out[0..6] ; fifo:fifo_|ram_rtl_0 ; RAM  ;
++------------------------------+----------------------+------+
+
+
++--------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; Multiplexer Restructuring Statistics (Restructuring Performed)                                                                                               ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
+; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output                     ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
+; 3:1                ; 12 bits   ; 24 LEs        ; 12 LEs               ; 12 LEs                 ; Yes        ; |timing_example|bit_diff:bit_diff_|diff_r[0]   ;
+; 3:1                ; 31 bits   ; 62 LEs        ; 31 LEs               ; 31 LEs                 ; Yes        ; |timing_example|bit_diff:bit_diff_|data_r[5]   ;
+; 4:1                ; 3 bits    ; 6 LEs         ; 3 LEs                ; 3 LEs                  ; Yes        ; |timing_example|bit_diff:bit_diff_|done_r      ;
+; 5:1                ; 7 bits    ; 21 LEs        ; 7 LEs                ; 14 LEs                 ; Yes        ; |timing_example|bit_diff:bit_diff_|result_r[5] ;
++--------------------+-----------+---------------+----------------------+------------------------+------------+------------------------------------------------+
+
+
++------------------------------------------------------------------+
+; Source assignments for Top-level Entity: |timing_example         ;
++-------------------------+-------------+------+-------------------+
+; Assignment              ; Value       ; From ; To                ;
++-------------------------+-------------+------+-------------------+
+; ADV_NETLIST_OPT_ALLOWED ; Never Allow ; -    ; fifo_rd_data_r[6] ;
+; ADV_NETLIST_OPT_ALLOWED ; Never Allow ; -    ; fifo_rd_data_r[5] ;
+; ADV_NETLIST_OPT_ALLOWED ; Never Allow ; -    ; fifo_rd_data_r[4] ;
+; ADV_NETLIST_OPT_ALLOWED ; Never Allow ; -    ; fifo_rd_data_r[3] ;
+; ADV_NETLIST_OPT_ALLOWED ; Never Allow ; -    ; fifo_rd_data_r[2] ;
+; ADV_NETLIST_OPT_ALLOWED ; Never Allow ; -    ; fifo_rd_data_r[1] ;
+; ADV_NETLIST_OPT_ALLOWED ; Never Allow ; -    ; fifo_rd_data_r[0] ;
++-------------------------+-------------+------+-------------------+
+
+
++---------------------------------------------------------------------------------------+
+; Source assignments for fifo:fifo_|altsyncram:ram_rtl_0|altsyncram_unb1:auto_generated ;
++---------------------------------+--------------------+------+-------------------------+
+; Assignment                      ; Value              ; From ; To                      ;
++---------------------------------+--------------------+------+-------------------------+
+; OPTIMIZE_POWER_DURING_SYNTHESIS ; NORMAL_COMPILATION ; -    ; -                       ;
++---------------------------------+--------------------+------+-------------------------+
+
+
++--------------------------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: Top-level Entity: |timing_example ;
++----------------+-------+-------------------------------------------------------+
+; Parameter Name ; Value ; Type                                                  ;
++----------------+-------+-------------------------------------------------------+
+; INPUT_WIDTH    ; 32    ; Signed Integer                                        ;
+; OUTPUT_WIDTH   ; 8     ; Signed Integer                                        ;
+; COUNTER_WIDTH  ; 64    ; Signed Integer                                        ;
+; NUM_PIPELINES  ; 16    ; Signed Integer                                        ;
++----------------+-------+-------------------------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------+
+; Parameter Settings for User Entity Instance: bit_diff:bit_diff_ ;
++----------------+-------+----------------------------------------+
+; Parameter Name ; Value ; Type                                   ;
++----------------+-------+----------------------------------------+
+; WIDTH          ; 32    ; Signed Integer                         ;
++----------------+-------+----------------------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------+
+; Parameter Settings for User Entity Instance: fifo:fifo_ ;
++-----------------------+-------+-------------------------+
+; Parameter Name        ; Value ; Type                    ;
++-----------------------+-------+-------------------------+
+; WIDTH                 ; 7     ; Signed Integer          ;
+; DEPTH                 ; 512   ; Signed Integer          ;
+; ALMOST_FULL_THRESHOLD ; 511   ; Signed Integer          ;
++-----------------------+-------+-------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++----------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: fifo:fifo_|altsyncram:ram_rtl_0 ;
++------------------------------------+----------------------+----------------------+
+; Parameter Name                     ; Value                ; Type                 ;
++------------------------------------+----------------------+----------------------+
+; BYTE_SIZE_BLOCK                    ; 8                    ; Untyped              ;
+; AUTO_CARRY_CHAINS                  ; ON                   ; AUTO_CARRY           ;
+; IGNORE_CARRY_BUFFERS               ; OFF                  ; IGNORE_CARRY         ;
+; AUTO_CASCADE_CHAINS                ; ON                   ; AUTO_CASCADE         ;
+; IGNORE_CASCADE_BUFFERS             ; OFF                  ; IGNORE_CASCADE       ;
+; WIDTH_BYTEENA                      ; 1                    ; Untyped              ;
+; OPERATION_MODE                     ; DUAL_PORT            ; Untyped              ;
+; WIDTH_A                            ; 7                    ; Untyped              ;
+; WIDTHAD_A                          ; 9                    ; Untyped              ;
+; NUMWORDS_A                         ; 512                  ; Untyped              ;
+; OUTDATA_REG_A                      ; UNREGISTERED         ; Untyped              ;
+; ADDRESS_ACLR_A                     ; NONE                 ; Untyped              ;
+; OUTDATA_ACLR_A                     ; NONE                 ; Untyped              ;
+; WRCONTROL_ACLR_A                   ; NONE                 ; Untyped              ;
+; INDATA_ACLR_A                      ; NONE                 ; Untyped              ;
+; BYTEENA_ACLR_A                     ; NONE                 ; Untyped              ;
+; WIDTH_B                            ; 7                    ; Untyped              ;
+; WIDTHAD_B                          ; 9                    ; Untyped              ;
+; NUMWORDS_B                         ; 512                  ; Untyped              ;
+; INDATA_REG_B                       ; CLOCK1               ; Untyped              ;
+; WRCONTROL_WRADDRESS_REG_B          ; CLOCK1               ; Untyped              ;
+; RDCONTROL_REG_B                    ; CLOCK1               ; Untyped              ;
+; ADDRESS_REG_B                      ; CLOCK0               ; Untyped              ;
+; OUTDATA_REG_B                      ; UNREGISTERED         ; Untyped              ;
+; BYTEENA_REG_B                      ; CLOCK1               ; Untyped              ;
+; INDATA_ACLR_B                      ; NONE                 ; Untyped              ;
+; WRCONTROL_ACLR_B                   ; NONE                 ; Untyped              ;
+; ADDRESS_ACLR_B                     ; NONE                 ; Untyped              ;
+; OUTDATA_ACLR_B                     ; NONE                 ; Untyped              ;
+; RDCONTROL_ACLR_B                   ; NONE                 ; Untyped              ;
+; BYTEENA_ACLR_B                     ; NONE                 ; Untyped              ;
+; WIDTH_BYTEENA_A                    ; 1                    ; Untyped              ;
+; WIDTH_BYTEENA_B                    ; 1                    ; Untyped              ;
+; RAM_BLOCK_TYPE                     ; AUTO                 ; Untyped              ;
+; BYTE_SIZE                          ; 8                    ; Untyped              ;
+; READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE            ; Untyped              ;
+; READ_DURING_WRITE_MODE_PORT_A      ; NEW_DATA_NO_NBE_READ ; Untyped              ;
+; READ_DURING_WRITE_MODE_PORT_B      ; NEW_DATA_NO_NBE_READ ; Untyped              ;
+; INIT_FILE                          ; UNUSED               ; Untyped              ;
+; INIT_FILE_LAYOUT                   ; PORT_A               ; Untyped              ;
+; MAXIMUM_DEPTH                      ; 0                    ; Untyped              ;
+; CLOCK_ENABLE_INPUT_A               ; NORMAL               ; Untyped              ;
+; CLOCK_ENABLE_INPUT_B               ; NORMAL               ; Untyped              ;
+; CLOCK_ENABLE_OUTPUT_A              ; NORMAL               ; Untyped              ;
+; CLOCK_ENABLE_OUTPUT_B              ; NORMAL               ; Untyped              ;
+; CLOCK_ENABLE_CORE_A                ; USE_INPUT_CLKEN      ; Untyped              ;
+; CLOCK_ENABLE_CORE_B                ; USE_INPUT_CLKEN      ; Untyped              ;
+; ENABLE_ECC                         ; FALSE                ; Untyped              ;
+; ECC_PIPELINE_STAGE_ENABLED         ; FALSE                ; Untyped              ;
+; WIDTH_ECCSTATUS                    ; 3                    ; Untyped              ;
+; DEVICE_FAMILY                      ; MAX 10               ; Untyped              ;
+; CBXI_PARAMETER                     ; altsyncram_unb1      ; Untyped              ;
++------------------------------------+----------------------+----------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult15                ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult14                ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult13                ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult12                ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult11                ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult10                ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult9                 ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult8                 ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult7                 ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult6                 ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult5                 ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult4                 ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult3                 ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult2                 ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult1                 ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++---------------------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_mult:Mult0                 ;
++------------------------------------------------+----------+---------------------+
+; Parameter Name                                 ; Value    ; Type                ;
++------------------------------------------------+----------+---------------------+
+; AUTO_CARRY_CHAINS                              ; ON       ; AUTO_CARRY          ;
+; IGNORE_CARRY_BUFFERS                           ; OFF      ; IGNORE_CARRY        ;
+; AUTO_CASCADE_CHAINS                            ; ON       ; AUTO_CASCADE        ;
+; IGNORE_CASCADE_BUFFERS                         ; OFF      ; IGNORE_CASCADE      ;
+; LPM_WIDTHA                                     ; 8        ; Untyped             ;
+; LPM_WIDTHB                                     ; 7        ; Untyped             ;
+; LPM_WIDTHP                                     ; 15       ; Untyped             ;
+; LPM_WIDTHR                                     ; 15       ; Untyped             ;
+; LPM_WIDTHS                                     ; 1        ; Untyped             ;
+; LPM_REPRESENTATION                             ; UNSIGNED ; Untyped             ;
+; LPM_PIPELINE                                   ; 0        ; Untyped             ;
+; LATENCY                                        ; 0        ; Untyped             ;
+; INPUT_A_IS_CONSTANT                            ; NO       ; Untyped             ;
+; INPUT_B_IS_CONSTANT                            ; NO       ; Untyped             ;
+; USE_EAB                                        ; OFF      ; Untyped             ;
+; MAXIMIZE_SPEED                                 ; 5        ; Untyped             ;
+; DEVICE_FAMILY                                  ; MAX 10   ; Untyped             ;
+; CARRY_CHAIN                                    ; MANUAL   ; Untyped             ;
+; APEX20K_TECHNOLOGY_MAPPER                      ; LUT      ; TECH_MAPPER_APEX20K ;
+; DEDICATED_MULTIPLIER_CIRCUITRY                 ; AUTO     ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_INPUT_WIDTH_FOR_AUTO  ; 0        ; Untyped             ;
+; DEDICATED_MULTIPLIER_MIN_OUTPUT_WIDTH_FOR_AUTO ; 0        ; Untyped             ;
+; CBXI_PARAMETER                                 ; mult_vks ; Untyped             ;
+; INPUT_A_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; INPUT_B_FIXED_VALUE                            ; Bx       ; Untyped             ;
+; USE_AHDL_IMPLEMENTATION                        ; OFF      ; Untyped             ;
++------------------------------------------------+----------+---------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++-----------------------------------------------------------------------------+
+; altsyncram Parameter Settings by Entity Instance                            ;
++-------------------------------------------+---------------------------------+
+; Name                                      ; Value                           ;
++-------------------------------------------+---------------------------------+
+; Number of entity instances                ; 1                               ;
+; Entity Instance                           ; fifo:fifo_|altsyncram:ram_rtl_0 ;
+;     -- OPERATION_MODE                     ; DUAL_PORT                       ;
+;     -- WIDTH_A                            ; 7                               ;
+;     -- NUMWORDS_A                         ; 512                             ;
+;     -- OUTDATA_REG_A                      ; UNREGISTERED                    ;
+;     -- WIDTH_B                            ; 7                               ;
+;     -- NUMWORDS_B                         ; 512                             ;
+;     -- ADDRESS_REG_B                      ; CLOCK0                          ;
+;     -- OUTDATA_REG_B                      ; UNREGISTERED                    ;
+;     -- RAM_BLOCK_TYPE                     ; AUTO                            ;
+;     -- READ_DURING_WRITE_MODE_MIXED_PORTS ; DONT_CARE                       ;
++-------------------------------------------+---------------------------------+
+
+
++---------------------------------------------------------+
+; lpm_mult Parameter Settings by Entity Instance          ;
++---------------------------------------+-----------------+
+; Name                                  ; Value           ;
++---------------------------------------+-----------------+
+; Number of entity instances            ; 16              ;
+; Entity Instance                       ; lpm_mult:Mult15 ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult14 ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult13 ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult12 ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult11 ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult10 ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult9  ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult8  ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult7  ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult6  ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult5  ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult4  ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult3  ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult2  ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult1  ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
+; Entity Instance                       ; lpm_mult:Mult0  ;
+;     -- LPM_WIDTHA                     ; 8               ;
+;     -- LPM_WIDTHB                     ; 7               ;
+;     -- LPM_WIDTHP                     ; 15              ;
+;     -- LPM_REPRESENTATION             ; UNSIGNED        ;
+;     -- INPUT_A_IS_CONSTANT            ; NO              ;
+;     -- INPUT_B_IS_CONSTANT            ; NO              ;
+;     -- USE_EAB                        ; OFF             ;
+;     -- DEDICATED_MULTIPLIER_CIRCUITRY ; AUTO            ;
+;     -- INPUT_A_FIXED_VALUE            ; Bx              ;
+;     -- INPUT_B_FIXED_VALUE            ; Bx              ;
++---------------------------------------+-----------------+
+
+
++----------------------------------------------------------------------------------------------------------------+
+; Port Connectivity Checks: "fifo:fifo_"                                                                         ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; Port ; Type   ; Severity ; Details                                                                             ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+; full ; Output ; Info     ; Connected to dangling logic. Logic that only feeds a dangling port will be removed. ;
++------+--------+----------+-------------------------------------------------------------------------------------+
+
+
++-----------------------------------------------------+
+; Post-Synthesis Netlist Statistics for Top Partition ;
++-----------------------+-----------------------------+
+; Type                  ; Count                       ;
++-----------------------+-----------------------------+
+; boundary_port         ; 237                         ;
+; cycloneiii_ff         ; 564                         ;
+;     CLR               ; 296                         ;
+;     ENA               ; 112                         ;
+;     ENA CLR           ; 125                         ;
+;     ENA CLR SCLR      ; 5                           ;
+;     plain             ; 26                          ;
+; cycloneiii_lcell_comb ; 307                         ;
+;     arith             ; 201                         ;
+;         2 data inputs ; 80                          ;
+;         3 data inputs ; 121                         ;
+;     normal            ; 106                         ;
+;         1 data inputs ; 4                           ;
+;         2 data inputs ; 21                          ;
+;         3 data inputs ; 31                          ;
+;         4 data inputs ; 50                          ;
+; cycloneiii_mac_mult   ; 16                          ;
+; cycloneiii_mac_out    ; 16                          ;
+; cycloneiii_ram_block  ; 7                           ;
+;                       ;                             ;
+; Max LUT depth         ; 7.20                        ;
+; Average LUT depth     ; 1.43                        ;
++-----------------------+-----------------------------+
+
+
++-------------------------------+
+; Elapsed Time Per Partition    ;
++----------------+--------------+
+; Partition Name ; Elapsed Time ;
++----------------+--------------+
+; Top            ; 00:00:01     ;
++----------------+--------------+
+
+
++-------------------------------+
+; Analysis & Synthesis Messages ;
++-------------------------------+
+Info: *******************************************************************
+Info: Running Quartus Prime Analysis & Synthesis
+    Info: Version 20.1.0 Build 711 06/05/2020 SJ Standard Edition
+    Info: Processing started: Sat Apr 23 10:09:28 2022
+Info: Command: quartus_map --read_settings_files=on --write_settings_files=off timing_example -c timing_example
+Warning (18236): Number of processors has not been specified which may cause overloading on shared machines.  Set the global assignment NUM_PARALLEL_PROCESSORS in your QSF to an appropriate value for best performance.
+Info (20030): Parallel compilation is enabled and will use 12 of the 12 processors detected
+Info (12021): Found 3 design units, including 3 entities, in source file src/timing_example.sv
+    Info (12023): Found entity 1: bit_diff File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 15
+    Info (12023): Found entity 2: fifo File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 92
+    Info (12023): Found entity 3: timing_example File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 188
+Info (12127): Elaborating entity "timing_example" for the top level hierarchy
+Info (12128): Elaborating entity "bit_diff" for hierarchy "bit_diff:bit_diff_" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 224
+Info (12128): Elaborating entity "fifo" for hierarchy "fifo:fifo_" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 258
+Info (10264): Verilog HDL Case Statement information at timing_example.sv(151): all case item expressions in this case statement are onehot File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 151
+Warning (276020): Inferred RAM node "fifo:fifo_|ram_rtl_0" from synchronous design logic.  Pass-through logic has been added to match the read-during-write behavior of the original design.
+Info (19000): Inferred 1 megafunctions from design logic
+    Info (276029): Inferred altsyncram megafunction from the following design logic: "fifo:fifo_|ram_rtl_0" 
+        Info (286033): Parameter OPERATION_MODE set to DUAL_PORT
+        Info (286033): Parameter WIDTH_A set to 7
+        Info (286033): Parameter WIDTHAD_A set to 9
+        Info (286033): Parameter NUMWORDS_A set to 512
+        Info (286033): Parameter WIDTH_B set to 7
+        Info (286033): Parameter WIDTHAD_B set to 9
+        Info (286033): Parameter NUMWORDS_B set to 512
+        Info (286033): Parameter ADDRESS_ACLR_A set to NONE
+        Info (286033): Parameter OUTDATA_REG_B set to UNREGISTERED
+        Info (286033): Parameter ADDRESS_ACLR_B set to NONE
+        Info (286033): Parameter OUTDATA_ACLR_B set to NONE
+        Info (286033): Parameter ADDRESS_REG_B set to CLOCK0
+        Info (286033): Parameter INDATA_ACLR_A set to NONE
+        Info (286033): Parameter WRCONTROL_ACLR_A set to NONE
+Info (278001): Inferred 16 megafunctions from design logic
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult15" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult14" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult13" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult12" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult11" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult10" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult9" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult8" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult7" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult6" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult5" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult4" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult3" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult2" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult1" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (278003): Inferred multiplier megafunction ("lpm_mult") from the following logic: "Mult0" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+Info (12130): Elaborated megafunction instantiation "fifo:fifo_|altsyncram:ram_rtl_0"
+Info (12133): Instantiated megafunction "fifo:fifo_|altsyncram:ram_rtl_0" with the following parameter:
+    Info (12134): Parameter "OPERATION_MODE" = "DUAL_PORT"
+    Info (12134): Parameter "WIDTH_A" = "7"
+    Info (12134): Parameter "WIDTHAD_A" = "9"
+    Info (12134): Parameter "NUMWORDS_A" = "512"
+    Info (12134): Parameter "WIDTH_B" = "7"
+    Info (12134): Parameter "WIDTHAD_B" = "9"
+    Info (12134): Parameter "NUMWORDS_B" = "512"
+    Info (12134): Parameter "ADDRESS_ACLR_A" = "NONE"
+    Info (12134): Parameter "OUTDATA_REG_B" = "UNREGISTERED"
+    Info (12134): Parameter "ADDRESS_ACLR_B" = "NONE"
+    Info (12134): Parameter "OUTDATA_ACLR_B" = "NONE"
+    Info (12134): Parameter "ADDRESS_REG_B" = "CLOCK0"
+    Info (12134): Parameter "INDATA_ACLR_A" = "NONE"
+    Info (12134): Parameter "WRCONTROL_ACLR_A" = "NONE"
+Info (12021): Found 1 design units, including 1 entities, in source file db/altsyncram_unb1.tdf
+    Info (12023): Found entity 1: altsyncram_unb1 File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/db/altsyncram_unb1.tdf Line: 28
+Info (12130): Elaborated megafunction instantiation "lpm_mult:Mult15" File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+Info (12133): Instantiated megafunction "lpm_mult:Mult15" with the following parameter: File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 285
+    Info (12134): Parameter "LPM_WIDTHA" = "8"
+    Info (12134): Parameter "LPM_WIDTHB" = "7"
+    Info (12134): Parameter "LPM_WIDTHP" = "15"
+    Info (12134): Parameter "LPM_WIDTHR" = "15"
+    Info (12134): Parameter "LPM_WIDTHS" = "1"
+    Info (12134): Parameter "LPM_REPRESENTATION" = "UNSIGNED"
+    Info (12134): Parameter "INPUT_A_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "INPUT_B_IS_CONSTANT" = "NO"
+    Info (12134): Parameter "MAXIMIZE_SPEED" = "5"
+Info (12021): Found 1 design units, including 1 entities, in source file db/mult_vks.tdf
+    Info (12023): Found entity 1: mult_vks File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/db/mult_vks.tdf Line: 29
+Info (13000): Registers with preset signals will power-up high File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 210
+Info (13003): DEV_CLRn pin will set, and not reset, register with preset signal due to NOT Gate Push-Back
+Info (286030): Timing-Driven Synthesis is running
+Info (144001): Generated suppressed messages file /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/output_files/timing_example.map.smsg
+Info (16010): Generating hard_block partition "hard_block:auto_generated_inst"
+    Info (16011): Adding 0 node(s), including 0 DDIO, 0 PLL, 0 transceiver and 0 LCELL
+Info (15717): Design contains 235 virtual pins; timing numbers associated with paths containing virtual pins are estimates
+    Info (15719): Pin "ready" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 202
+    Info (15719): Pin "data_out[0]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 296
+    Info (15719): Pin "data_out[1]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 296
+    Info (15719): Pin "data_out[2]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 296
+    Info (15719): Pin "data_out[3]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 296
+    Info (15719): Pin "data_out[4]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 296
+    Info (15719): Pin "data_out[5]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 296
+    Info (15719): Pin "data_out[6]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 296
+    Info (15719): Pin "data_out[7]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 296
+    Info (15719): Pin "data_out_valid" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 204
+    Info (15719): Pin "count[0]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[1]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[2]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[3]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[4]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[5]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[6]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[7]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[8]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[9]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[10]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[11]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[12]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[13]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[14]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[15]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[16]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[17]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[18]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[19]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[20]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[21]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[22]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[23]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[24]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[25]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[26]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[27]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[28]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[29]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[30]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[31]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[32]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[33]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[34]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[35]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[36]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[37]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[38]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[39]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[40]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[41]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[42]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[43]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[44]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[45]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[46]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[47]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[48]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[49]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[50]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[51]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[52]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[53]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[54]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[55]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[56]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[57]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[58]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[59]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[60]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[61]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[62]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15719): Pin "count[63]" is virtual output pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 206
+    Info (15718): Pin "data_in_valid" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 200
+    Info (15718): Pin "pipe_in[15][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[15][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[15][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[15][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[15][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[15][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[15][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[15][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[14][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[14][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[14][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[14][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[14][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[14][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[14][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[14][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[13][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[13][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[13][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[13][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[13][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[13][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[13][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[13][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[12][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[12][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[12][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[12][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[12][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[12][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[12][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[12][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[11][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[11][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[11][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[11][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[11][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[11][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[11][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[11][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[10][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[10][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[10][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[10][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[10][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[10][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[10][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[10][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[9][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[9][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[9][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[9][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[9][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[9][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[9][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[9][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[8][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[8][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[8][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[8][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[8][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[8][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[8][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[8][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[7][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[7][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[7][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[7][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[7][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[7][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[7][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[7][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[6][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[6][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[6][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[6][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[6][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[6][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[6][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[6][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[5][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[5][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[5][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[5][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[5][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[5][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[5][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[5][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[4][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[4][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[4][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[4][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[4][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[4][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[4][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[4][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[3][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[3][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[3][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[3][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[3][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[3][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[3][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[3][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[2][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[2][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[2][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[2][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[2][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[2][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[2][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[2][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[1][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[1][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[1][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[1][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[1][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[1][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[1][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[1][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[0][0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[0][1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[0][2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[0][3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[0][4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[0][5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[0][6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "pipe_in[0][7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 201
+    Info (15718): Pin "data_in[0]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[1]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[2]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[3]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[4]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[5]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[6]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[7]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[8]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[9]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[10]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[11]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[12]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[13]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[14]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[15]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[16]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[17]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[18]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[19]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[20]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[21]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[22]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[23]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[24]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[25]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[26]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[27]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[28]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[29]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[30]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+    Info (15718): Pin "data_in[31]" is virtual input pin File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 199
+Warning (15751): Ignored Virtual Pin assignment to "en".
+Info (21057): Implemented 881 device resources after synthesis - the final resource count might be different
+    Info (21058): Implemented 2 input pins
+    Info (21059): Implemented 0 output pins
+    Info (21061): Implemented 856 logic cells
+    Info (21064): Implemented 7 RAM segments
+    Info (21062): Implemented 16 DSP elements
+Info: Quartus Prime Analysis & Synthesis was successful. 0 errors, 3 warnings
+    Info: Peak virtual memory: 618 megabytes
+    Info: Processing ended: Sat Apr 23 10:09:41 2022
+    Info: Elapsed time: 00:00:13
+    Info: Total CPU time (on all processors): 00:00:33
+
+
++------------------------------------------+
+; Analysis & Synthesis Suppressed Messages ;
++------------------------------------------+
+The suppressed messages can be found in /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/output_files/timing_example.map.smsg.
+
+

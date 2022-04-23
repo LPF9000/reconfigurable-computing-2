@@ -1,0 +1,6 @@
+
+State Machine - |timing_example|bit_diff:bit_diff_|state_r
+Name state_r.START state_r.RESTART state_r.COMPUTE 
+state_r.START 0 0 0 
+state_r.COMPUTE 1 0 1 
+state_r.RESTART 1 1 0 

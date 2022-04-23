@@ -1,0 +1,17 @@
+Quartus Prime Archive log --	/home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/timing_example.qarlog
+
+Archive:	/home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/timing_example.qar
+Date:		Sat Apr 23 10:11:11 2022
+Quartus Prime		20.1.0 Build 711 06/05/2020 SJ Standard Edition
+
+	=========== Files Selected: ===========
+/home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv
+/home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/timing_example.out.sdc
+/home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/timing_example.qpf
+/home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/timing_example.qsf
+/home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/timing_example.sdc
+/tools/Intel/quartus_std/20.1.0.711/quartus/linux64/assignment_defaults.qdf
+	======= Total: 6 files to archive =======
+
+	================ Status: ===============
+All files archived successfully.

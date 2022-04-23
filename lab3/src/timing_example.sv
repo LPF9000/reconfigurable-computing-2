@@ -109,16 +109,21 @@ module fifo
   
    logic [WIDTH-1:0]         ram[DEPTH];
    logic [$clog2(DEPTH)-1:0] wr_addr_r, rd_addr_r, rd_addr;
+	//logic [$clog2(DEPTH)-1:0] wr_addr_update, wr_addr_next;
+	//logic [$clog2(DEPTH)-1:0] rd_addr_update, rd_addr_next;	
 
    localparam int            COUNT_WIDTH = $clog2(DEPTH)+1;   
-   logic [COUNT_WIDTH-1:0]   count_r;
+	//localparam int				  WR_ADDR_WIDTH = $clog2(DEPTH);
+	//localparam int				  RD_ADDR_WIDTH = $clog2(DEPTH);
+   logic [COUNT_WIDTH-1:0]   count_r, count_next, count_update;
    logic                     valid_wr, valid_rd;
+	logic [WIDTH-1:0] 			rd_data_out;
    
    assign rd_addr = !valid_rd ? rd_addr_r : rd_addr_r + 1'b1;
    
    always @(posedge clk) begin
       if (valid_wr) ram[wr_addr_r] = wr_data;
-      rd_data <= ram[rd_addr];      
+      rd_data_out <= ram[rd_addr];      
    end
    
    always @(posedge clk or posedge rst) begin
@@ -127,17 +132,49 @@ module fifo
          wr_addr_r <= '0;
          count_r <= '0;  
       end
-      else begin
+      else begin		
+			count_r <= count_next;
          if (valid_wr) begin
             wr_addr_r <= wr_addr_r + 1'b1;
-            count_r = count_r + 1'b1;            
+            //count_r = count_r + 1'b1;            
          end
          if (valid_rd) begin 
             rd_addr_r <= rd_addr_r + 1'b1;
-            count_r <= count_r - 1'b1;            
+//            count_r <= count_r - 1'b1;            
          end
+			//wr_addr_r <= wr_addr_next;
+			//rd_addr_r <= rd_addr_next;
       end
    end 
+	
+	always_comb begin	
+		case ({valid_wr, valid_rd})
+			2'b10 : begin
+				count_update = COUNT_WIDTH'(1);
+				//wr_addr_update = WR_ADDR_WIDTH'(1);
+				//rd_addr_update = '0;
+			end	
+			2'b01 : begin
+				count_update = '1; 
+				//rd_addr_update = RD_ADDR_WIDTH'(1);	
+				//wr_addr_update = '0;
+				end
+			default : begin
+				count_update = '0;
+				//wr_addr_update = '0;
+				//rd_addr_update = '0;
+				end
+		endcase
+		
+		count_next = count_r + count_update;
+		//rd_addr_next = rd_addr_r + rd_addr_update;
+		//wr_addr_next = wr_addr_r + wr_addr_update;
+	end
+	
+	assign rd_data = rd_data_out;
+
+	
+
    
    assign valid_wr = wr_en && !full;
    assign valid_rd = rd_en && !empty;
@@ -225,39 +262,59 @@ module timing_example
    ////////////////////////////////////////////////////////
    // Instantiate a multiply-add tree.
    
-   logic [OUTPUT_WIDTH-1:0] pipe_in_r[NUM_PIPELINES], mult_out[NUM_PIPELINES], add_l0[8], add_l1[4], add_l2[2];  
+   logic [OUTPUT_WIDTH-1:0] pipe_in_r[NUM_PIPELINES], mult_out[NUM_PIPELINES], add_l0[8], add_l1[4], add_l2[2], add_l3;  
+	(* dont_replicate *) logic [$bits(fifo_rd_data)-1:0] fifo_rd_data_r; 
    
    always_ff @(posedge clk or posedge rst) begin
       if (rst) begin
+			fifo_rd_data_r <= '0;
          for (int i=0; i < NUM_PIPELINES; i++) begin
             pipe_in_r[i] <= '0;
             mult_out[i] <= '0;
          end
       end
-      else begin                  
+      else begin          
+		
+			// registered fifo_rd_data as critical path
+			fifo_rd_data_r <= fifo_rd_data;
          for (int i=0; i < NUM_PIPELINES; i++) begin
             // Register all the pipeline inputs. You can assume these inputs 
             // never change in the middle of execution.
-            pipe_in_r[i] <= pipe_in[i];     
-            mult_out[i] <= fifo_rd_data * pipe_in_r[i];
+				
+				
+            pipe_in_r[i] <= pipe_in[i] * fifo_rd_data_r;     
+            mult_out[i] <= pipe_in_r[i];
          end         
       end
    end
+	
+	// Adder tree that sums all the multiplier outputs
+   always_ff @(posedge clk or posedge rst) begin
+		if (rst) begin
+				data_out <= '0;
+		end else begin                  
+				for (int i=0; i < 8; i++) add_l0[i] <= mult_out[2*i] + mult_out[2*i+1];
+				for (int i=0; i < 4; i++) add_l1[i] <= add_l0[2*i] + add_l0[2*i+1];
+				for (int i=0; i < 2; i++) add_l2[i] <= add_l1[2*i] + add_l1[2*i+1];
+				add_l3 = add_l2[0] + add_l2[1];
+				data_out <= add_l3;
+		end
+   end
 
    // Adder tree that sums all the multiplier outputs
-   always_comb begin
-      for (int i=0; i < 8; i++) add_l0[i] = mult_out[2*i] + mult_out[2*i+1];
-      for (int i=0; i < 4; i++) add_l1[i] = add_l0[2*i] + add_l0[2*i+1];
-      for (int i=0; i < 2; i++) add_l2[i] = add_l1[2*i] + add_l1[2*i+1];
-      data_out = add_l2[0] + add_l2[1];
-   end
+//   always_comb begin
+//      for (int i=0; i < 8; i++) add_l0[i] = mult_out[2*i] + mult_out[2*i+1];
+//      for (int i=0; i < 4; i++) add_l1[i] = add_l0[2*i] + add_l0[2*i+1];
+//      for (int i=0; i < 2; i++) add_l2[i] = add_l1[2*i] + add_l1[2*i+1];
+//      data_out = add_l2[0] + add_l2[1];
+//   end
    
    ////////////////////////////////////////////////////
    // Logic for valid_out
 
    // IF YOU MAKE CHANGES THAT INCREASE LATENCY OF THE MULTIPLY-ADD TREE, YOU
    // WILL NEED TO CHANGE THIS LOCALPARAM.
-   localparam int                        PIPE_LATENCY = 1;
+   localparam int                        PIPE_LATENCY = 7;
    logic [0:PIPE_LATENCY-1]              valid_delay_r;
    
    always_ff @(posedge clk or posedge rst) begin

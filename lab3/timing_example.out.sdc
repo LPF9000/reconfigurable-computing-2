@@ -1,4 +1,4 @@
-## Generated SDC file "timing_example.sdc"
+## Generated SDC file "timing_example.out.sdc"
 
 ## Copyright (C) 2020  Intel Corporation. All rights reserved.
 ## Your use of Intel Corporation's design tools, logic functions 
@@ -20,7 +20,7 @@
 ## PROGRAM "Quartus Prime"
 ## VERSION "Version 20.1.0 Build 711 06/05/2020 SJ Standard Edition"
 
-## DATE    "Sat Apr 23 09:43:41 2022"
+## DATE    "Sat Apr 23 09:35:23 2022"
 
 ##
 ## DEVICE  "10M08DAF484C8G"
@@ -96,7 +96,7 @@ set_multicycle_path -setup -end -from [get_keepers {total_count_r*}] -to [get_ke
 set_multicycle_path -hold -end -from [get_keepers {total_count_r*}] -to [get_keepers {total_count_r*}] 1
 set_multicycle_path -setup -end -from [get_keepers {pipe_in_r*}] -to [get_keepers {data_out*}] 2
 set_multicycle_path -hold -end -from [get_keepers {pipe_in_r*}] -to [get_keepers {data_out*}] 1
-
+set_multicycle_path -setup -end -from [get_keepers {fifo_rd_data_r[3]}] -to [get_keepers {pipe_in_r[1][0]}] 2
 
 
 #**************************************************************
