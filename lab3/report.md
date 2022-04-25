@@ -18,4 +18,16 @@ Added fifo_rd_data_r
 
 **New Fmax = 173.79 MHz**
 
-<!-- # Crit Path 2 -->
+# Crit Path 2
+
+**Fmax = 173.79 MHz**
+
+New path is in the FIFO count signal:
+
+![](./images/crit_2.png)
+
+Old FIFO:
+![](./images/2_old_fifo.png)
+
+New FIFO:
+![](./images/2_new_fifo.png)
