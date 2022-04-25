@@ -1,0 +1,28 @@
+videos linked off repository
+timing analyzer overview and add tree explanation (timing analyzer)
+
+qsf file
+timing analysis:
+analyzing your module in isolation from any other design
+do not want mapping to pins (use virtual pins)
+
+maybe do on the reset also (can do in gui)
+
+optimize based on the slowest model
+
+setup summary slack, total negative slack
+
+open timing analyzer
+
+report setup summary
+(right-click report timing on slack instead)
+
+count bottleneck
+(don't have to add every cycle) (multicycle path) (add setup and hold constraing and multicycle constraint) set to 2 multicycle path
+
+count fifo bottleneck
+
+pass pipeline to absortion fifo
+-ready signal 
+	-send almost full to input fifo to affect logic for readfifo
+
