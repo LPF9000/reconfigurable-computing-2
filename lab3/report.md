@@ -3,7 +3,7 @@
 ## Crit Path 1
 I ran the timing analyzer > Report path... > report 1 path for Slow 1200mV 85C Model
 
-Fmax = 204MHz
+Fmax = 104MHz
 
 First critical path:
 
