@@ -173,7 +173,7 @@ module timing_example
    logic                               first_execution_r;   
    
    localparam int                      FIFO_DEPTH = 512;
-   logic [$bits(bit_diff_out)-1:0]     fifo_rd_data;
+   logic [$bits(bit_diff_out)-1:0]     fifo_rd_data, fifo_rd_data_r; // _r solves crit path 1
    logic                               fifo_wr_en, fifo_rd_en;
    logic                               fifo_full, fifo_almost_full, fifo_empty;   
 
@@ -234,12 +234,13 @@ module timing_example
             mult_out[i] <= '0;
          end
       end
-      else begin                  
+      else begin             
+         fifo_rd_data_r <= fifo_rd_data;     
          for (int i=0; i < NUM_PIPELINES; i++) begin
             // Register all the pipeline inputs. You can assume these inputs 
             // never change in the middle of execution.
             pipe_in_r[i] <= pipe_in[i];     
-            mult_out[i] <= fifo_rd_data * pipe_in_r[i];
+            mult_out[i] <= fifo_rd_data_r * pipe_in_r[i];
          end         
       end
    end
