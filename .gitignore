@@ -48,3 +48,8 @@ vsim.dbg
 # Support for Project snippet scope
 
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,modelsim
+
+# Quartus
+db/
+incremental_db/
+output_files/
