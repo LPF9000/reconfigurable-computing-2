@@ -1,4 +1,2 @@
-Warning (10268): Verilog HDL information at timing_example.sv(40): always construct contains both blocking and non-blocking assignments File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 40
-Warning (10268): Verilog HDL information at timing_example.sv(124): always construct contains both blocking and non-blocking assignments File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 124
-Warning (10268): Verilog HDL information at timing_example.sv(292): always construct contains both blocking and non-blocking assignments File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 292
-Warning (10268): Verilog HDL information at timing_example.sv(320): always construct contains both blocking and non-blocking assignments File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 320
+Warning (10268): Verilog HDL information at timing_example.sv(42): always construct contains both blocking and non-blocking assignments File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 42
+Warning (10268): Verilog HDL information at timing_example.sv(300): always construct contains both blocking and non-blocking assignments File: /home/UFAD/ryan.laur/reconfigurable-computing-2/lab3/src/timing_example.sv Line: 300
