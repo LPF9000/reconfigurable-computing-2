@@ -258,7 +258,7 @@ module timing_example
 
    // IF YOU MAKE CHANGES THAT INCREASE LATENCY OF THE MULTIPLY-ADD TREE, YOU
    // WILL NEED TO CHANGE THIS LOCALPARAM.
-   localparam int                        PIPE_LATENCY = 1;
+   localparam int                        PIPE_LATENCY = 2;
    logic [0:PIPE_LATENCY-1]              valid_delay_r;
    
    always_ff @(posedge clk or posedge rst) begin
