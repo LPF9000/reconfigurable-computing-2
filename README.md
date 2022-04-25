@@ -1,6 +1,156 @@
 # Reconfigurable Computing 2
 Link to Dr. Stitt's SystemVerilog tutorial: https://github.com/ARC-Lab-UF/sv-tutorial
 
+## Race Conditions
+### What is a race condition? 
+
+Race conditions are when two expressions are scheduledbto execute at the same time, and if the order of the execution is not determined, then a race condition occurs. In other words, a race condition is non-deterministic behavior created by a variable written to and/or read from by multiple threads simultaneously. 
+
+### Common Race Conditions
+#### Race #1 Blocking and non-blocking assignments
+
+Race #1 is the most commone race. When there is multiple threads running in parallel synchronized to the same clock edge, there is a race between reading hte old value, or the updated value from a blocking assignment. 
+
+GUIDELINE FOR TESTBENCHES: when one process reads a value that another process writes, the write should use a non-blocking assignment to avoid the race conditions. 
+
+``` 
+x = i
+```
+changed to:
+```
+x <= i
+```
+
+#### Race #2 Continuous Assignemnts
+
+There is no deterministic order when using continuous assignemnts. Whenever the right-hand side of the operand of a continuous assignment changes, it assigns it to the left side. But if there is another process also making changes, there is no guarantee when the left-hand side wiill update. 
+
+#### Race #3 Reset Race
+
+Changing the reset should be done with a non-blocking assignment, reset gets updatated at the end of a time step, so when a block reads reset, it will always be the previous value. This also has the effect of not setting/clearing the reset until the next clock cycle.
+
+One way to think of non-blocking assignments that are synchronized to a rising clock edge is that they will always get updated just after the clock, so that anything read fromt he modified variables will always get the old value. 
+
+## Testbench Techniques
+### Simple testbenches
+#### Generating a clock
+Instead of this:
+```
+   initial begin : generate_clock
+      clk = 1'b0;
+      while(1)
+        #5 clk = !clk;
+   end
+```
+Use this:
+```
+   initial begin : generate_clock
+      clk = 1'b0;
+      while(1)
+        #5 clk = !clk;
+   end
+```
+Here we change the always block to an initial block with an infinite loop. We do this because we will later use a disable statement, which is similar to a break statement. The disable will move execution to the end of the initial block, which breaks the loop.
+```
+      // Disable the other initial blocks so that the simulation terminates.
+      disable generate_clock;
+```
+### Assertions
+
+#### Immediate Assertions
+Immediate assertions are procedural statements mainly used in simulation. 
+```  
+if (A == B) ...  // Simply checks if A equals B
+  assert (A == B); // Asserts that A equals B; if not, an error is generated 
+ ```
+ You can include a message with the statement. 
+ 
+ Pass Statement:
+ ``` 
+ assert (A == B) $display ("OK. A equals B");
+ ```
+ Fail Statement:
+ ``` 
+ assert (A == B) $display ("OK. A equals B");
+    else $error("It's gone wrong");
+ ```
+ #### Concurrent Assertions
+ Let's say we want the behavior of our design to behave as such:
+ "The done signal should be cleared at least 2 cycles after the go signal is asserted"
+ 
+ Properties are built using sequences. For example,
+ ```
+ assert property (@(posedge clk) go |-> ##[1:2] !done);
+ ```
+ where `go` is a simple sequence (boolean) and `##[1:2] !done` means that `done` is false on the next clock, the following clock, or both. `|->` is the implification operator, so this assertion checks that whenever go asserted, done must be cleared on the next clock, or the following clock. 
+ 
+This assertion is only checked when a rising clock edge have occured, so go and done are sampled on the rising edge of clock. 
+
+#### Implication
+The implication construct (`|->`) allows a user to monitor sequences based on satisfying somecriteria, e.g. attach a precondition to a sequence and evaluate the sequence only if the condition is successful. The left-hand side operand of the implication is called the antecedent sequence expression, while the right-hand side is called the consequent sequence expression.
+
+If there is no match of the antecedent sequence expression, implication succeeds vacuously by returning true. If there is a match, for each successful match of the antecedent sequence expression, the consequent sequence expression is separately evaluated, beginning at the end point of the match.
+
+There are two forms of implication: overlapped using operator `|->`, and non-overlapped using operator `|=>`.
+
+For overlapped implication, if there is a match for the antecedent sequence expression, then the first element of the consequent sequence expression is evaluated on the same clock tick.
+
+For non-overlapped implication, the first element of the consequent sequence expression
+is evaluated on the next clock tick.
+
+#### Properties and Sequences
+Complex properties can be built using sequences, and both properties and sequences can be declared separately. 
+```
+  sequence request
+    Req;
+  endsequence
+
+  sequence acknowledge
+    ##[1:2] Ack;
+  endsequence
+
+  property handshake;
+    @(posedge Clock) request |-> acknowledge;
+  endproperty
+
+  assert property (handshake);
+```
+
+#### disable iff
+
+`disable iff` disables the property if the expression it is checking is active. This is normally used for reset checking and if reset is active, then property is disabled. 
+``` 
+assert property (@(posedge clk) disable iff (rst) in |=> out);
+```
+This property checks (on a rising `clk`) that if in is asserted, then `out` should be asserted on the next cycle - the property is disabled if `rst` is asserted. 
+
+#### Assertion Techniques
+
+##### Testing a Flip Flop
+```
+   // checks that out is asserted one cycle after enable is asserted, and also one cycle after in is asserted
+   assert property(@(posedge clk) disable iff (rst) en |=> out == $past(in,1));
+
+   // Here we check to make sure that the output doesn't change when the enable
+   // isn't asserted. We can either do this by using the $past function to check
+   // the output on the previous cycle, or by using the $stable function, which
+   // is semantically equivalent.
+   assert property(@(posedge clk) disable iff (rst) !en |=> out == $past(out,1));
+   assert property(@(posedge clk) disable iff (rst) !en |=> $stable(out));
+
+   // The always block from the previous testbench can be simplified to this:
+   always @(rst) #1 assert(out == 1'b0);  
+```
+##### Testing a synchronous Reset on a flip flop
+```
+assert property (@(posedge clk) rst |=> !out);
+```
+##### Testing an asynchronous reset
+```
+always @(rst) #1 assert(!out);
+```
+
+
 ## Resources
 
 1. https://github.com/intel/FPGA-Devcloud/tree/master/main/QuickStartGuides/RTL_AFU_Program_PAC_Quickstart/Arria10
