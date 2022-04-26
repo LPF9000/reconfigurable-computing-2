@@ -32,7 +32,7 @@ Changing the reset should be done with a non-blocking assignment, reset gets upd
 One way to think of non-blocking assignments that are synchronized to a rising clock edge is that they will always get updated just after the clock, so that anything read fromt he modified variables will always get the old value. 
 
 ## Testbench Techniques
-### Simple testbenches
+### Simple testbenches and basics
 #### Generating a clock
 Instead of this:
 ```
@@ -55,7 +55,7 @@ Here we change the always block to an initial block with an infinite loop. We do
       // Disable the other initial blocks so that the simulation terminates.
       disable generate_clock;
 ```
-### Assertions
+#### Assertions
 
 #### Immediate Assertions
 Immediate assertions are procedural statements mainly used in simulation. 
@@ -149,8 +149,123 @@ assert property (@(posedge clk) rst |=> !out);
 ```
 always @(rst) #1 assert(!out);
 ```
+#### Coverage
+In order to monitor sequences and other behavioral aspects, cover property statements can be used. 
+##### Cover Properties
+For example, let's say we hae an adder. We would like to check that there was at least one test where there was a carry in, and at least one test that generated a carry out:
+```
+   cp_carry_in : cover property (@(posedge clk) carry_in);
+   cp_carry_out : cover property (@(posedge clk) carry_out);
+   ```
+Here we check to make sure that both inputs were 0 at some point:
+```
+   cp_in0_eq_0 : cover property (@(posedge clk) in0 == 0);
+   cp_in1_eq_0 : cover property (@(posedge clk) in1 == 0);
+```
+Here we check to make sure both inputs are tested with their maximum amounts. To get the maximum amount, we use the replication operator:
+```
+   cp_in0_max : cover property (@(posedge clk) in0 == {WIDTH{1'b1}});
+   cp_in1_max : cover property (@(posedge clk) in1 == {WIDTH{1'b1}});
+```
+### Advanced Testbench Techniques
+#### Reference Queue
+This example uses a localparam in the module declaration:
+```
+   localparam logic [WIDTH-1:0] RESET_VALUE = '0; 
+```
+Example code:
+```
+   // A queue is similar to an unpacked array, but is declared with a $ for
+   // the range.
+   logic [WIDTH-1:0] reference_queue[$];
+   
+   always_ff @(posedge clk or posedge rst)
+     if (rst) begin
+        reference_queue = {};
+        for (int i=0; i < CYCLES; i++) reference_queue = {reference_queue, RESET_VALUE};
+     end
+     else if (en) begin
+        // Update the queue by popping the front and pushing the new input.
+        reference_queue = {reference_queue[1:$], in};
+     end
+     
+   // The output should simply always be the front of the reference queue.
+   // IMPORTANT: In previous examples, we saw race conditions being caused by
+   // one process writing with blocking assignments, and another process reading
+   // those values. There is no race condition here because an assert property
+   // always samples the "preponed" values of the referenced signals. In other
+   // words, you can think of the sampled values as the ones before the
+   // simulator updates anything on a clock edge. Alternatively, you can think
+   // of the values as the ones just before the posedge of the clock.
+   // Interestingly, this means that any reference to the clock here will always
+   // be 0, because the clock is always 0 right before a rising clock edge.
+   assert property(@(posedge clk) out == reference_queue[0]);
+```
+The above replicates a delay module, which imitates a shift register inside of a delay. 
 
+#### Tagging and Serving
+The following example is using Tagging and Serving so we can track the writes, so when a read occurs, we can find out which write corresponds to a read. This example corresponds to the write and reads that occur within a fifo:
+```
+  assert property (@(posedge clk) DUT.valid_wr |-> !full);
+   assert property (@(posedge clk) DUT.valid_rd |-> !empty);
 
+   int tag=0, serving=0;   
+   function void inc_tag();
+      tag = tag + 1'b1;
+   endfunction
+   
+   function void inc_serving();
+      serving = serving + 1'b1; 
+   endfunction
+```    
+The following example says, when there is a valid write, we are going to store the current tag value (local wr_tag), increments the tag, saves the write data into the local data variable, it then checks for the first_match within a sequence of indefinite amount of time, that there is a valid read that corresponds to the write tag. It then increments the serving, waits one cycle, and then it verifies the read data. 
+
+```
+   property check_output;
+      int wr_tag;
+      logic [WIDTH-1:0] data;
+     
+    
+      @(posedge clk) (wr_en && !full, wr_tag=tag, inc_tag(), data=wr_data) |-> first_match(##[1:$] (rd_en && !empty && serving==wr_tag, inc_serving())) ##1 rd_data==data;
+   endproperty
+            
+   ap_check_output : assert property (check_output);
+   
+```
+#### Reference Queue on a FIFO
+This is the same example as the previous queue, but with a FIFO. 
+```
+   assert property (@(posedge clk) DUT.valid_wr |-> !full);
+   assert property (@(posedge clk) DUT.valid_rd |-> !empty);
+
+   logic [WIDTH-1:0] correct_rd_data;   
+   logic [WIDTH-1:0] reference[$];
+
+   // Imitate the functionality of the FIFO with a queue
+   always_ff @(posedge clk or posedge rst)
+     if (rst) begin
+        reference = {};
+     end
+     else begin
+     
+         // save to a variable so we can see what is happening within the queue
+        correct_rd_data = reference[0];       
+        
+        // Pop the front element on a valid read
+        if (rd_en && !empty) begin
+           reference = reference[1:$];
+        end
+
+        // Push the write data on a valid write.
+        if (wr_en && !full) begin
+           reference = {reference, wr_data};
+        end    
+      end
+   
+   assert property(@(posedge clk) rd_en && !empty |=> rd_data == correct_rd_data); 
+   ```
+   
+   
 ## Resources
 
 1. https://github.com/intel/FPGA-Devcloud/tree/master/main/QuickStartGuides/RTL_AFU_Program_PAC_Quickstart/Arria10
