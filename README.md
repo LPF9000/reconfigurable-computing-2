@@ -4,7 +4,7 @@ Link to Dr. Stitt's SystemVerilog tutorial: https://github.com/ARC-Lab-UF/sv-tut
 ## Race Conditions
 ### What is a race condition? 
 
-Race conditions are when two expressions are scheduledbto execute at the same time, and if the order of the execution is not determined, then a race condition occurs. In other words, a race condition is non-deterministic behavior created by a variable written to and/or read from by multiple threads simultaneously. 
+Race conditions are when two expressions are scheduled to execute at the same time, and if the order of the execution is not determined, then a race condition occurs. In other words, a race condition is non-deterministic behavior created by a variable written to and/or read from by multiple threads simultaneously. 
 
 ### Common Race Conditions
 #### Race #1 Blocking and non-blocking assignments
