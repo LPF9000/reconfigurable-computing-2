@@ -259,8 +259,9 @@ module timing_example #(
   ////////////////////////////////////////////////////////
   // Instantiate a multiply-add tree.
 
-  logic [OUTPUT_WIDTH-1:0]
-      pipe_in_r[NUM_PIPELINES], mult_out[NUM_PIPELINES], add_l0[8], add_l1[4], add_l2[2];
+  logic [OUTPUT_WIDTH-1:0] pipe_in_r[NUM_PIPELINES];
+  logic [OUTPUT_WIDTH-1:0] mult_out[NUM_PIPELINES];
+  logic [OUTPUT_WIDTH-1:0] add_l0[8], add_l1[4], add_l2[2];
 
   always_ff @(posedge clk or posedge rst) begin
     if (rst) begin

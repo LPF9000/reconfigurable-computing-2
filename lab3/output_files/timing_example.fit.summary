@@ -1,11 +1,11 @@
-Fitter Status : Successful - Sun Apr 24 07:27:53 2022
+Fitter Status : Successful - Tue Apr 26 00:11:33 2022
 Quartus Prime Version : 20.1.0 Build 711 06/05/2020 SJ Standard Edition
 Revision Name : timing_example
 Top-level Entity Name : timing_example
 Family : MAX 10
 Device : 10M08DAF484C8G
 Timing Models : Final
-Total logic elements : 287 / 8,064 ( 4 % )
+Total logic elements : 292 / 8,064 ( 4 % )
     Total combinational functions : 282 / 8,064 ( 3 % )
     Dedicated logic registers : 151 / 8,064 ( 2 % )
 Total registers : 151
