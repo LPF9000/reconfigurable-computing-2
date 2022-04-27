@@ -128,14 +128,22 @@ module fifo
          count_r <= '0;  
       end
       else begin
-         if (valid_wr) begin
+         // Case with just valid_wr
+         if (valid_wr && !valid_rd) begin
             wr_addr_r <= wr_addr_r + 1'b1;
-            count_r = count_r + 1'b1;            
+            count_r <= count_r + 1'b1;
          end
-         if (valid_rd) begin 
+         // Just valid_rd
+         else if (valid_rd && !valid_wr) begin 
             rd_addr_r <= rd_addr_r + 1'b1;
-            count_r <= count_r - 1'b1;            
+            count_r <= count_r - 1'b1;
          end
+         // Case with both
+         else if (valid_rd && valid_wr) begin
+            wr_addr_r <= wr_addr_r + 1'b1;
+            rd_addr_r <= rd_addr_r + 1'b1;
+         end
+         // Otherwise, nothing happens.
       end
    end 
    
