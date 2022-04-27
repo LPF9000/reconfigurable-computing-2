@@ -93,7 +93,7 @@ set_clock_uncertainty -fall_from [get_clocks {clk}] -fall_to [get_clocks {clk}] 
 #**************************************************************
 
 set_multicycle_path -from {total_count_r*} -to {total_count_r*} -setup 2
-set_multicycle_path -from {total_count_r*} -to {total_count_r*} -hold 2
+set_multicycle_path -from {total_count_r*} -to {total_count_r*} -hold 1
 
 
 #**************************************************************
