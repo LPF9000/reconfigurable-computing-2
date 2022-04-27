@@ -109,43 +109,46 @@ module fifo
   
    logic [WIDTH-1:0]         ram[DEPTH];
    logic [$clog2(DEPTH)-1:0] wr_addr_r, rd_addr_r, rd_addr;
+   logic [$bits(rd_data)-1:0] rd_data_delay_r;
 
    localparam int            COUNT_WIDTH = $clog2(DEPTH)+1;   
-   logic [COUNT_WIDTH-1:0]   count_r;
+   logic [COUNT_WIDTH-1:0]   count_r, next_count, count_update;
    logic                     valid_wr, valid_rd;
    
    assign rd_addr = !valid_rd ? rd_addr_r : rd_addr_r + 1'b1;
    
    always @(posedge clk) begin
       if (valid_wr) ram[wr_addr_r] = wr_data;
-      rd_data <= ram[rd_addr];      
+      rd_data_delay_r <= ram[rd_addr]; // Delay it by 1 cycle
+      rd_data <= rd_data_delay_r;
    end
    
-   always @(posedge clk or posedge rst) begin
+   always_ff @(posedge clk or posedge rst) begin
       if (rst) begin
          rd_addr_r <= '0;
          wr_addr_r <= '0;
          count_r <= '0;  
       end
       else begin
-         // Case with just valid_wr
-         if (valid_wr && !valid_rd) begin
-            wr_addr_r <= wr_addr_r + 1'b1;
-            count_r <= count_r + 1'b1;
-         end
-         // Just valid_rd
-         else if (valid_rd && !valid_wr) begin 
-            rd_addr_r <= rd_addr_r + 1'b1;
-            count_r <= count_r - 1'b1;
-         end
-         // Case with both
-         else if (valid_rd && valid_wr) begin
-            wr_addr_r <= wr_addr_r + 1'b1;
-            rd_addr_r <= rd_addr_r + 1'b1;
-         end
-         // Otherwise, nothing happens.
+         // Handle rd/wr
+         if (valid_wr) wr_addr_r <= wr_addr_r + 1'b1;
+         if (valid_rd) rd_addr_r <= rd_addr_r + 1'b1;
+
+         // Update count_r
+         count_r <= next_count;
+
       end
-   end 
+   end
+   
+   always_comb begin
+      case ({valid_rd, valid_wr})
+         2'b10: count_update = '1; // -1
+         2'b01: count_update = COUNT_WIDTH'(1); // TODO do we need to width-cast here?
+         default: count_update = 0;
+      endcase
+
+      next_count = count_r + count_update;
+   end
    
    assign valid_wr = wr_en && !full;
    assign valid_rd = rd_en && !empty;
@@ -233,7 +236,7 @@ module timing_example
    ////////////////////////////////////////////////////////
    // Instantiate a multiply-add tree.
    
-   logic [OUTPUT_WIDTH-1:0] pipe_in_r[NUM_PIPELINES], mult_out[NUM_PIPELINES], add_l0[8], add_l1[4], add_l2[2];  
+   logic [OUTPUT_WIDTH-1:0] pipe_in_r[NUM_PIPELINES], pipe_in_r_delay[NUM_PIPELINES], mult_out[NUM_PIPELINES], add_l0[8], add_l1[4], add_l2[2];  
    
    always_ff @(posedge clk or posedge rst) begin
       if (rst) begin
@@ -243,12 +246,13 @@ module timing_example
          end
       end
       else begin             
-         fifo_rd_data_r <= fifo_rd_data;     
+         fifo_rd_data_r <= fifo_rd_data;
          for (int i=0; i < NUM_PIPELINES; i++) begin
             // Register all the pipeline inputs. You can assume these inputs 
             // never change in the middle of execution.
-            pipe_in_r[i] <= pipe_in[i];     
-            mult_out[i] <= fifo_rd_data_r * pipe_in_r[i];
+            pipe_in_r[i] <= pipe_in[i];
+            pipe_in_r_delay[i] <= pipe_in_r[i];
+            mult_out[i] <= fifo_rd_data_r * pipe_in_r_delay[i];
          end         
       end
    end
@@ -266,7 +270,7 @@ module timing_example
 
    // IF YOU MAKE CHANGES THAT INCREASE LATENCY OF THE MULTIPLY-ADD TREE, YOU
    // WILL NEED TO CHANGE THIS LOCALPARAM.
-   localparam int                        PIPE_LATENCY = 2;
+   localparam int                        PIPE_LATENCY = 3;
    logic [0:PIPE_LATENCY-1]              valid_delay_r;
    
    always_ff @(posedge clk or posedge rst) begin
