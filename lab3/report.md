@@ -22,7 +22,9 @@ Added fifo_rd_data_r
 
 **Fmax = 173.79 MHz**
 
-New path is in the FIFO count signal:
+New critical path is in the FIFO count signal:
+
+
 
 ![](./images/crit_2.png)
 
@@ -31,3 +33,5 @@ Old FIFO:
 
 New FIFO:
 ![](./images/2_new_fifo.png)
+
+I'm honestly not sure _why_ this worked. It probably is more apparent in the Technology Map viewer.
