@@ -1,4 +1,4 @@
-## Generated SDC file "add_tree.sdc"
+## Generated SDC file "timing_example.sdc"
 
 ## Copyright (C) 2020  Intel Corporation. All rights reserved.
 ## Your use of Intel Corporation's design tools, logic functions 
@@ -20,7 +20,7 @@
 ## PROGRAM "Quartus Prime"
 ## VERSION "Version 20.1.0 Build 711 06/05/2020 SJ Standard Edition"
 
-## DATE    "Wed Nov 11 20:27:37 2020"
+## DATE    "Wed Apr 27 16:29:36 2022"
 
 ##
 ## DEVICE  "10M08DAF484C8G"
@@ -92,6 +92,8 @@ set_clock_uncertainty -fall_from [get_clocks {clk}] -fall_to [get_clocks {clk}] 
 # Set Multicycle Path
 #**************************************************************
 
+set_multicycle_path -from {total_count_r*} -to {total_count_r*} -setup 2
+set_multicycle_path -from {total_count_r*} -to {total_count_r*} -hold 2
 
 
 #**************************************************************
